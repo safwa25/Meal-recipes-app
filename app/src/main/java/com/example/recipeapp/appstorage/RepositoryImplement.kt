@@ -12,8 +12,8 @@ class RepositoryImplement(val localDataSource: LocalDataSource):Repository {
         return localDataSource.selectById(userId)
     }
 
-    override suspend fun selectByEmail(userEmail: String): User? {
-        return localDataSource.selectByEmail(userEmail)
+    override suspend fun selectByEmail(userEmail:String ,passwordEmail:String): User? {
+        return localDataSource.selectByEmail(userEmail,passwordEmail)
     }
 
 

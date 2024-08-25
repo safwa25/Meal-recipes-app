@@ -16,8 +16,8 @@ class LocalDataBaseImplement(context: Context) : LocalDataSource {
         return dao.selectById(userId)
     }
 
-    override suspend fun selectByEmail(userEmail: String): User? {
-        return dao.selectByEmail(userEmail)
+    override suspend fun selectByEmail(userEmail: String,passwordEmail:String): User? {
+        return dao.selectByEmail(userEmail,passwordEmail)
     }
 
 }

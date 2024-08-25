@@ -18,9 +18,9 @@ class AppViewModel(private val repo: Repository): ViewModel() {
             _user.postValue( repo.selectById(userId))
         }
     }
-    fun loadUserByEmail(userEmail: String) {
+    fun loadUserByEmail(userEmail: String,passwordEmail:String) {
         viewModelScope.launch(Dispatchers.IO) {
-            _user.postValue( repo.selectByEmail(userEmail))
+            _user.postValue( repo.selectByEmail(userEmail,passwordEmail))
         }
     }
     fun insertNewUser(user : User)
