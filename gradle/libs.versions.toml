@@ -9,6 +9,10 @@ appcompat = "1.7.0"
 material = "1.12.0"
 activity = "1.9.1"
 constraintlayout = "2.1.4"
+room_version = "2.6.1"
+kapt="1.8.0"
+lifecycleViewModelKtx="2.8.4"
+coroutines="1.7.3"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -19,8 +23,15 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
-
+androidx-room-runtime={group="androidx.room",name ="room-runtime",version.ref="room_version"}
+androidx-room-compiler={group="androidx.room",name="room-compiler",version.ref="room_version"}
+androidx-room-ktx={group="androidx.room",name="room-ktx",version.ref="room_version"}
+kotlinx-coroutines={group="org.jetbrains.kotlinx",name="kotlinx-coroutines-android",version.ref="coroutines"}
+androidx-lifecycle-viewmodel-ktx={group ="androidx.lifecycle" , name="lifecycle-viewmodel-ktx" , version.ref="lifecycleViewModelKtx"}
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+jetbrains-kotlin-kapt={id="org.jetbrains.kotlin.kapt",version.ref="kapt"}
+
+
 
