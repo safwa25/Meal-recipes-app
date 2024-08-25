@@ -13,8 +13,17 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import com.example.recipeapp.appstorage.RepositoryImplement
+import com.example.recipeapp.database.LocalDataBaseImplement
+import com.example.recipeapp.database.User
+import com.example.recipeapp.viewmodel.AppViewModel
+import com.example.recipeapp.viewmodel.AppViewModelFactory
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import kotlinx.coroutines.launch
 
 class SignupFragment : Fragment() {
     private lateinit var emailInput : TextInputLayout
@@ -22,6 +31,7 @@ class SignupFragment : Fragment() {
     private lateinit var signUpButton : Button
     private lateinit var email : TextInputEditText
     private lateinit var password  : TextInputEditText
+    private lateinit var userName : TextInputEditText
 
 
 
@@ -39,13 +49,34 @@ class SignupFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val viewModelFactory = AppViewModelFactory(RepositoryImplement(LocalDataBaseImplement(this.requireContext())))
+        val viewModel = ViewModelProvider(this, viewModelFactory).get(AppViewModel::class.java)
         emailInput = view.findViewById(R.id.email)
         passwordInput = view.findViewById(R.id.signPassword)
         signUpButton = view.findViewById(R.id.signBtn)
         email = view.findViewById(R.id.emailText)
         password = view.findViewById(R.id.signPasswordText)
+        userName = view.findViewById(R.id.signUsernameText)
         setupEmailValidation()
         setupPasswordValidation()
+        signUpButton.setOnClickListener {
+            viewModel.loadUserByEmail(email.text.toString())
+        }
+
+        viewModel.userExists.observe(viewLifecycleOwner) { isExixt ->
+            if (isExixt) {
+                emailInput.helperText = "Email already exists"
+            } else {
+                viewModel.insertNewUser(
+                    User(
+                        email = email.text.toString(),
+                        password = password.text.toString(),
+                        name = userName.text.toString()
+                    )
+                )
+
+            }
+        }
     }
 
     private fun setupEmailValidation() {
@@ -55,6 +86,7 @@ class SignupFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {
                 emailInput.helperText = validateEmail()
                 updateSignUpButtonState()
+
             }
         })
     }

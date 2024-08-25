@@ -13,6 +13,7 @@ room_version = "2.6.1"
 kapt="1.8.0"
 lifecycleViewModelKtx="2.8.4"
 coroutines="1.7.3"
+viewmodel = "2.6.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -28,6 +29,7 @@ androidx-room-compiler={group="androidx.room",name="room-compiler",version.ref="
 androidx-room-ktx={group="androidx.room",name="room-ktx",version.ref="room_version"}
 kotlinx-coroutines={group="org.jetbrains.kotlinx",name="kotlinx-coroutines-android",version.ref="coroutines"}
 androidx-lifecycle-viewmodel-ktx={group ="androidx.lifecycle" , name="lifecycle-viewmodel-ktx" , version.ref="lifecycleViewModelKtx"}
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
