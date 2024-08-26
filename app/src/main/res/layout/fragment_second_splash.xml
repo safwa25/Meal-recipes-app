@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
-    tools:context=".second_splash" >
+    android:background="@drawable/welcome_background"
+    tools:context=".SplashFragments.second_splash" >
 
     <TextView
         android:id="@+id/heading"
         style="@style/Heading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="372dp"
+        android:layout_height="71dp"
         android:fontFamily="@font/lobster"
         android:text="Discover Your Ideal Dish"
         android:textSize="37sp"
@@ -27,16 +27,15 @@
         style="@style/content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="65dp"
-        android:layout_marginTop="360dp"
-        android:layout_marginEnd="65dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginEnd="45dp"
         android:gravity="center"
         android:text="Search and filter to find exactly what you’re craving, anytime, anywhere."
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/heading"
-        app:layout_constraintVertical_bias="0.221" />
+        app:layout_constraintVertical_bias="0.649" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:layout_width="304dp"
@@ -73,12 +72,12 @@
         android:id="@+id/next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="52dp"
-        android:clickable="true"
-        android:focusable="auto"
-        android:focusableInTouchMode="true"
+        android:layout_marginTop="28dp"
         android:src="@drawable/next_page"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintHorizontal_bias="0.905"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintVertical_bias="0.187" />
 </androidx.constraintlayout.widget.ConstraintLayout>

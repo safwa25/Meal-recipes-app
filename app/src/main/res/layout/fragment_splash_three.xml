@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/welcome_background"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    tools:context=".SplashFragments.first_splash">
+    tools:context=".SplashFragments.SplashFragmentThree">
 
     <TextView
         android:id="@+id/heading"
         style="@style/Heading"
-        android:layout_width="302dp"
-        android:layout_height="81dp"
+        android:layout_width="362dp"
+        android:layout_height="74dp"
         android:fontFamily="@font/lobster"
-        android:text="Cook Like a Pro"
+        android:text="Star Your Best Dishes"
+        android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -33,8 +30,9 @@
         android:layout_marginStart="45dp"
         android:layout_marginEnd="45dp"
         android:gravity="center"
-        android:text="Step-by-step instructions and videos to guide you to perfect meals every time."
+        android:text="Keep your top recipes just a tap away for quick and easy cooking anytime"
         android:textAlignment="center"
+        android:textColor="#BDBAB6"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,29 +46,15 @@
         android:layout_marginTop="248dp"
         android:layout_marginEnd="43dp"
         android:foregroundGravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.093"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/first_fragment" />
-
-    <TextView
-        android:id="@+id/skip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:fontFamily="@font/amaranth"
-        android:text="Skip"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.917"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:lottie_rawRes="@raw/third_fragment" />
 
     <ImageView
         android:id="@+id/next"
@@ -84,6 +68,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
         app:layout_constraintVertical_bias="0.187" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

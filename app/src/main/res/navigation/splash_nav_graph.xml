@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/splash_nav_graph"
-    app:startDestination="@id/first_splash">
+    app:startDestination="@id/welcomeFragment">
 
     <fragment
         android:id="@+id/first_splash"
-        android:name="com.habiba.splashfregments.first_splash"
+        android:name="com.example.recipeapp.SplashFragments.first_splash"
         android:label="fragment_first_splash"
         tools:layout="@layout/fragment_first_splash" >
         <action
@@ -16,7 +16,25 @@
     </fragment>
     <fragment
         android:id="@+id/second_splash"
-        android:name="com.habiba.splashfregments.second_splash"
+        android:name="com.example.recipeapp.SplashFragments.second_splash"
         android:label="fragment_second_splash"
-        tools:layout="@layout/fragment_second_splash" />
+        tools:layout="@layout/fragment_second_splash" >
+        <action
+            android:id="@+id/action_second_splash_to_splashFragmentThree"
+            app:destination="@id/splashFragmentThree" />
+    </fragment>
+    <fragment
+        android:id="@+id/splashFragmentThree"
+        android:name="com.example.recipeapp.SplashFragments.SplashFragmentThree"
+        android:label="fragment_splash_three"
+        tools:layout="@layout/fragment_splash_three" />
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="com.example.recipeapp.SplashFragments.WelcomeFragment"
+        android:label="fragment_welcome"
+        tools:layout="@layout/fragment_welcome" >
+        <action
+            android:id="@+id/action_welcomeFragment_to_first_splash"
+            app:destination="@id/first_splash" />
+    </fragment>
 </navigation>
