@@ -7,16 +7,6 @@
     android:background="@drawable/welcome_background"
     tools:context=".SplashFragments.WelcomeFragment" >
 
-    <ImageView
-        android:id="@+id/imageView10"
-        android:layout_width="264dp"
-        android:layout_height="461dp"
-        android:layout_marginStart="472dp"
-        android:layout_marginTop="4dp"
-        android:src="@drawable/basil"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/start_btn"
         android:layout_width="135dp"
@@ -48,10 +38,21 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.424"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.062" />
+        app:layout_constraintVertical_bias="0.063" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="303dp"
+        android:layout_height="328dp"
+        android:layout_marginStart="484dp"
+        android:layout_marginTop="56dp"
+        android:src="@drawable/burger"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.196"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView3"
@@ -69,20 +70,10 @@
         android:textStyle="normal|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.412"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.343" />
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="303dp"
-        android:layout_height="328dp"
-        android:layout_marginStart="484dp"
-        android:layout_marginTop="40dp"
-        android:src="@drawable/burger"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintVertical_bias="0.351" />
 
     <ImageView
         android:id="@+id/pizza"
@@ -91,7 +82,11 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="488dp"
         android:src="@drawable/pizza"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.882"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

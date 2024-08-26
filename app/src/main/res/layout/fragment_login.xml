@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/login_fragment"
     android:layout_width="match_parent"
+    android:background="@drawable/program_background"
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
@@ -22,26 +23,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:background="#A43C3C3C"
+            android:background="#EFDEC4"
             android:orientation="vertical"
             android:padding="24dp">
 
             <TextView
                 android:id="@+id/loginTv"
+                style="@style/Heading"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:shadowColor="#EFECEC"
                 android:text="Login"
                 android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="36sp" />
+                android:textColor="#6C4E31"
+                android:textSize="42sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                app:boxBackgroundMode="filled"
                 app:boxBackgroundColor="@color/black"
-                app:boxStrokeColor="@color/white"
+                app:boxStrokeColor="@color/defaultColor"
+                app:hintTextColor="@color/defaultColor"
                 app:endIconMode="none">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -50,10 +53,11 @@
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/baseline_person_24"
                     android:drawablePadding="8dp"
-                    android:hint="Username"
+                    android:hint="Email"
                     android:padding="10dp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/defaultColor"
                     android:textColorHint="@color/white"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -61,22 +65,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                app:boxBackgroundMode="filled"
                 app:boxBackgroundColor="@color/black"
-                app:boxStrokeColor="@color/white"
+                app:boxStrokeColor="@color/defaultColor"
+                app:hintTextColor="@color/defaultColor"
                 app:endIconMode="password_toggle">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/baseline_lock_24"
+                    android:drawableStart="@drawable/baseline_lock_24"
                     android:drawablePadding="8dp"
                     android:hint="Password"
                     android:inputType="textPassword"
                     android:padding="10dp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/defaultColor"
                     android:textColorHint="@color/white"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -86,8 +91,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="30dp"
+                android:background="@drawable/sign_up"
+                android:fontFamily="@font/lobster"
                 android:text="Login"
-                android:textSize="24sp"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="28sp"
                 android:textStyle="bold"
                 app:cornerRadius="30dp" />
 
@@ -96,9 +105,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
+                android:textColor="@color/defaultColor"
                 android:text="Don't Have One? Sign Up"
                 android:textAlignment="center"
-                android:textColor="@android:color/white"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
