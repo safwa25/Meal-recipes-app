@@ -25,10 +25,11 @@ class first_splash : Fragment() {
         val next: ImageView = view.findViewById(R.id.next)
         val skip:TextView=view.findViewById(R.id.skip)
         next.setOnClickListener {
-            findNavController().navigate(R.id.action_first_splash_to_second_splash)
+            findNavController().navigate(R.id.second_splash)
         }
         skip.setOnClickListener {
-            findNavController().navigate(R.id.action_first_splash_to_loginFragment6)
+            val homepage=Intent(view.context,MainActivity2::class.java)
+            startActivity(homepage)
         }
 
 

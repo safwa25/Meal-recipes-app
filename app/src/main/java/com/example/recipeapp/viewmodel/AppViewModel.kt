@@ -1,5 +1,6 @@
 package com.example.recipeapp.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -36,7 +37,6 @@ class AppViewModel(private val repo: Repository): ViewModel() {
             }
         }
     }
-
 
     fun loadUserByEmailAndPassword(userEmail: String,passwordEmail:String) {
         viewModelScope.launch(Dispatchers.IO) {

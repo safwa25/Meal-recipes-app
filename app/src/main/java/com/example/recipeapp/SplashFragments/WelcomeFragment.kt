@@ -1,5 +1,8 @@
 package com.example.recipeapp.SplashFragments
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,11 +10,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.recipeapp.MainActivity2
 import com.example.recipeapp.R
 
 
 class WelcomeFragment : Fragment() {
-
+lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -20,8 +24,19 @@ class WelcomeFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_welcome, container, false)
         val startButton = view.findViewById<Button>(R.id.start_btn)
+         sharedPreferences = requireContext().getSharedPreferences("currentuser", Context.MODE_PRIVATE)
         startButton.setOnClickListener {
-            findNavController().navigate(R.id.first_splash)
+
+            val id =sharedPreferences.getInt("id",-1)
+            if(id==-1)
+            {
+                findNavController().navigate(R.id.loginFragment)
+            }else
+            {
+                val homepage= Intent(view.context, MainActivity2::class.java)
+                startActivity(homepage)
+            }
+
         }
         return view
 

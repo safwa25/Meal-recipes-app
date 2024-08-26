@@ -16,28 +16,23 @@
         android:label="fragment_second_splash"
         tools:layout="@layout/fragment_second_splash" />
     <fragment
-        android:id="@+id/splashFragmentThree"
+        android:id="@+id/third_splash"
         android:name="com.example.recipeapp.SplashFragments.SplashFragmentThree"
         android:label="fragment_splash_three"
         tools:layout="@layout/fragment_splash_three" />
 
     <fragment
-        android:id="@+id/loginFragment6"
+        android:id="@+id/signup_fragment"
         android:name="com.example.recipeapp.SignupFragment"
         android:label="fragment_signup"
         tools:layout="@layout/fragment_signup" />
-<!--    <fragment-->
-<!--        android:id="@+id/loginFragment"-->
-<!--        android:name="com.example.recipeapp.LoginFragment"-->
-<!--        android:label="fragment_signup"-->
-<!--        tools:layout="@layout/fragment_signup" />-->
     <fragment
         android:id="@+id/welcomeFragment"
         android:name="com.example.recipeapp.SplashFragments.WelcomeFragment"
         android:label="fragment_welcome"
         tools:layout="@layout/fragment_welcome" />
     <fragment
-        android:id="@+id/loginFragment2"
+        android:id="@+id/loginFragment"
         android:name="com.example.recipeapp.LoginFragment"
         android:label="fragment_signup"
         tools:layout="@layout/fragment_login" />
