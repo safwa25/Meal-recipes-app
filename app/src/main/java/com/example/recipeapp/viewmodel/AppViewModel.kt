@@ -22,8 +22,6 @@ class AppViewModel(private val repo: Repository): ViewModel() {
             _user.postValue( repo.selectById(userId))
         }
     }
-
-
     fun loadUserByEmail(userEmail: String) {
         viewModelScope.launch(Dispatchers.IO) {
             val user = repo.selectByEmail(userEmail)

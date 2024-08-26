@@ -3,12 +3,7 @@ package com.example.recipeapp
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Color
 import android.os.Bundle
-import android.text.SpannableString
-import android.text.Spanned
-import android.text.style.ClickableSpan
-import android.text.style.ForegroundColorSpan
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -62,7 +57,7 @@ class LoginFragment : Fragment() {
                 val editor=sharedPreferences.edit()
                 editor.putInt("id",it.id)
                 editor.apply()
-                val homepage=Intent(view.context,MainActivity2::class.java)
+                val homepage=Intent(view.context,HomeActivity::class.java)
                 startActivity(homepage)
             } else {
                 Toast.makeText(context, "Invalid Username or Password", Toast.LENGTH_SHORT).show()
@@ -71,7 +66,6 @@ class LoginFragment : Fragment() {
         signupTextView.setOnClickListener{
             findNavController().navigate(R.id.signup_fragment)
         }
-
     }
 }
 
