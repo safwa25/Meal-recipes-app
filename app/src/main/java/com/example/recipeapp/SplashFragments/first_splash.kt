@@ -1,4 +1,5 @@
-package com.habiba.splashfregments
+package com.example.recipeapp.SplashFragments
+
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
