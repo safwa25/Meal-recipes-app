@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btn_start"
+        android:id="@+id/start_btn"
         android:layout_width="135dp"
         android:layout_height="96dp"
         android:background="@drawable/button"
@@ -85,7 +85,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/pizza"
         android:layout_width="277dp"
         android:layout_height="605dp"
         android:layout_marginTop="4dp"

@@ -135,7 +135,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:fontFamily="@font/lobster"
+                android:fontFamily="sans-serif"
                 android:text="Already Have One? Login"
                 android:textAlignment="center"
                 android:textColor="#6C4E31"
