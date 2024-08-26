@@ -14,6 +14,8 @@ kapt="1.8.0"
 lifecycleViewModelKtx="2.8.4"
 coroutines="1.7.3"
 viewmodel = "2.6.1"
+navigationFragmentKtx = "2.7.7"
+navigationUiKtx = "2.7.7"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -30,6 +32,8 @@ androidx-room-ktx={group="androidx.room",name="room-ktx",version.ref="room_versi
 kotlinx-coroutines={group="org.jetbrains.kotlinx",name="kotlinx-coroutines-android",version.ref="coroutines"}
 androidx-lifecycle-viewmodel-ktx={group ="androidx.lifecycle" , name="lifecycle-viewmodel-ktx" , version.ref="lifecycleViewModelKtx"}
 
+androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
+androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

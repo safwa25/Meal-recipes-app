@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/welcome_background"
+    tools:context=".SplashFragments.WelcomeFragment" >
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="264dp"
+        android:layout_height="461dp"
+        android:layout_marginStart="472dp"
+        android:layout_marginTop="4dp"
+        android:src="@drawable/basil"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_start"
+        android:layout_width="135dp"
+        android:layout_height="96dp"
+        android:background="@drawable/button"
+        android:fontFamily="sans-serif"
+        android:text="Let's Start"
+        android:textColor="#6C4E31"
+        android:textColorLink="#6C4E31"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintVertical_bias="0.545" />
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/Heading"
+        android:layout_width="283dp"
+        android:layout_height="158dp"
+        android:shadowColor="#D9D2D2"
+        android:text=" Foodii"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        android:textSize="102sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.424"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.062" />
+
+    <TextView
+        android:id="@+id/textView3"
+        style="@style/content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginEnd="45dp"
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:text="Find best recipes for cooking"
+        android:textAlignment="center"
+        android:textColor="#D6E6DC"
+        android:textSize="22sp"
+        android:textStyle="normal|italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.412"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.343" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="303dp"
+        android:layout_height="328dp"
+        android:layout_marginStart="484dp"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/burger"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="277dp"
+        android:layout_height="605dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="488dp"
+        android:src="@drawable/pizza"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

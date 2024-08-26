@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/splash_nav_graph"
+    app:startDestination="@id/welcomeFragment">
+
+    <fragment
+        android:id="@+id/first_splash"
+        android:name="com.example.recipeapp.SplashFragments.first_splash"
+        android:label="fragment_first_splash"
+        tools:layout="@layout/fragment_first_splash" >
+        <action
+            android:id="@+id/action_first_splash_to_second_splash"
+            app:destination="@id/second_splash" />
+        <action
+            android:id="@+id/action_first_splash_to_loginFragment6"
+            app:destination="@id/loginFragment6" />
+    </fragment>
+    <fragment
+        android:id="@+id/second_splash"
+        android:name="com.example.recipeapp.SplashFragments.second_splash"
+        android:label="fragment_second_splash"
+        tools:layout="@layout/fragment_second_splash" >
+        <action
+            android:id="@+id/action_second_splash_to_splashFragmentThree"
+            app:destination="@id/splashFragmentThree" />
+        <action
+            android:id="@+id/action_second_splash_to_loginFragment6"
+            app:destination="@id/loginFragment6" />
+    </fragment>
+    <fragment
+        android:id="@+id/splashFragmentThree"
+        android:name="com.example.recipeapp.SplashFragments.SplashFragmentThree"
+        android:label="fragment_splash_three"
+        tools:layout="@layout/fragment_splash_three" >
+        <action
+            android:id="@+id/action_splashFragmentThree_to_loginFragment6"
+            app:destination="@id/loginFragment6" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment6"
+        android:name="com.example.recipeapp.SignupFragment"
+        android:label="fragment_signup"
+        tools:layout="@layout/fragment_signup" />
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="com.example.recipeapp.SplashFragments.WelcomeFragment"
+        android:label="fragment_welcome"
+        tools:layout="@layout/fragment_welcome" >
+        <action
+            android:id="@+id/action_welcomeFragment_to_first_splash"
+            app:destination="@id/first_splash" />
+    </fragment>
+</navigation>

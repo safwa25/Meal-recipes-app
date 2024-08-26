@@ -2,9 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/signup_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="@drawable/signup"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".LoginFragment">
@@ -13,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
+        android:background="#6C4E31"
         app:cardBackgroundColor="@android:color/transparent"
         app:cardCornerRadius="30dp">
 
@@ -20,17 +22,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:background="#A4494949"
+            android:background="#EFDEC4"
             android:orientation="vertical"
             android:padding="24dp">
 
             <TextView
                 android:id="@+id/signupTv"
+                style="@style/Heading"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:shadowColor="#EFECEC"
                 android:text="SignUp"
                 android:textAlignment="center"
-                android:textColor="@color/white"
+                android:textColor="#6C4E31"
                 android:textSize="36sp" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -40,9 +44,9 @@
                 android:layout_marginTop="40dp"
                 app:expandedHintEnabled="false"
                 app:helperText=""
-                app:helperTextTextColor="@android:color/holo_red_dark"
+                app:helperTextTextColor="#6C4E31"
                 app:hintAnimationEnabled="false"
-                app:hintTextColor="@color/white">
+                app:hintTextColor="#6C4E31">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/signUsernameText"
@@ -53,7 +57,7 @@
                     android:drawablePadding="8dp"
                     android:hint="Username"
                     android:padding="10dp"
-                    android:textColor="@color/white"
+                    android:textColor="#6C4E31"
                     android:textColorHint="@color/white"
                     android:textStyle="bold" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -67,7 +71,7 @@
                 app:helperText=""
                 app:helperTextTextColor="@android:color/holo_red_dark"
                 app:hintAnimationEnabled="false"
-                app:hintTextColor="@color/white">
+                app:hintTextColor="#6C4E31">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/emailText"
@@ -78,7 +82,7 @@
                     android:drawablePadding="8dp"
                     android:hint="Email"
                     android:padding="10dp"
-                    android:textColor="@color/white"
+                    android:textColor="#6C4E31"
                     android:textColorHint="@color/white"
                     android:textStyle="bold" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -94,7 +98,7 @@
                 app:helperText=""
                 app:helperTextTextColor="@android:color/holo_red_dark"
                 app:hintAnimationEnabled="false"
-                app:hintTextColor="@color/white"
+                app:hintTextColor="#6C4E31"
                 app:passwordToggleEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -107,8 +111,8 @@
                     android:hint="Password"
                     android:inputType="textPassword"
                     android:padding="10dp"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white"
+                    android:textColor="#6C4E31"
+                    android:textColorHint="#6C4E31"
                     android:textStyle="bold" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -117,20 +121,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="30dp"
-                android:text="SignUp"
+                android:background="@drawable/sign_up"
+                android:fontFamily="@font/lobster"
+                android:text="Sign up"
+                android:textAllCaps="false"
+                android:textColor="#FEFEFE"
                 android:textSize="24sp"
-                android:textStyle="bold"
                 app:cornerRadius="30dp" />
 
             <TextView
                 android:id="@+id/signup_text"
+                style="@style/content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
+                android:fontFamily="@font/lobster"
                 android:text="Already Have One? Login"
                 android:textAlignment="center"
-                android:textColor="@android:color/white"
-                android:textSize="20sp"
+                android:textColor="#6C4E31"
                 android:textStyle="bold" />
 
         </LinearLayout>
