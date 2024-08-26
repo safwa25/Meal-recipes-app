@@ -21,7 +21,7 @@ class WelcomeFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_welcome, container, false)
         val startButton = view.findViewById<Button>(R.id.start_btn)
         startButton.setOnClickListener {
-            findNavController().navigate(R.id.action_welcomeFragment_to_first_splash)
+            findNavController().navigate(R.id.first_splash)
         }
         return view
 
