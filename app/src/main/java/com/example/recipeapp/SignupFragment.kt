@@ -1,5 +1,7 @@
 package com.example.recipeapp
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -16,6 +18,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.findNavController
 import com.example.recipeapp.appstorage.RepositoryImplement
 import com.example.recipeapp.database.LocalDataBaseImplement
 import com.example.recipeapp.database.User
@@ -32,8 +35,7 @@ class SignupFragment : Fragment() {
     private lateinit var email : TextInputEditText
     private lateinit var password  : TextInputEditText
     private lateinit var userName : TextInputEditText
-
-
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,14 +69,18 @@ class SignupFragment : Fragment() {
             if (isExixt) {
                 emailInput.helperText = "Email already exists"
             } else {
-                viewModel.insertNewUser(
-                    User(
-                        email = email.text.toString(),
-                        password = password.text.toString(),
-                        name = userName.text.toString()
-                    )
+               // signUpButton.isEnabled = false chatgpt solution
+                sharedPreferences = requireContext().getSharedPreferences("currentuser", Context.MODE_PRIVATE)
+                val user =User(
+                    email = email.text.toString(),
+                    password = password.text.toString(),
+                    name = userName.text.toString()
                 )
-
+                val editor=sharedPreferences.edit()
+                editor.putInt("id",user.id)
+                editor.apply()
+                viewModel.insertNewUser(user)
+                findNavController().navigate(R.id.first_splash)
             }
         }
     }
