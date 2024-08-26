@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_first_splash_to_second_splash"
             app:destination="@id/second_splash" />
+        <action
+            android:id="@+id/action_first_splash_to_loginFragment6"
+            app:destination="@id/loginFragment6" />
     </fragment>
     <fragment
         android:id="@+id/second_splash"
@@ -22,12 +25,26 @@
         <action
             android:id="@+id/action_second_splash_to_splashFragmentThree"
             app:destination="@id/splashFragmentThree" />
+        <action
+            android:id="@+id/action_second_splash_to_loginFragment6"
+            app:destination="@id/loginFragment6" />
     </fragment>
     <fragment
         android:id="@+id/splashFragmentThree"
         android:name="com.example.recipeapp.SplashFragments.SplashFragmentThree"
         android:label="fragment_splash_three"
-        tools:layout="@layout/fragment_splash_three" />
+        tools:layout="@layout/fragment_splash_three" >
+        <action
+            android:id="@+id/action_splashFragmentThree_to_loginFragment6"
+            app:destination="@id/loginFragment6" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment6"
+        android:name="com.example.recipeapp.SignupFragment"
+        android:label="fragment_signup"
+        tools:layout="@layout/fragment_signup" />
     <fragment
         android:id="@+id/welcomeFragment"
         android:name="com.example.recipeapp.SplashFragments.WelcomeFragment"
