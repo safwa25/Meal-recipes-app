@@ -15,6 +15,10 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.recipeapp.appstorage.RepositoryImplement
+import com.example.recipeapp.database.favourites.FavouritesDao
+import com.example.recipeapp.database.favourites.FavouritesLocalDsImplement
+import com.example.recipeapp.database.meal.MealLocalDs
+import com.example.recipeapp.database.meal.MealLocalDsImplement
 import com.example.recipeapp.database.user.LocalDataBaseImplement
 import com.example.recipeapp.viewmodel.AppViewModel
 import com.example.recipeapp.viewmodel.AppViewModelFactory
@@ -44,7 +48,10 @@ class LoginFragment : Fragment() {
         password = view.findViewById(R.id.password)
         loginButton = view.findViewById(R.id.loginBtn)
         val signupTextView = view.findViewById<TextView>(R.id.signup_text)
-        val viewModelFactory = AppViewModelFactory(RepositoryImplement(LocalDataBaseImplement(this.requireContext())))
+        val viewModelFactory = AppViewModelFactory(
+            RepositoryImplement(
+            LocalDataBaseImplement(this.requireContext()),
+            MealLocalDsImplement(this.requireContext()), FavouritesLocalDsImplement(this.requireContext())))
         val viewModel = ViewModelProvider(this, viewModelFactory).get(AppViewModel::class.java)
         loginButton.setOnClickListener {
             viewModel.loadUserByEmailAndPassword(username.text.toString(), password.text.toString())

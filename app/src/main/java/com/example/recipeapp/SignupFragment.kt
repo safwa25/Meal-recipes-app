@@ -14,6 +14,8 @@ import android.widget.Button
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.recipeapp.appstorage.RepositoryImplement
+import com.example.recipeapp.database.favourites.FavouritesLocalDsImplement
+import com.example.recipeapp.database.meal.MealLocalDsImplement
 import com.example.recipeapp.database.user.LocalDataBaseImplement
 import com.example.recipeapp.database.user.User
 import com.example.recipeapp.viewmodel.AppViewModel
@@ -44,7 +46,11 @@ class SignupFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val viewModelFactory = AppViewModelFactory(RepositoryImplement(LocalDataBaseImplement(this.requireContext())))
+        val viewModelFactory = AppViewModelFactory(
+            RepositoryImplement(
+                LocalDataBaseImplement(this.requireContext()),
+                MealLocalDsImplement(this.requireContext()), FavouritesLocalDsImplement(this.requireContext())
+            ))
         val viewModel = ViewModelProvider(this, viewModelFactory).get(AppViewModel::class.java)
         emailInput = view.findViewById(R.id.email)
         passwordInput = view.findViewById(R.id.signPassword)
