@@ -2,8 +2,6 @@ package com.example.recipeapp
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -13,20 +11,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
-import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.example.recipeapp.appstorage.RepositoryImplement
-import com.example.recipeapp.database.LocalDataBaseImplement
-import com.example.recipeapp.database.User
+import com.example.recipeapp.database.favourites.FavouritesLocalDsImplement
+import com.example.recipeapp.database.meal.MealLocalDsImplement
+import com.example.recipeapp.database.user.LocalDataBaseImplement
+import com.example.recipeapp.database.user.User
 import com.example.recipeapp.viewmodel.AppViewModel
 import com.example.recipeapp.viewmodel.AppViewModelFactory
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-import kotlinx.coroutines.launch
 
 class SignupFragment : Fragment() {
     private lateinit var emailInput : TextInputLayout
@@ -51,7 +46,11 @@ class SignupFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val viewModelFactory = AppViewModelFactory(RepositoryImplement(LocalDataBaseImplement(this.requireContext())))
+        val viewModelFactory = AppViewModelFactory(
+            RepositoryImplement(
+                LocalDataBaseImplement(this.requireContext()),
+                MealLocalDsImplement(this.requireContext()), FavouritesLocalDsImplement(this.requireContext())
+            ))
         val viewModel = ViewModelProvider(this, viewModelFactory).get(AppViewModel::class.java)
         emailInput = view.findViewById(R.id.email)
         passwordInput = view.findViewById(R.id.signPassword)
@@ -71,7 +70,7 @@ class SignupFragment : Fragment() {
             } else {
                // signUpButton.isEnabled = false chatgpt solution
                 sharedPreferences = requireContext().getSharedPreferences("currentuser", Context.MODE_PRIVATE)
-                val user =User(
+                val user = User(
                     email = email.text.toString(),
                     password = password.text.toString(),
                     name = userName.text.toString()

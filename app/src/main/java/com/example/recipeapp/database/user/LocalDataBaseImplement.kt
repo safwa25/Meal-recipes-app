@@ -1,9 +1,10 @@
-package com.example.recipeapp.database
+package com.example.recipeapp.database.user
 
 import android.content.Context
+import com.example.recipeapp.database.AppDatabase
 
 class LocalDataBaseImplement(context: Context) : LocalDataSource {
-    private val dao:UserDao
+    private val dao: UserDao
     init {
         val dp= AppDatabase.getDatabase(context)
         dao =dp.userDao()

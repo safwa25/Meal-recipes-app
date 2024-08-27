@@ -1,14 +1,14 @@
 package com.example.recipeapp.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.recipeapp.appstorage.Repository
-import com.example.recipeapp.database.User
+import com.example.recipeapp.database.favourites.Favourites
+import com.example.recipeapp.database.user.User
+import com.example.recipeapp.dto.Meal
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class AppViewModel(private val repo: Repository): ViewModel() {
@@ -17,6 +17,18 @@ class AppViewModel(private val repo: Repository): ViewModel() {
     private val _userExists = MutableLiveData<Boolean>()
     val userExists: LiveData<Boolean> get() = _userExists
 
+
+    private val _favourites = MutableLiveData<List<Meal>>()
+    val favourites: LiveData<List<Meal>> get() = _favourites
+
+
+    private val _meals = MutableLiveData<List<Meal>>()
+    val meals: LiveData<List<Meal>> get() = _meals
+
+
+
+
+    // user -------------------------
     fun loadUserById(userId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             _user.postValue( repo.selectById(userId))
@@ -46,6 +58,39 @@ class AppViewModel(private val repo: Repository): ViewModel() {
     {
         viewModelScope.launch(Dispatchers.IO) {
             repo.insert(user)
+        }
+    }
+
+
+    // meals -------------------------
+    fun insertNewMeal(meal: Meal)
+    {
+        viewModelScope.launch(Dispatchers.IO) {
+            repo.insertMeal(meal)
+        }
+    }
+
+    fun searchMeals(mealName: String)
+    {
+        viewModelScope.launch(Dispatchers.IO) {
+            _meals.postValue(repo.searchMeals(mealName))
+        }
+    }
+
+
+    // favourite meals -------------------------
+    fun getFavoriteMeals(userId: Int)
+    {
+        viewModelScope.launch(Dispatchers.IO) {
+            _favourites.postValue(repo.getFavourites(userId))
+        }
+    }
+
+
+    fun insertFavourite(favourite: Favourites)
+    {
+        viewModelScope.launch(Dispatchers.IO) {
+            repo.insertFavourite(favourite)
         }
     }
 }
