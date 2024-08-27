@@ -18,6 +18,7 @@ import com.example.recipeapp.database.favourites.FavouritesLocalDsImplement
 import com.example.recipeapp.database.meal.MealLocalDsImplement
 import com.example.recipeapp.database.user.LocalDataBaseImplement
 import com.example.recipeapp.database.user.User
+import com.example.recipeapp.network.APIClient
 import com.example.recipeapp.viewmodel.AppViewModel
 import com.example.recipeapp.viewmodel.AppViewModelFactory
 import com.google.android.material.textfield.TextInputEditText
@@ -49,7 +50,7 @@ class SignupFragment : Fragment() {
         val viewModelFactory = AppViewModelFactory(
             RepositoryImplement(
                 LocalDataBaseImplement(this.requireContext()),
-                MealLocalDsImplement(this.requireContext()), FavouritesLocalDsImplement(this.requireContext())
+                MealLocalDsImplement(this.requireContext()), FavouritesLocalDsImplement(this.requireContext()),APIClient
             ))
         val viewModel = ViewModelProvider(this, viewModelFactory).get(AppViewModel::class.java)
         emailInput = view.findViewById(R.id.email)

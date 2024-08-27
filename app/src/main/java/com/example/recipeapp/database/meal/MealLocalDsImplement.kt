@@ -2,8 +2,7 @@ package com.example.recipeapp.database.meal
 
 import android.content.Context
 import com.example.recipeapp.database.AppDatabase
-import com.example.recipeapp.database.user.UserDao
-import com.example.recipeapp.dto.Meal
+import com.example.recipeapp.dto.MealDataBase
 
 class MealLocalDsImplement(context: Context) : MealLocalDs {
     private val mealDao: MealDao
@@ -11,11 +10,11 @@ class MealLocalDsImplement(context: Context) : MealLocalDs {
         val dp= AppDatabase.getDatabase(context)
         mealDao =dp.mealDao()
     }
-    override suspend fun insertMeal(meal: Meal) {
-        mealDao.insertMeal(meal)
+    override suspend fun insertMeal(mealDataBase: MealDataBase) {
+        mealDao.insertMeal(mealDataBase)
     }
 
-    override suspend fun searchMeals(mealName: String): List<Meal> {
+    override suspend fun searchMeals(mealName: String): List<MealDataBase> {
         return mealDao.searchMeal(mealName)
     }
 }

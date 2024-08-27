@@ -7,23 +7,24 @@ import androidx.lifecycle.viewModelScope
 import com.example.recipeapp.appstorage.Repository
 import com.example.recipeapp.database.favourites.Favourites
 import com.example.recipeapp.database.user.User
-import com.example.recipeapp.dto.Meal
+import com.example.recipeapp.dto.MealDataBase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class AppViewModel(private val repo: Repository): ViewModel() {
     private val _user = MutableLiveData<User?>()
     val user: LiveData<User?> get() = _user
+
     private val _userExists = MutableLiveData<Boolean>()
     val userExists: LiveData<Boolean> get() = _userExists
 
 
-    private val _favourites = MutableLiveData<List<Meal>>()
-    val favourites: LiveData<List<Meal>> get() = _favourites
+    private val _favourites = MutableLiveData<List<MealDataBase>>()
+    val favourites: LiveData<List<MealDataBase>> get() = _favourites
 
 
-    private val _meals = MutableLiveData<List<Meal>>()
-    val meals: LiveData<List<Meal>> get() = _meals
+    private val _meals = MutableLiveData<List<MealDataBase>>()
+    val meals: LiveData<List<MealDataBase>> get() = _meals
 
 
 
@@ -63,10 +64,10 @@ class AppViewModel(private val repo: Repository): ViewModel() {
 
 
     // meals -------------------------
-    fun insertNewMeal(meal: Meal)
+    fun insertNewMeal(mealDataBase: MealDataBase)
     {
         viewModelScope.launch(Dispatchers.IO) {
-            repo.insertMeal(meal)
+            repo.insertMeal(mealDataBase)
         }
     }
 
