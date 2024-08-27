@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.recipeapp.HomeActivity
+import com.example.recipeapp.home.HomeActivity
 import com.example.recipeapp.R
 
 

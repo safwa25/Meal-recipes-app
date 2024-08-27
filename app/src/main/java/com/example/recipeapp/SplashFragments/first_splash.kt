@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
-import com.example.recipeapp.HomeActivity
+import com.example.recipeapp.home.HomeActivity
 import com.example.recipeapp.R
 
 class first_splash : Fragment() {
@@ -28,7 +28,7 @@ class first_splash : Fragment() {
             findNavController().navigate(R.id.second_splash)
         }
         skip.setOnClickListener {
-            val homepage=Intent(view.context,HomeActivity::class.java)
+            val homepage=Intent(view.context, HomeActivity::class.java)
             startActivity(homepage)
         }
 

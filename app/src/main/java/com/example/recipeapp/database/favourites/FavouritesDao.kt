@@ -3,7 +3,7 @@ package com.example.recipeapp.database.favourites
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.recipeapp.dto.Meal
+import com.example.recipeapp.dto.MealDataBase
 
 
 @Dao
@@ -11,7 +11,6 @@ interface FavouritesDao {
     @Insert
     suspend fun insertFavourite(favourites: Favourites)
 
-    @Query("SELECT * FROM favourites f , user u, meal m where f.userId = u.id and f.mealId = m.idMeal and u.id = :userId")
-    suspend fun getFavourites(userId :Int) : List<Meal>
-
+    @Query("SELECT m.* FROM favourites f, meal m WHERE m.idMeal = f.mealId and f.userId = :userId")
+    suspend fun getFavourites(userId: Int): List<MealDataBase>
 }

@@ -1,56 +1,57 @@
 package com.example.recipeapp.network
 
+import com.example.recipeapp.dto.Category
 import com.example.recipeapp.dto.Ingradients
 import com.example.recipeapp.dto.MainIngradient
-import com.example.recipeapp.dto.Meal
+import com.example.recipeapp.dto.MealDataBase
 import retrofit2.http.GET
 import retrofit2.http.Query
 import retrofit2.Response
-import retrofit2.Call
 
 interface APIService {
 
     // Search meal by name
     @GET("search.php")
-    fun searchMealByName(@Query("s") mealName: String): Meal
+    suspend fun searchMealByName(@Query("s") mealName: String): Response<List<MealDataBase>>
 
     // List all meals by first letter
     @GET("search.php")
-    fun listMealsByFirstLetter(@Query("f") firstLetter: String):List<Meal>
+    suspend fun listMealsByFirstLetter(@Query("f") firstLetter: String): Response<List<MealDataBase>>
 
     // Lookup full meal details by id
     @GET("lookup.php")
-    fun lookupMealById(@Query("i") mealId: String): Meal
+    suspend fun lookupMealById(@Query("i") mealId: String): Response<MealDataBase>
 
     // Lookup a single random meal
     @GET("random.php")
-    fun getRandomMeal(): Meal
+    suspend fun getRandomMeal(): Response<MealDataBase>
 
     // List all meal categories
     @GET("categories.php")
-    fun listAllCategories():List<Meal>
+    suspend fun listAllCategories(): Response<List<Category>>
 
-    //list of all categories names
+    // List of all categories names
     @GET("list.php")
-    fun listCategories(@Query("c") listType: String = "list"): List<String>
+    suspend fun listCategories(@Query("c") listType: String = "list"): Response<List<String>>
 
-    //list of all areas names
+    // List of all areas names
     @GET("list.php")
-    fun listAreas(@Query("a") listType: String = "list"): List<String>
+    suspend fun listAreas(@Query("a") listType: String = "list"): Response<List<String>>
 
-    //list of all ingredients names
+    // List of all ingredients names
     @GET("list.php")
-    fun listIngredients(@Query("i") listType: String = "list"): List<Ingradients>
+    suspend fun listIngredients(@Query("i") listType: String = "list"): Response<List<Ingradients>>
 
     // Filter by main ingredient
     @GET("filter.php")
-    fun filterByMainIngredient(@Query("i") ingredient: String): List<MainIngradient>
+    suspend fun filterByMainIngredient(@Query("i") ingredient: String): Response<List<MainIngradient>>
 
-    // Filter by Category
+    // Filter by category
     @GET("filter.php")
-    fun filterByCategory(@Query("c") category: String): List<Meal>
+    suspend fun filterByCategory(@Query("c") category: String): Response<List<MealDataBase>>
 
-    // Filter by Area
+    // Filter by area
     @GET("filter.php")
-    fun filterByArea(@Query("a") area: String):List<Meal>
+    suspend fun filterByArea(@Query("a") area: String): Response<List<MealDataBase>>
+
 }

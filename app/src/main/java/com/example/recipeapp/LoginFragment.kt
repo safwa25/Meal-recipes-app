@@ -15,11 +15,11 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.recipeapp.appstorage.RepositoryImplement
-import com.example.recipeapp.database.favourites.FavouritesDao
 import com.example.recipeapp.database.favourites.FavouritesLocalDsImplement
-import com.example.recipeapp.database.meal.MealLocalDs
 import com.example.recipeapp.database.meal.MealLocalDsImplement
 import com.example.recipeapp.database.user.LocalDataBaseImplement
+import com.example.recipeapp.home.HomeActivity
+import com.example.recipeapp.network.APIClient
 import com.example.recipeapp.viewmodel.AppViewModel
 import com.example.recipeapp.viewmodel.AppViewModelFactory
 
@@ -51,7 +51,7 @@ class LoginFragment : Fragment() {
         val viewModelFactory = AppViewModelFactory(
             RepositoryImplement(
             LocalDataBaseImplement(this.requireContext()),
-            MealLocalDsImplement(this.requireContext()), FavouritesLocalDsImplement(this.requireContext())))
+            MealLocalDsImplement(this.requireContext()), FavouritesLocalDsImplement(this.requireContext()),APIClient))
         val viewModel = ViewModelProvider(this, viewModelFactory).get(AppViewModel::class.java)
         loginButton.setOnClickListener {
             viewModel.loadUserByEmailAndPassword(username.text.toString(), password.text.toString())
@@ -64,7 +64,7 @@ class LoginFragment : Fragment() {
                 val editor=sharedPreferences.edit()
                 editor.putInt("id",it.id)
                 editor.apply()
-                val homepage=Intent(view.context,HomeActivity::class.java)
+                val homepage=Intent(view.context, HomeActivity::class.java)
                 startActivity(homepage)
             } else {
                 Toast.makeText(context, "Invalid Username or Password", Toast.LENGTH_SHORT).show()

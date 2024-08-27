@@ -2,8 +2,7 @@ package com.example.recipeapp.database.favourites
 
 import android.content.Context
 import com.example.recipeapp.database.AppDatabase
-import com.example.recipeapp.database.meal.MealDao
-import com.example.recipeapp.dto.Meal
+import com.example.recipeapp.dto.MealDataBase
 
 class FavouritesLocalDsImplement(context: Context) : FavouritesLocalDs {
     private val favouritesDao: FavouritesDao
@@ -15,7 +14,7 @@ class FavouritesLocalDsImplement(context: Context) : FavouritesLocalDs {
         favouritesDao.insertFavourite(favourite)
     }
 
-    override suspend fun getFavourites(userId: Int): List<Meal> {
+    override suspend fun getFavourites(userId: Int): List<MealDataBase> {
         return favouritesDao.getFavourites(userId)
     }
 }
