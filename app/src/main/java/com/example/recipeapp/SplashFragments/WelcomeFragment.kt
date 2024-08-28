@@ -28,7 +28,7 @@ lateinit var sharedPreferences: SharedPreferences
         startButton.setOnClickListener {
 
             val id =sharedPreferences.getInt("id",-1)
-            if(id==-1)
+            if(id==-1 || id==0)
             {
                 findNavController().navigate(R.id.loginFragment)
             }else

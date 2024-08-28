@@ -3,11 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home_nav_graph"
-    app:startDestination="@id/logout">
-
+    app:startDestination="@id/logoutFragment">
     <fragment
-        android:id="@+id/logout"
-        android:name="com.example.recipeapp.logout"
+        android:id="@+id/logoutFragment"
+        android:name="com.example.recipeapp.home.logout.LogoutFragment"
         android:label="fragment_logout"
         tools:layout="@layout/fragment_logout" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.recipeapp.home.home_fragment.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
 </navigation>
