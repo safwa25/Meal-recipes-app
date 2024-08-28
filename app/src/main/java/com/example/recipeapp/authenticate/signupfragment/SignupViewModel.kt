@@ -17,11 +17,6 @@ class SignupViewModel(private val repo:Repository):ViewModel() {
     private val _userId = MutableLiveData<Int>()
     val userId: LiveData<Int> get() = _userId
 
-    fun insertNewUser(user: User) {
-        viewModelScope.launch(Dispatchers.IO) {
-            repo.insert(user)
-        }
-    }
 
     fun loadUserByEmail(userEmail: String) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -34,11 +29,12 @@ class SignupViewModel(private val repo:Repository):ViewModel() {
         }
     }
 
-    fun returnlastid() {
-        viewModelScope.launch {
-            _userId.postValue(repo.returnlastid())
+    fun insertUserAndFetchLastId(user: User) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repo.insert(user)
+            val lastId = repo.returnlastid()
+            _userId.postValue(lastId)
         }
-
-
     }
+
 }
