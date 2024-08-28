@@ -3,6 +3,7 @@ import com.example.recipeapp.dto.Category
 import com.example.recipeapp.dto.Ingradients
 import com.example.recipeapp.dto.MainIngradient
 import com.example.recipeapp.dto.MealDataBase
+import com.example.recipeapp.dto.MealList
 import retrofit2.Response
 
 interface RemoteDataSource {
@@ -12,7 +13,7 @@ interface RemoteDataSource {
 
     suspend fun lookupMealById(mealId: String): Response<MealDataBase>
 
-    suspend fun getRandomMeal(): Response<MealDataBase>
+    suspend fun getRandomMeal(): Response<MealList>
 
     suspend fun listAllCategories(): Response<List<Category>>
 
