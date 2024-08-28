@@ -1,4 +1,4 @@
-package com.example.recipeapp
+package com.example.recipeapp.authenticate.signupfragment
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -13,14 +13,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.recipeapp.R
 import com.example.recipeapp.appstorage.RepositoryImplement
 import com.example.recipeapp.database.favourites.FavouritesLocalDsImplement
 import com.example.recipeapp.database.meal.MealLocalDsImplement
 import com.example.recipeapp.database.user.LocalDataBaseImplement
 import com.example.recipeapp.database.user.User
 import com.example.recipeapp.network.APIClient
-import com.example.recipeapp.viewmodel.AppViewModel
-import com.example.recipeapp.viewmodel.AppViewModelFactory
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
@@ -47,12 +46,12 @@ class SignupFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val viewModelFactory = AppViewModelFactory(
+        val  signupViewModelFactory= SignupViewModelFactory(
             RepositoryImplement(
                 LocalDataBaseImplement(this.requireContext()),
                 MealLocalDsImplement(this.requireContext()), FavouritesLocalDsImplement(this.requireContext()),APIClient
             ))
-        val viewModel = ViewModelProvider(this, viewModelFactory).get(AppViewModel::class.java)
+        val viewModel = ViewModelProvider(this,signupViewModelFactory).get(SignupViewModel::class.java)
         emailInput = view.findViewById(R.id.email)
         passwordInput = view.findViewById(R.id.signPassword)
         signUpButton = view.findViewById(R.id.signBtn)
@@ -106,8 +105,6 @@ class SignupFragment : Fragment() {
         }
     }
 
-
-
     private fun setupPasswordValidation() {
         password.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -140,6 +137,4 @@ class SignupFragment : Fragment() {
         val passwordValid = validatePassword() == null
         signUpButton.isEnabled = emailValid && passwordValid
     }
-
-
 }

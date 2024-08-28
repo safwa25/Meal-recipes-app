@@ -4,6 +4,7 @@ import com.example.recipeapp.dto.Category
 import com.example.recipeapp.dto.Ingradients
 import com.example.recipeapp.dto.MainIngradient
 import com.example.recipeapp.dto.MealDataBase
+import com.example.recipeapp.dto.MealList
 import retrofit2.Response
 
 object APIClient : RemoteDataSource {
@@ -20,7 +21,7 @@ object APIClient : RemoteDataSource {
         return API.retrofitService.lookupMealById(mealId)
     }
 
-    override suspend fun getRandomMeal(): Response<MealDataBase> {
+    override suspend fun getRandomMeal(): Response<MealList> {
         return API.retrofitService.getRandomMeal()
     }
 

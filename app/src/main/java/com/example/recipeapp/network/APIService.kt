@@ -4,6 +4,7 @@ import com.example.recipeapp.dto.Category
 import com.example.recipeapp.dto.Ingradients
 import com.example.recipeapp.dto.MainIngradient
 import com.example.recipeapp.dto.MealDataBase
+import com.example.recipeapp.dto.MealList
 import retrofit2.http.GET
 import retrofit2.http.Query
 import retrofit2.Response
@@ -23,8 +24,8 @@ interface APIService {
     suspend fun lookupMealById(@Query("i") mealId: String): Response<MealDataBase>
 
     // Lookup a single random meal
-    @GET("random.php")
-    suspend fun getRandomMeal(): Response<MealDataBase>
+    @GET("api/json/v1/1/random.php")
+    suspend fun getRandomMeal(): Response<MealList>
 
     // List all meal categories
     @GET("categories.php")

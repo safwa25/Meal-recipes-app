@@ -23,7 +23,7 @@
 
     <fragment
         android:id="@+id/signup_fragment"
-        android:name="com.example.recipeapp.SignupFragment"
+        android:name="com.example.recipeapp.authenticate.signupfragment.SignupFragment"
         android:label="fragment_signup"
         tools:layout="@layout/fragment_signup" />
     <fragment
@@ -33,7 +33,7 @@
         tools:layout="@layout/fragment_welcome" />
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.recipeapp.LoginFragment"
+        android:name="com.example.recipeapp.authenticate.loginfragment.LoginFragment"
         android:label="fragment_signup"
         tools:layout="@layout/fragment_login" />
 </navigation>

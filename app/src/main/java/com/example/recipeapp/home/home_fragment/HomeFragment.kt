@@ -38,13 +38,6 @@ class HomeFragment : Fragment() {
         val viewModel = ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
          image=view.findViewById(R.id.meal_image)
          viewModel.getRandomMeal()
-        viewModel.randomMealDataBase.observe(viewLifecycleOwner){
-            Glide.with(view.context)
-                .load(it.strImageSource)
-                .into(image)
-        }
-
-
     }
 
 }

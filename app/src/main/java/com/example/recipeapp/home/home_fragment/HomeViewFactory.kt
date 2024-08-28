@@ -3,7 +3,6 @@ package com.example.recipeapp.home.home_fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.recipeapp.appstorage.Repository
-import com.example.recipeapp.viewmodel.AppViewModel
 import java.lang.IllegalArgumentException
 
 class HomeViewFactory(private val repository: Repository): ViewModelProvider.Factory {

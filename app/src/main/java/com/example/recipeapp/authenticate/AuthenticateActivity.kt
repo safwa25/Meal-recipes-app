@@ -1,10 +1,9 @@
-package com.example.recipeapp
+package com.example.recipeapp.authenticate
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import com.example.recipeapp.SplashFragments.WelcomeFragment
+import com.example.recipeapp.R
 
 class AuthenticateActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

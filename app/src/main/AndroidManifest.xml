@@ -16,7 +16,7 @@
             android:name=".home.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".AuthenticateActivity"
+            android:name=".authenticate.AuthenticateActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
