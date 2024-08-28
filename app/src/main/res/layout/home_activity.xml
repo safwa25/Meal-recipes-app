@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".home.HomeActivity">
 
-
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
         android:name="com.example.recipeapp.home.home_fragment.HomeFragment"
