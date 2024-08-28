@@ -6,6 +6,7 @@ import com.example.recipeapp.database.favourites.FavouritesLocalDs
 import com.example.recipeapp.database.meal.MealLocalDs
 import com.example.recipeapp.database.user.LocalDataSource
 import com.example.recipeapp.database.user.User
+import com.example.recipeapp.dto.AreasStr
 import com.example.recipeapp.dto.Category
 import com.example.recipeapp.dto.Ingradients
 import com.example.recipeapp.dto.MainIngradient
@@ -58,7 +59,7 @@ class RepositoryImplement(val localDataSource: LocalDataSource, val mealLocalDs:
 
 
 
-    override suspend fun searchMealByName(mealName: String): Response<List<MealDataBase>> {
+    override suspend fun searchMealByName(mealName: String): Response<MealList> {
         return remoteDataSource.searchMealByName(mealName)
     }
 
@@ -82,7 +83,7 @@ class RepositoryImplement(val localDataSource: LocalDataSource, val mealLocalDs:
         return remoteDataSource.listCategories()
     }
 
-    override suspend fun listAreas(): Response<List<String>> {
+    override suspend fun listAreas(): Response<AreasStr> {
         return remoteDataSource.listAreas()
     }
 

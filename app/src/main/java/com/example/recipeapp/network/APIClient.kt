@@ -1,5 +1,6 @@
 package com.example.recipeapp.network
 
+import com.example.recipeapp.dto.AreasStr
 import com.example.recipeapp.dto.Category
 import com.example.recipeapp.dto.Ingradients
 import com.example.recipeapp.dto.MainIngradient
@@ -9,7 +10,7 @@ import retrofit2.Response
 
 object APIClient : RemoteDataSource {
 
-    override suspend fun searchMealByName(mealName: String): Response<List<MealDataBase>> {
+    override suspend fun searchMealByName(mealName: String): Response<MealList> {
         return API.retrofitService.searchMealByName(mealName)
     }
 
@@ -33,7 +34,7 @@ object APIClient : RemoteDataSource {
         return API.retrofitService.listCategories()
     }
 
-    override suspend fun listAreas(): Response<List<String>> {
+    override suspend fun listAreas(): Response<AreasStr> {
         return API.retrofitService.listAreas()
     }
 

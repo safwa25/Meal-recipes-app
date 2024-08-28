@@ -5,9 +5,8 @@
     android:layout_width="250dp"
     android:layout_height="270dp"
     android:background="#FF0000"
-    android:backgroundTint="#5B5A5A"
     app:cardCornerRadius="30dp"
-    app:cardElevation="30dp">
+    app:cardElevation="50dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -28,7 +27,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/meal_pop_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:elevation="0dp"

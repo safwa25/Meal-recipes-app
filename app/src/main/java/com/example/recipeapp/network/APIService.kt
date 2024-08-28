@@ -1,5 +1,6 @@
 package com.example.recipeapp.network
 
+import com.example.recipeapp.dto.AreasStr
 import com.example.recipeapp.dto.Category
 import com.example.recipeapp.dto.Ingradients
 import com.example.recipeapp.dto.MainIngradient
@@ -12,8 +13,8 @@ import retrofit2.Response
 interface APIService {
 
     // Search meal by name
-    @GET("search.php")
-    suspend fun searchMealByName(@Query("s") mealName: String): Response<List<MealDataBase>>
+    @GET("api/json/v1/1/search.php")
+    suspend fun searchMealByName(@Query("s") mealName: String): Response<MealList>
 
     // List all meals by first letter
     @GET("search.php")
@@ -36,8 +37,8 @@ interface APIService {
     suspend fun listCategories(@Query("c") listType: String = "list"): Response<List<String>>
 
     // List of all areas names
-    @GET("list.php")
-    suspend fun listAreas(@Query("a") listType: String = "list"): Response<List<String>>
+    @GET("api/json/v1/1/list.php")
+    suspend fun listAreas(@Query("a") listType: String = "list"): Response<AreasStr>
 
     // List of all ingredients names
     @GET("list.php")
