@@ -76,7 +76,8 @@ class SignupFragment : Fragment() {
                     password = password.text.toString(),
                     name = userName.text.toString()
                 )
-                viewModel.returnlastid()
+
+                viewModel.insertUserAndFetchLastId(user)
             }
         }
         viewModel.userId.observe(viewLifecycleOwner) { newUserId ->
