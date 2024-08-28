@@ -1,6 +1,7 @@
 package com.example.recipeapp.database.user
 
 import android.content.Context
+import android.util.Log
 import com.example.recipeapp.database.AppDatabase
 
 class LocalDataBaseImplement(context: Context) : LocalDataSource {
@@ -23,6 +24,12 @@ class LocalDataBaseImplement(context: Context) : LocalDataSource {
 
     override suspend fun selectByEmailAndPassword(userEmail: String, passwordEmail: String): User? {
         return dao.selectByEmailAndPassword(userEmail,passwordEmail)
+    }
+
+    override suspend fun returnlastid():Int {
+        val id=dao.returnlastid()
+        Log.d("check at local","id :${id}")
+        return id
     }
 
 }

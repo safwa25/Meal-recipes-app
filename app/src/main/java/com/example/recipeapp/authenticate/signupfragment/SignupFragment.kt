@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -75,12 +76,18 @@ class SignupFragment : Fragment() {
                     password = password.text.toString(),
                     name = userName.text.toString()
                 )
-                val editor=sharedPreferences.edit()
-                editor.putInt("id",user.id)
-                editor.apply()
-                viewModel.insertNewUser(user)
-                findNavController().navigate(R.id.first_splash)
+                viewModel.returnlastid()
             }
+        }
+        viewModel.userId.observe(viewLifecycleOwner) { newUserId ->
+
+                // Save the ID in SharedPreferences
+                val editor = sharedPreferences.edit()
+            Log.d("sharedprefrancetest","id :${newUserId}")
+                editor.putInt("id", newUserId)
+                editor.apply()
+
+                findNavController().navigate(R.id.first_splash)
         }
     }
 

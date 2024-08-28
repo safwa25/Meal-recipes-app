@@ -35,6 +35,10 @@ class RepositoryImplement(val localDataSource: LocalDataSource, val mealLocalDs:
         return data1
     }
 
+    override suspend fun returnlastid(): Int {
+        return localDataSource.returnlastid()
+    }
+
     override suspend fun insertMeal(mealDataBase: MealDataBase) {
         mealLocalDs.insertMeal(mealDataBase)
     }
