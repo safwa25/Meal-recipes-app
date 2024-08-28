@@ -14,23 +14,31 @@ class SignupViewModel(private val repo:Repository):ViewModel() {
     private val _userExists = MutableLiveData<Boolean>()
     val userExists: LiveData<Boolean> get() = _userExists
 
-    fun insertNewUser(user : User)
-    {
+    private val _userId = MutableLiveData<Int>()
+    val userId: LiveData<Int> get() = _userId
+
+    fun insertNewUser(user: User) {
         viewModelScope.launch(Dispatchers.IO) {
             repo.insert(user)
         }
     }
+
     fun loadUserByEmail(userEmail: String) {
         viewModelScope.launch(Dispatchers.IO) {
             val user = repo.selectByEmail(userEmail)
-            if(user != null)
-            {
+            if (user != null) {
                 _userExists.postValue(true)
-            }
-            else
-            {
+            } else {
                 _userExists.postValue(false)
             }
         }
+    }
+
+    fun returnlastid() {
+        viewModelScope.launch {
+            _userId.postValue(repo.returnlastid())
+        }
+
+
     }
 }

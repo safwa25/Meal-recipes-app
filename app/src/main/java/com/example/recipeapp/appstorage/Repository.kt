@@ -26,6 +26,7 @@ interface Repository {
     suspend fun listMealsByFirstLetter(firstLetter: String): Response<List<MealDataBase>>
     suspend fun lookupMealById(mealId: String): Response<MealDataBase>
     suspend fun getRandomMeal(): Response<MealList>
+    suspend fun returnlastid():Int
 
     suspend fun listAllCategories(): Response<List<Category>>
 
