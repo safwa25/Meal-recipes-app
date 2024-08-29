@@ -28,4 +28,24 @@
         <!-- Additional customizations if needed -->
     </style>
 
+<!--    <style name="app_bar" parent="Theme.MaterialComponents.Light.DarkActionBar">-->
+<!--        <item name="colorPrimary">@color/white</item>-->
+<!--        <item name="colorPrimaryDark">@color/black</item>-->
+<!--        <item name="colorAccent">@color/defaultColor</item>-->
+<!--    </style>-->
+
+    <!-- Custom Toolbar Style -->
+    <style name="CustomToolbar" parent="Widget.AppCompat.Toolbar">
+        <item name="android:background">#EFDEC4</item> <!-- Background color -->
+         <!-- Subtitle text style (if any) -->
+
+    </style>
+
+    <style name="BottomNavTextAppearance" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/defaultColor</item>
+    </style>
+
+
+
 </resources>
