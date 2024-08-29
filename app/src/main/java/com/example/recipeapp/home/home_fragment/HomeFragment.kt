@@ -75,6 +75,8 @@ class HomeFragment : Fragment() {
 
             sharedPreferences = requireContext().getSharedPreferences("currentuser", Context.MODE_PRIVATE)
 
+
+
             mealAdapter = PopularAdapter(viewModel.randomMealList.value ?: emptyList()) { meal, fab ->
                 val userId = sharedPreferences.getInt("id", -1)
                 viewModel.insertFavourite(meal, userId)
@@ -100,6 +102,7 @@ class HomeFragment : Fragment() {
             viewModel.getRandomMealList()
 
 
+            // Initialize and set up areasRecyclerView and areasAdapter
             areasAdapter = AreasAdapter(viewModel.areas.value ?: emptyList()) { area ->
                 val action = HomeFragmentDirections.actionHomeFragmentToAreaFragment(area)
                 findNavController().navigate(action)
@@ -109,14 +112,12 @@ class HomeFragment : Fragment() {
             areasRecyclerView.adapter = areasAdapter
             areasRecyclerView.addItemDecoration(SpaceItemDecoration(20))
 
-            viewModel.randomMealList.observe(viewLifecycleOwner) { meals ->
-                areasAdapter = AreasAdapter(viewModel.areas.value ?: emptyList()) { area ->
-                    val action = HomeFragmentDirections.actionHomeFragmentToAreaFragment(area)
-                    findNavController().navigate(action)
-                }
+            viewModel.getAreas()
+            viewModel.areas.observe(viewLifecycleOwner) { areas ->
+                areasAdapter.updateData(areas)
             }
 
-            viewModel.getAreas()
+
 
 
 

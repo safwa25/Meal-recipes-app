@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.example.recipeapp.R
 import com.example.recipeapp.dto.MealArea
 
-class AreasAdapter(val areas:List<MealArea>, val onAreaClick: (String) -> Unit) : RecyclerView.Adapter<AreasAdapter.ViewHolder>() {
+class AreasAdapter(var areas:List<MealArea>, val onAreaClick: (String) -> Unit) : RecyclerView.Adapter<AreasAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val row = LayoutInflater.from(parent.context).inflate(R.layout.area_card, parent, false)
@@ -30,6 +30,12 @@ class AreasAdapter(val areas:List<MealArea>, val onAreaClick: (String) -> Unit) 
     class ViewHolder(val card: View) : RecyclerView.ViewHolder(card){
         var text = card.findViewById<TextView>(R.id.areaTv)
     }
+
+    fun updateData(newAreas: List<MealArea>) {
+        areas = newAreas
+        notifyDataSetChanged()
+    }
+
 
 
 }
