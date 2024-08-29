@@ -9,9 +9,9 @@ import com.example.recipeapp.database.favourites.FavouritesDao
 import com.example.recipeapp.database.meal.MealDao
 import com.example.recipeapp.database.user.User
 import com.example.recipeapp.database.user.UserDao
-import com.example.recipeapp.dto.MealDataBase
+import com.example.recipeapp.dto.Meal
 
-@Database(entities = [User::class, MealDataBase::class, Favourites::class], version = 3)
+@Database(entities = [User::class, Meal::class, Favourites::class], version = 3)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao

@@ -8,26 +8,28 @@ import com.example.recipeapp.dto.Category
 import com.example.recipeapp.dto.Ingradients
 import com.example.recipeapp.dto.MainIngradient
 import com.example.recipeapp.dto.Meal
-import com.example.recipeapp.dto.MealDataBase
 import com.example.recipeapp.dto.MealList
 import retrofit2.Response
 
 interface Repository {
+    // user database functions
     suspend fun insert(user: User)
     suspend fun selectById(userId :Int) : User?
     suspend fun selectByEmail(userEmail :String) : User?
+    suspend fun returnlastid():Int
     suspend fun selectByEmailAndPassword(userEmail :String,passwordEmail:String) : User?
-    suspend fun insertMeal(mealDataBase: MealDataBase)
-    suspend fun searchMeals(mealName : String): List<MealDataBase>
+    // meal database functions
+    suspend fun insertMeal(mealDataBase: Meal)
+    suspend fun searchMeals(mealName : String): List<Meal>
+    // favourite database functions
     suspend fun insertFavourite(favourite: Favourites)
-    suspend fun getFavourites(userId: Int): List<MealDataBase>
-
-
+    suspend fun getFavourites(userId: Int): List<Meal>
+    suspend fun deleteFavouriteByMealId(mealId: String)
+    // api functions
     suspend fun searchMealByName(mealName: String): Response<MealList>
-    suspend fun listMealsByFirstLetter(firstLetter: String): Response<List<MealDataBase>>
+    suspend fun listMealsByFirstLetter(firstLetter: String): Response<List<Meal>>
     suspend fun lookupMealById(mealId: String): Response<MealList>
     suspend fun getRandomMeal(): Response<MealList>
-    suspend fun returnlastid():Int
 
     suspend fun listAllCategories(): Response<List<Category>>
 
@@ -39,7 +41,7 @@ interface Repository {
 
     suspend fun filterByMainIngredient(ingredient: String): Response<List<MainIngradient>>
 
-    suspend fun filterByCategory(category: String): Response<List<MealDataBase>>
+    suspend fun filterByCategory(category: String): Response<List<Meal>>
 
     suspend fun filterByArea(area: String): Response<AreaMealsResponse>
 

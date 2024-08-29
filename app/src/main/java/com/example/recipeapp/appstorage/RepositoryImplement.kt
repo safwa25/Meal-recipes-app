@@ -11,12 +11,14 @@ import com.example.recipeapp.dto.AreasStr
 import com.example.recipeapp.dto.Category
 import com.example.recipeapp.dto.Ingradients
 import com.example.recipeapp.dto.MainIngradient
-import com.example.recipeapp.dto.MealDataBase
+import com.example.recipeapp.dto.Meal
 import com.example.recipeapp.dto.MealList
 import com.example.recipeapp.network.RemoteDataSource
 import retrofit2.Response
 
 class RepositoryImplement(val localDataSource: LocalDataSource, val mealLocalDs: MealLocalDs, val favouritesLocalDs: FavouritesLocalDs,val remoteDataSource: RemoteDataSource):Repository {
+
+   // user database functions
     override suspend fun insert(user: User) {
         localDataSource.insert(user)
     }
@@ -40,31 +42,33 @@ class RepositoryImplement(val localDataSource: LocalDataSource, val mealLocalDs:
     override suspend fun returnlastid(): Int {
         return localDataSource.returnlastid()
     }
-
-    override suspend fun insertMeal(mealDataBase: MealDataBase) {
+//meal database functions
+    override suspend fun insertMeal(mealDataBase: Meal) {
         mealLocalDs.insertMeal(mealDataBase)
     }
 
-    override suspend fun searchMeals(mealName: String): List<MealDataBase> {
+    override suspend fun searchMeals(mealName: String): List<Meal> {
         return mealLocalDs.searchMeals(mealName)
     }
-
+//favourite database functions
     override suspend fun insertFavourite(favourite: Favourites) {
         favouritesLocalDs.insertFavourite(favourite)
     }
 
-    override suspend fun getFavourites(userId: Int): List<MealDataBase> {
+    override suspend fun getFavourites(userId: Int): List<Meal> {
         return favouritesLocalDs.getFavourites(userId)
     }
 
-
-
+    override suspend fun deleteFavouriteByMealId(mealId: String) {
+        favouritesLocalDs.deleteFavouriteByMealId(mealId)
+    }
 
     override suspend fun searchMealByName(mealName: String): Response<MealList> {
         return remoteDataSource.searchMealByName(mealName)
     }
+    // api functions
 
-    override suspend fun listMealsByFirstLetter(firstLetter: String): Response<List<MealDataBase>> {
+    override suspend fun listMealsByFirstLetter(firstLetter: String): Response<List<Meal>> {
         return remoteDataSource.listMealsByFirstLetter(firstLetter)
     }
 
@@ -96,7 +100,7 @@ class RepositoryImplement(val localDataSource: LocalDataSource, val mealLocalDs:
         return remoteDataSource.filterByMainIngredient(ingredient)
     }
 
-    override suspend fun filterByCategory(category: String): Response<List<MealDataBase>> {
+    override suspend fun filterByCategory(category: String): Response<List<Meal>> {
         return remoteDataSource.filterByCategory(category)
     }
 
