@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.recipeapp.appstorage.Repository
 import com.example.recipeapp.database.user.User
-import com.example.recipeapp.dto.MealAPI
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

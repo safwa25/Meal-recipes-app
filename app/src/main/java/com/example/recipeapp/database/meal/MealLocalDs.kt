@@ -1,8 +1,8 @@
 package com.example.recipeapp.database.meal
 
-import com.example.recipeapp.dto.MealDataBase
+import com.example.recipeapp.dto.Meal
 
 interface MealLocalDs {
-    suspend fun insertMeal(mealDataBase: MealDataBase)
-    suspend fun searchMeals(mealName : String): List<MealDataBase>
+    suspend fun insertMeal(mealDataBase: Meal)
+    suspend fun searchMeals(mealName : String): List<Meal>
 }

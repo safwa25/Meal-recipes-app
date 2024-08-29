@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.recipeapp.appstorage.Repository
 import com.example.recipeapp.dto.AreaMeal
-import com.example.recipeapp.dto.MealAPI
+import com.example.recipeapp.dto.Meal
 import com.example.recipeapp.dto.MealList
 import kotlinx.coroutines.launch
 
@@ -27,8 +27,8 @@ class AreaViewModel(val repo : Repository) : ViewModel(){
 
 
 
-    fun getMealByID(id:String): MealAPI?{
-        var meal : MealAPI? = null
+    fun getMealByID(id:String): Meal?{
+        var meal : Meal? = null
         viewModelScope.launch {
             val response = repo.lookupMealById(id)
             if(response.isSuccessful){

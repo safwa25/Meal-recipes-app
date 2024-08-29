@@ -5,7 +5,7 @@ import com.example.recipeapp.dto.AreasStr
 import com.example.recipeapp.dto.Category
 import com.example.recipeapp.dto.Ingradients
 import com.example.recipeapp.dto.MainIngradient
-import com.example.recipeapp.dto.MealDataBase
+import com.example.recipeapp.dto.Meal
 import com.example.recipeapp.dto.MealList
 import retrofit2.Response
 
@@ -15,7 +15,7 @@ object APIClient : RemoteDataSource {
         return API.retrofitService.searchMealByName(mealName)
     }
 
-    override suspend fun listMealsByFirstLetter(firstLetter: String): Response<List<MealDataBase>> {
+    override suspend fun listMealsByFirstLetter(firstLetter: String): Response<List<Meal>> {
         return API.retrofitService.listMealsByFirstLetter(firstLetter)
     }
 
@@ -47,7 +47,7 @@ object APIClient : RemoteDataSource {
         return API.retrofitService.filterByMainIngredient(ingredient)
     }
 
-    override suspend fun filterByCategory(category: String): Response<List<MealDataBase>> {
+    override suspend fun filterByCategory(category: String): Response<List<Meal>> {
         return API.retrofitService.filterByCategory(category)
     }
 

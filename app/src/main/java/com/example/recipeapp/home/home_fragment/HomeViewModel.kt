@@ -8,18 +8,18 @@ import androidx.lifecycle.viewModelScope
 import com.example.recipeapp.appstorage.Repository
 import com.example.recipeapp.database.favourites.Favourites
 import com.example.recipeapp.dto.AreasStr
-import com.example.recipeapp.dto.MealAPI
 import com.example.recipeapp.dto.MealArea
+import com.example.recipeapp.dto.Meal
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 class HomeViewModel(val repository: Repository): ViewModel() {
-    private val _randomMeal = MutableLiveData<MealAPI?>()
-    val randomMeal :LiveData<MealAPI?> get() = _randomMeal
+    private val _randomMeal = MutableLiveData<Meal?>()
+    val randomMeal :LiveData<Meal?> get() = _randomMeal
 
-    private val _randomMealList = MutableLiveData<List<MealAPI>?>()
-    val randomMealList : MutableLiveData<List<MealAPI>?> get() = _randomMealList
+    private val _randomMealList = MutableLiveData<List<Meal>?>()
+    val randomMealList : MutableLiveData<List<Meal>?> get() = _randomMealList
 
 
     private val _areas = MutableLiveData<List<MealArea>>()
@@ -74,7 +74,7 @@ class HomeViewModel(val repository: Repository): ViewModel() {
     }
 
 //
-//    fun insertFavourite(meal : MealAPI, userId: Int){
+//    fun insertFavourite(meal : MealDataBase, userId: Int){
 //        viewModelScope.launch(Dispatchers.IO) {
 //            repository.insertMeal(meal)
 //            repository.insertFavourite(Favourites(meal.idMeal.toString(), userId))

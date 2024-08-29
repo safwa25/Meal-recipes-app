@@ -5,7 +5,7 @@ import com.example.recipeapp.dto.AreasStr
 import com.example.recipeapp.dto.Category
 import com.example.recipeapp.dto.Ingradients
 import com.example.recipeapp.dto.MainIngradient
-import com.example.recipeapp.dto.MealDataBase
+import com.example.recipeapp.dto.Meal
 import com.example.recipeapp.dto.MealList
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -19,7 +19,7 @@ interface APIService {
 
     // List all meals by first letter
     @GET("search.php")
-    suspend fun listMealsByFirstLetter(@Query("f") firstLetter: String): Response<List<MealDataBase>>
+    suspend fun listMealsByFirstLetter(@Query("f") firstLetter: String): Response<List<Meal>>
 
     // Lookup full meal details by id
     @GET("lookup.php")
@@ -51,7 +51,7 @@ interface APIService {
 
     // Filter by category
     @GET("filter.php")
-    suspend fun filterByCategory(@Query("c") category: String): Response<List<MealDataBase>>
+    suspend fun filterByCategory(@Query("c") category: String): Response<List<Meal>>
 
     // Filter by area
     @GET("api/json/v1/1/filter.php")

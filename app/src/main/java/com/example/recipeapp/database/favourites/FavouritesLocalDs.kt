@@ -1,8 +1,11 @@
 package com.example.recipeapp.database.favourites
 
-import com.example.recipeapp.dto.MealDataBase
+import com.example.recipeapp.dto.Meal
 
 interface FavouritesLocalDs {
     suspend fun insertFavourite(favourite: Favourites)
-    suspend fun getFavourites(userId: Int): List<MealDataBase>
+
+    suspend fun getFavourites(userId: Int): List<Meal>
+
+    suspend fun deleteFavouriteByMealId(mealId: String)
 }
