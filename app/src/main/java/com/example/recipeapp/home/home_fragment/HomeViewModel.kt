@@ -73,12 +73,12 @@ class HomeViewModel(val repository: Repository): ViewModel() {
         }
     }
 
-//
-//    fun insertFavourite(meal : MealDataBase, userId: Int){
-//        viewModelScope.launch(Dispatchers.IO) {
-//            repository.insertMeal(meal)
-//            repository.insertFavourite(Favourites(meal.idMeal.toString(), userId))
-//        }
-//    }
+
+    fun insertFavourite(meal : Meal, userId: Int){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.insertMeal(meal)
+            repository.insertFavourite(Favourites(meal.idMeal.toString(), userId))
+        }
+    }
 
 }

@@ -29,6 +29,7 @@ import com.example.recipeapp.database.user.LocalDataBaseImplement
 import com.example.recipeapp.network.APIClient
 import com.example.task2.AreasAdapter
 import com.example.task2.PopularAdapter
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.io.IOException
 
 
@@ -63,6 +64,7 @@ class HomeFragment : Fragment() {
             randomMealTitile=view.findViewById(R.id.recipeTitle)
             randomMealDescription=view.findViewById(R.id.recipeDesc)
 
+
             viewModel.getRandomMeal()
             viewModel.randomMeal.observe(viewLifecycleOwner) {
                 Glide.with(view).load(it?.strMealThumb.toString()).into(image)
@@ -73,24 +75,29 @@ class HomeFragment : Fragment() {
 
             sharedPreferences = requireContext().getSharedPreferences("currentuser", Context.MODE_PRIVATE)
 
-//            mealAdapter = PopularAdapter(viewModel.randomMealList.value ?: emptyList()) { meal ->
-//                val userId = sharedPreferences.getInt("id", -1)
-//                viewModel.insertFavourite(meal.idMeal.toString(), userId)
-//            }
-//            val mealsRecyclerView = view.findViewById<RecyclerView>(R.id.popular_rv)
-//            mealsRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-//            mealsRecyclerView.adapter = mealAdapter
-//            mealsRecyclerView.addItemDecoration(SpaceItemDecoration(20))
-//
-//            viewModel.randomMealList.observe(viewLifecycleOwner) { meals ->
-//                mealAdapter = PopularAdapter(viewModel.randomMealList.value ?: emptyList()) { meal ->
-//                    val userId = sharedPreferences.getInt("id", -1)
-//                    viewModel.insertFavourite(meal.idMeal.toString(), userId)
-//                }
-//                mealsRecyclerView.adapter = mealAdapter
-//            }
-//
-//            viewModel.getRandomMealList()
+            mealAdapter = PopularAdapter(viewModel.randomMealList.value ?: emptyList()) { meal, fab ->
+                val userId = sharedPreferences.getInt("id", -1)
+                viewModel.insertFavourite(meal, userId)
+                fab.setImageResource(R.drawable.baseline_favorite_24)
+                Toast.makeText(context, "Added to favourites", Toast.LENGTH_SHORT).show()
+            }
+            val mealsRecyclerView = view.findViewById<RecyclerView>(R.id.popular_rv)
+            mealsRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            mealsRecyclerView.adapter = mealAdapter
+            mealsRecyclerView.addItemDecoration(SpaceItemDecoration(20))
+
+            viewModel.randomMealList.observe(viewLifecycleOwner) { meals ->
+                mealAdapter = PopularAdapter(viewModel.randomMealList.value ?: emptyList()) { meal, fab ->
+                    val userId = sharedPreferences.getInt("id", -1)
+                    viewModel.insertFavourite(meal, userId)
+                    fab.setImageResource(R.drawable.baseline_favorite_24)
+                    Toast.makeText(context, "Added to favourites", Toast.LENGTH_SHORT).show()
+                }
+                mealsRecyclerView.adapter = mealAdapter
+            }
+
+
+            viewModel.getRandomMealList()
 
 
             areasAdapter = AreasAdapter(viewModel.areas.value ?: emptyList()) { area ->
@@ -110,6 +117,8 @@ class HomeFragment : Fragment() {
             }
 
             viewModel.getAreas()
+
+
 
 
 
