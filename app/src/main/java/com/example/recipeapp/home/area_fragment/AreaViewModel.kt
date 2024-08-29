@@ -1,5 +1,6 @@
 package com.example.recipeapp.home.area_fragment
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,6 +9,7 @@ import com.example.recipeapp.appstorage.Repository
 import com.example.recipeapp.dto.AreaMeal
 import com.example.recipeapp.dto.Meal
 import com.example.recipeapp.dto.MealList
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class AreaViewModel(val repo : Repository) : ViewModel(){
@@ -27,14 +29,17 @@ class AreaViewModel(val repo : Repository) : ViewModel(){
 
 
 
-    fun getMealByID(id:String): Meal?{
-        var meal : Meal? = null
+    fun getMealByID(id: String): LiveData<Meal?> {
+        val mealLiveData = MutableLiveData<Meal?>()
         viewModelScope.launch {
             val response = repo.lookupMealById(id)
-            if(response.isSuccessful){
-                meal = response.body()?.meals?.get(0)
+            if (response.isSuccessful) {
+                mealLiveData.postValue(response.body()?.meals?.get(0))
+            } else {
+                mealLiveData.postValue(null)
             }
         }
-        return meal
+        return mealLiveData
     }
+
 }

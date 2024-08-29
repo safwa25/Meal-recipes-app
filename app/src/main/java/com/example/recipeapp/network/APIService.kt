@@ -22,7 +22,7 @@ interface APIService {
     suspend fun listMealsByFirstLetter(@Query("f") firstLetter: String): Response<List<Meal>>
 
     // Lookup full meal details by id
-    @GET("lookup.php")
+    @GET("api/json/v1/1/lookup.php")
     suspend fun lookupMealById(@Query("i") mealId: String): Response<MealList>
 
     // Lookup a single random meal

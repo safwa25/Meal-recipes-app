@@ -1,5 +1,6 @@
 package com.example.recipeapp.network
 
+import android.util.Log
 import com.example.recipeapp.dto.AreaMealsResponse
 import com.example.recipeapp.dto.AreasStr
 import com.example.recipeapp.dto.Category
@@ -21,6 +22,7 @@ object APIClient : RemoteDataSource {
 
     override suspend fun lookupMealById(mealId: String): Response<MealList> {
         return API.retrofitService.lookupMealById(mealId)
+
     }
 
     override suspend fun getRandomMeal(): Response<MealList> {
