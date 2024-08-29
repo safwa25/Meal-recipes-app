@@ -1,5 +1,6 @@
 package com.example.recipeapp.appstorage
 
+import CategoriesResponse
 import com.example.recipeapp.database.favourites.Favourites
 import com.example.recipeapp.database.user.User
 import com.example.recipeapp.dto.AreasStr
@@ -28,7 +29,7 @@ interface Repository {
     suspend fun getRandomMeal(): Response<MealList>
     suspend fun returnlastid():Int
 
-    suspend fun listAllCategories(): Response<List<Category>>
+    suspend fun listAllCategories(): Response<CategoriesResponse>
 
     suspend fun listCategories(): Response<List<String>>
 

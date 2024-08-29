@@ -1,5 +1,6 @@
 package com.example.recipeapp.appstorage
 
+import CategoriesResponse
 import android.util.Log
 import com.example.recipeapp.database.favourites.Favourites
 import com.example.recipeapp.database.favourites.FavouritesLocalDs
@@ -75,7 +76,7 @@ class RepositoryImplement(val localDataSource: LocalDataSource, val mealLocalDs:
         return remoteDataSource.getRandomMeal()
     }
 
-    override suspend fun listAllCategories(): Response<List<Category>> {
+    override suspend fun listAllCategories(): Response<CategoriesResponse>{
         return remoteDataSource.listAllCategories()
     }
 

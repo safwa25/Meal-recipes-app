@@ -1,5 +1,6 @@
 package com.example.recipeapp.network
 
+import CategoriesResponse
 import com.example.recipeapp.dto.AreasStr
 import com.example.recipeapp.dto.Category
 import com.example.recipeapp.dto.Ingradients
@@ -26,7 +27,7 @@ object APIClient : RemoteDataSource {
         return API.retrofitService.getRandomMeal()
     }
 
-    override suspend fun listAllCategories(): Response<List<Category>> {
+    override suspend fun listAllCategories(): Response<CategoriesResponse> {
         return API.retrofitService.listAllCategories()
     }
 

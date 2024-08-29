@@ -1,5 +1,6 @@
 package com.example.recipeapp.network
 
+import CategoriesResponse
 import com.example.recipeapp.dto.AreasStr
 import com.example.recipeapp.dto.Category
 import com.example.recipeapp.dto.Ingradients
@@ -29,8 +30,8 @@ interface APIService {
     suspend fun getRandomMeal(): Response<MealList>
 
     // List all meal categories
-    @GET("categories.php")
-    suspend fun listAllCategories(): Response<List<Category>>
+    @GET("api/json/v1/1/categories.php")
+    suspend fun listAllCategories(): Response<CategoriesResponse>
 
     // List of all categories names
     @GET("list.php")

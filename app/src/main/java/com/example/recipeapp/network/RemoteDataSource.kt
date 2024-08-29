@@ -1,4 +1,5 @@
 package com.example.recipeapp.network
+import CategoriesResponse
 import com.example.recipeapp.dto.AreasStr
 import com.example.recipeapp.dto.Category
 import com.example.recipeapp.dto.Ingradients
@@ -17,7 +18,7 @@ interface RemoteDataSource {
 
     suspend fun getRandomMeal(): Response<MealList>
 
-    suspend fun listAllCategories(): Response<List<Category>>
+    suspend fun listAllCategories():Response<CategoriesResponse>
 
     suspend fun listCategories(): Response<List<String>>
 

@@ -27,8 +27,17 @@
         <item name="android:elevation">0dp</item>
         <!-- Additional customizations if needed -->
     </style>
+    <style name="CustomCardView" parent="Widget.MaterialComponents.CardView">
+        <item name="shapeAppearance">@style/CustomShapeAppearance</item>
+    </style>
 
-<!--    <style name="app_bar" parent="Theme.MaterialComponents.Light.DarkActionBar">-->
+    <style name="CustomShapeAppearance" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">200dp</item>
+    </style>
+
+
+    <!--    <style name="app_bar" parent="Theme.MaterialComponents.Light.DarkActionBar">-->
 <!--        <item name="colorPrimary">@color/white</item>-->
 <!--        <item name="colorPrimaryDark">@color/black</item>-->
 <!--        <item name="colorAccent">@color/defaultColor</item>-->
