@@ -17,4 +17,8 @@ class MealLocalDsImplement(context: Context) : MealLocalDs {
     override suspend fun searchMeals(mealName: String): List<Meal> {
         return mealDao.searchMeal(mealName)
     }
+
+    override suspend fun deleteMeal(mealId: String) {
+        mealDao.deleteMeal(mealId)
+    }
 }

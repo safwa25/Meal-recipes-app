@@ -11,7 +11,12 @@ import com.example.recipeapp.R
 import com.example.recipeapp.dto.Meal
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class PopularAdapter(var meals:List<Meal>, val onFavClick : (Meal, FloatingActionButton) -> Unit) : RecyclerView.Adapter<PopularAdapter.ViewHolder>() {
+class PopularAdapter(
+    private var meals: List<Meal>,
+    private val onFavClick: (Meal) -> Unit
+) : RecyclerView.Adapter<PopularAdapter.ViewHolder>() {
+
+    private var favoriteMeals = mutableSetOf<String>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val row = LayoutInflater.from(parent.context).inflate(R.layout.meal_card, parent, false)
@@ -19,30 +24,42 @@ class PopularAdapter(var meals:List<Meal>, val onFavClick : (Meal, FloatingActio
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        var p = meals.get(position)
-        holder.text.text = p.strMeal
+        val meal = meals[position]
+        holder.text.text = meal.strMeal
         Glide.with(holder.img)
-            .load(p.strMealThumb)
+            .load(meal.strMealThumb)
             .into(holder.img)
+
+        // Update the FAB icon based on whether the meal is in the favorites
+        holder.fab.setImageResource(
+            if (favoriteMeals.contains(meal.idMeal)) R.drawable.baseline_favorite_24
+            else R.drawable.baseline_favorite_border_24
+        )
+
         holder.fab.setOnClickListener {
-            onFavClick(p, holder.fab)
+            if (favoriteMeals.contains(meal.idMeal)) {
+                onFavClick(meal)
+                favoriteMeals.remove(meal.idMeal)
+            } else {
+                onFavClick(meal)
+                favoriteMeals.add(meal.idMeal)
+            }
+            // Notify the adapter that the data has changed
+            notifyItemChanged(position)
         }
     }
 
     override fun getItemCount(): Int = meals.size
 
-    class ViewHolder(val card: View) : RecyclerView.ViewHolder(card){
-        var text = card.findViewById<TextView>(R.id.meal_title)
-        var img = card.findViewById<ImageView>(R.id.meal_pop_image)
-        var fab = card.findViewById<FloatingActionButton>(R.id.pop_fav_btn)
-
-
+    class ViewHolder(val card: View) : RecyclerView.ViewHolder(card) {
+        val text: TextView = card.findViewById(R.id.meal_title)
+        val img: ImageView = card.findViewById(R.id.meal_pop_image)
+        val fab: FloatingActionButton = card.findViewById(R.id.pop_fav_btn)
     }
 
-    fun updateData(newMeals: List<Meal>) {
+    fun updateData(newMeals: List<Meal>, favoriteIds: Set<String>) {
         meals = newMeals
+        favoriteMeals = favoriteIds.toMutableSet() // Update the favorite meals
         notifyDataSetChanged()
     }
-
-
 }

@@ -50,6 +50,10 @@ class RepositoryImplement(val localDataSource: LocalDataSource, val mealLocalDs:
     override suspend fun searchMeals(mealName: String): List<Meal> {
         return mealLocalDs.searchMeals(mealName)
     }
+
+    override suspend fun deleteMeal(mealId: String) {
+        mealLocalDs.deleteMeal(mealId)
+    }
 //favourite database functions
     override suspend fun insertFavourite(favourite: Favourites) {
         favouritesLocalDs.insertFavourite(favourite)
@@ -59,8 +63,8 @@ class RepositoryImplement(val localDataSource: LocalDataSource, val mealLocalDs:
         return favouritesLocalDs.getFavourites(userId)
     }
 
-    override suspend fun deleteFavouriteByMealId(mealId: String) {
-        favouritesLocalDs.deleteFavouriteByMealId(mealId)
+    override suspend fun deleteFavouriteByMealId(mealId: String, userId: Int) {
+        favouritesLocalDs.deleteFavouriteByMealId(mealId, userId)
     }
 
     override suspend fun searchMealByName(mealName: String): Response<MealList> {

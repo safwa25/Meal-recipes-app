@@ -15,4 +15,8 @@ interface MealDao {
 
     @Query("SELECT * FROM meal where strMeal Like :mealName")
     suspend fun searchMeal(mealName :String) : List<Meal>
+
+
+    @Query("Delete from meal Where idMeal = :mealId")
+    suspend fun deleteMeal(mealId :String)
 }

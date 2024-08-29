@@ -7,5 +7,5 @@ interface FavouritesLocalDs {
 
     suspend fun getFavourites(userId: Int): List<Meal>
 
-    suspend fun deleteFavouriteByMealId(mealId: String)
+    suspend fun deleteFavouriteByMealId(mealId: String, userId: Int)
 }

@@ -21,10 +21,11 @@ interface Repository {
     // meal database functions
     suspend fun insertMeal(mealDataBase: Meal)
     suspend fun searchMeals(mealName : String): List<Meal>
+    suspend fun deleteMeal(mealId :String)
     // favourite database functions
     suspend fun insertFavourite(favourite: Favourites)
     suspend fun getFavourites(userId: Int): List<Meal>
-    suspend fun deleteFavouriteByMealId(mealId: String)
+    suspend fun deleteFavouriteByMealId(mealId: String, userId: Int)
     // api functions
     suspend fun searchMealByName(mealName: String): Response<MealList>
     suspend fun listMealsByFirstLetter(firstLetter: String): Response<List<Meal>>
