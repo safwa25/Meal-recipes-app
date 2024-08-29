@@ -75,6 +75,8 @@ class HomeFragment : Fragment() {
 
             sharedPreferences = requireContext().getSharedPreferences("currentuser", Context.MODE_PRIVATE)
 
+
+
             mealAdapter = PopularAdapter(viewModel.randomMealList.value ?: emptyList()) { meal, fab ->
                 val userId = sharedPreferences.getInt("id", -1)
                 viewModel.insertFavourite(meal, userId)
@@ -85,19 +87,14 @@ class HomeFragment : Fragment() {
             mealsRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             mealsRecyclerView.adapter = mealAdapter
             mealsRecyclerView.addItemDecoration(SpaceItemDecoration(20))
-
+            viewModel.getRandomMealList()
             viewModel.randomMealList.observe(viewLifecycleOwner) { meals ->
-                mealAdapter = PopularAdapter(viewModel.randomMealList.value ?: emptyList()) { meal, fab ->
-                    val userId = sharedPreferences.getInt("id", -1)
-                    viewModel.insertFavourite(meal, userId)
-                    fab.setImageResource(R.drawable.baseline_favorite_24)
-                    Toast.makeText(context, "Added to favourites", Toast.LENGTH_SHORT).show()
+                if (meals != null) {
+                    mealAdapter.updateData(meals)
                 }
-                mealsRecyclerView.adapter = mealAdapter
             }
 
 
-            viewModel.getRandomMealList()
 
 
             areasAdapter = AreasAdapter(viewModel.areas.value ?: emptyList()) { area ->
@@ -109,14 +106,12 @@ class HomeFragment : Fragment() {
             areasRecyclerView.adapter = areasAdapter
             areasRecyclerView.addItemDecoration(SpaceItemDecoration(20))
 
-            viewModel.randomMealList.observe(viewLifecycleOwner) { meals ->
-                areasAdapter = AreasAdapter(viewModel.areas.value ?: emptyList()) { area ->
-                    val action = HomeFragmentDirections.actionHomeFragmentToAreaFragment(area)
-                    findNavController().navigate(action)
-                }
+            viewModel.getAreas()
+            viewModel.areas.observe(viewLifecycleOwner) { areas ->
+                areasAdapter.updateData(areas)
             }
 
-            viewModel.getAreas()
+
 
 
 
