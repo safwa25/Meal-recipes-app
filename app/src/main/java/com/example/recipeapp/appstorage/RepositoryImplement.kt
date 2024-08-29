@@ -6,6 +6,7 @@ import com.example.recipeapp.database.favourites.FavouritesLocalDs
 import com.example.recipeapp.database.meal.MealLocalDs
 import com.example.recipeapp.database.user.LocalDataSource
 import com.example.recipeapp.database.user.User
+import com.example.recipeapp.dto.AreaMealsResponse
 import com.example.recipeapp.dto.AreasStr
 import com.example.recipeapp.dto.Category
 import com.example.recipeapp.dto.Ingradients
@@ -67,7 +68,7 @@ class RepositoryImplement(val localDataSource: LocalDataSource, val mealLocalDs:
         return remoteDataSource.listMealsByFirstLetter(firstLetter)
     }
 
-    override suspend fun lookupMealById(mealId: String): Response<MealDataBase> {
+    override suspend fun lookupMealById(mealId: String): Response<MealList> {
         return remoteDataSource.lookupMealById(mealId)
     }
 
@@ -99,7 +100,7 @@ class RepositoryImplement(val localDataSource: LocalDataSource, val mealLocalDs:
         return remoteDataSource.filterByCategory(category)
     }
 
-    override suspend fun filterByArea(area: String): Response<List<MealDataBase>> {
+    override suspend fun filterByArea(area: String): Response<AreaMealsResponse> {
         return remoteDataSource.filterByArea(area)
     }
 

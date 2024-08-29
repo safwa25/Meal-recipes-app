@@ -51,6 +51,7 @@ lifecycle-viewmodel-ktx={group="androidx.lifecycle",name="lifecycle-viewmodel-kt
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 jetbrains-kotlin-kapt={id="org.jetbrains.kotlin.kapt",version.ref="kapt"}
+safe-args-plugin = { id = "androidx.navigation.safeargs.kotlin", version = "2.5.3" }
 
 
 

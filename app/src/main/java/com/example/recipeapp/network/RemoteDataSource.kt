@@ -1,4 +1,5 @@
 package com.example.recipeapp.network
+import com.example.recipeapp.dto.AreaMealsResponse
 import com.example.recipeapp.dto.AreasStr
 import com.example.recipeapp.dto.Category
 import com.example.recipeapp.dto.Ingradients
@@ -13,7 +14,7 @@ interface RemoteDataSource {
 
     suspend fun listMealsByFirstLetter(firstLetter: String): Response<List<MealDataBase>>
 
-    suspend fun lookupMealById(mealId: String): Response<MealDataBase>
+    suspend fun lookupMealById(mealId: String): Response<MealList>
 
     suspend fun getRandomMeal(): Response<MealList>
 
@@ -29,5 +30,5 @@ interface RemoteDataSource {
 
     suspend fun filterByCategory(category: String): Response<List<MealDataBase>>
 
-    suspend fun filterByArea(area: String): Response<List<MealDataBase>>
+    suspend fun filterByArea(area: String): Response<AreaMealsResponse>
 }

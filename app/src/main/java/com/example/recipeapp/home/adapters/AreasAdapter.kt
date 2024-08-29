@@ -11,7 +11,7 @@ import com.example.recipeapp.R
 import com.example.recipeapp.dto.MealAPI
 import com.example.recipeapp.dto.MealArea
 
-class AreasAdapter(val areas:List<MealArea>) : RecyclerView.Adapter<AreasAdapter.ViewHolder>() {
+class AreasAdapter(val areas:List<MealArea>, val onAreaClick: (String) -> Unit) : RecyclerView.Adapter<AreasAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val row = LayoutInflater.from(parent.context).inflate(R.layout.area_card, parent, false)
@@ -21,6 +21,9 @@ class AreasAdapter(val areas:List<MealArea>) : RecyclerView.Adapter<AreasAdapter
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var p = areas.get(position)
         holder.text.text = p.strArea
+        holder.itemView.setOnClickListener{
+            onAreaClick(p.strArea)
+        }
     }
 
     override fun getItemCount(): Int = areas.size

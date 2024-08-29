@@ -9,8 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.recipeapp.R
 import com.example.recipeapp.dto.MealAPI
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class PopularAdapter(val meals:List<MealAPI>) : RecyclerView.Adapter<PopularAdapter.ViewHolder>() {
+class PopularAdapter(val meals:List<MealAPI>, val onFavClick : (MealAPI) -> Unit) : RecyclerView.Adapter<PopularAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val row = LayoutInflater.from(parent.context).inflate(R.layout.meal_card, parent, false)
@@ -23,10 +24,9 @@ class PopularAdapter(val meals:List<MealAPI>) : RecyclerView.Adapter<PopularAdap
         Glide.with(holder.img)
             .load(p.strMealThumb)
             .into(holder.img)
-
-//        holder.itemView.setOnClickListener{
-//            onItemClick(p)
-//        }
+        holder.fab.setOnClickListener {
+            onFavClick(p)
+        }
     }
 
     override fun getItemCount(): Int = meals.size
@@ -34,6 +34,7 @@ class PopularAdapter(val meals:List<MealAPI>) : RecyclerView.Adapter<PopularAdap
     class ViewHolder(val card: View) : RecyclerView.ViewHolder(card){
         var text = card.findViewById<TextView>(R.id.meal_title)
         var img = card.findViewById<ImageView>(R.id.meal_pop_image)
+        var fab = card.findViewById<FloatingActionButton>(R.id.fav_btn)
 
 
     }
