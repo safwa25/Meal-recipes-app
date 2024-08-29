@@ -47,7 +47,11 @@ class AreaFragment : Fragment() {
         val areaName = arguments?.getString("areaName") ?: ""
         val viewModel = ViewModelProvider(this, viewModelFactory).get(AreaViewModel::class.java)
 
-        adapter = AreasMealsAdapter(viewModel.areasMeals.value ?: emptyList())
+        adapter = AreasMealsAdapter(viewModel.areasMeals.value ?: emptyList()) { id, callback ->
+            viewModel.getMealByID(id).observe(viewLifecycleOwner) { meal ->
+                callback(meal)
+            }
+        }
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.areas_meals_rv)
         recyclerView.adapter = adapter
@@ -55,7 +59,11 @@ class AreaFragment : Fragment() {
         recyclerView.addItemDecoration(SpaceItemDecoration(20))
 
         viewModel.areasMeals.observe(viewLifecycleOwner) { areasMeals ->
-            adapter = AreasMealsAdapter(viewModel.areasMeals.value ?: emptyList())
+            adapter = AreasMealsAdapter(viewModel.areasMeals.value ?: emptyList()) { id, callback ->
+                viewModel.getMealByID(id).observe(viewLifecycleOwner) { meal ->
+                    callback(meal)
+                }
+            }
             recyclerView.adapter = adapter
         }
 
