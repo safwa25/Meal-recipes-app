@@ -1,5 +1,6 @@
 package com.example.recipeapp.network
 
+import com.example.recipeapp.dto.AreaMealsResponse
 import com.example.recipeapp.dto.AreasStr
 import com.example.recipeapp.dto.Category
 import com.example.recipeapp.dto.Ingradients
@@ -18,7 +19,7 @@ object APIClient : RemoteDataSource {
         return API.retrofitService.listMealsByFirstLetter(firstLetter)
     }
 
-    override suspend fun lookupMealById(mealId: String): Response<MealDataBase> {
+    override suspend fun lookupMealById(mealId: String): Response<MealList> {
         return API.retrofitService.lookupMealById(mealId)
     }
 
@@ -50,7 +51,7 @@ object APIClient : RemoteDataSource {
         return API.retrofitService.filterByCategory(category)
     }
 
-    override suspend fun filterByArea(area: String): Response<List<MealDataBase>> {
+    override suspend fun filterByArea(area: String): Response<AreaMealsResponse> {
         return API.retrofitService.filterByArea(area)
     }
 }

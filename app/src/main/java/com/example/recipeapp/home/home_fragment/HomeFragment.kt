@@ -3,6 +3,7 @@ package com.example.recipeapp.home.home_fragment
 import SpaceItemDecoration
 import android.content.ClipDescription
 import android.content.Context
+import android.content.SharedPreferences
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
@@ -33,6 +34,7 @@ import java.io.IOException
 
 class HomeFragment : Fragment() {
     private lateinit var image :ImageView
+    lateinit var sharedPreferences: SharedPreferences
     private lateinit var randomMealTitile: TextView
     private lateinit var randomMealDescription: TextView
     private lateinit var mealAdapter: PopularAdapter
@@ -68,29 +70,43 @@ class HomeFragment : Fragment() {
                 randomMealDescription.text = it?.strInstructions.toString()
             }
 
-            mealAdapter = PopularAdapter(viewModel.randomMealList.value ?: emptyList())
-            val mealsRecyclerView = view.findViewById<RecyclerView>(R.id.popular_rv)
-            mealsRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            mealsRecyclerView.adapter = mealAdapter
-            mealsRecyclerView.addItemDecoration(SpaceItemDecoration(20))
 
-            viewModel.randomMealList.observe(viewLifecycleOwner) { meals ->
-                mealAdapter = PopularAdapter(viewModel.randomMealList.value ?: emptyList())
-                mealsRecyclerView.adapter = mealAdapter
+            sharedPreferences = requireContext().getSharedPreferences("currentuser", Context.MODE_PRIVATE)
+
+//            mealAdapter = PopularAdapter(viewModel.randomMealList.value ?: emptyList()) { meal ->
+//                val userId = sharedPreferences.getInt("id", -1)
+//                viewModel.insertFavourite(meal.idMeal.toString(), userId)
+//            }
+//            val mealsRecyclerView = view.findViewById<RecyclerView>(R.id.popular_rv)
+//            mealsRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+//            mealsRecyclerView.adapter = mealAdapter
+//            mealsRecyclerView.addItemDecoration(SpaceItemDecoration(20))
+//
+//            viewModel.randomMealList.observe(viewLifecycleOwner) { meals ->
+//                mealAdapter = PopularAdapter(viewModel.randomMealList.value ?: emptyList()) { meal ->
+//                    val userId = sharedPreferences.getInt("id", -1)
+//                    viewModel.insertFavourite(meal.idMeal.toString(), userId)
+//                }
+//                mealsRecyclerView.adapter = mealAdapter
+//            }
+//
+//            viewModel.getRandomMealList()
+
+
+            areasAdapter = AreasAdapter(viewModel.areas.value ?: emptyList()) { area ->
+                val action = HomeFragmentDirections.actionHomeFragmentToAreaFragment(area)
+                findNavController().navigate(action)
             }
-
-            viewModel.getRandomMealList()
-
-
-            areasAdapter = AreasAdapter(viewModel.areas.value ?: emptyList())
             val areasRecyclerView = view.findViewById<RecyclerView>(R.id.areas_rv)
             areasRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             areasRecyclerView.adapter = areasAdapter
             areasRecyclerView.addItemDecoration(SpaceItemDecoration(20))
 
             viewModel.randomMealList.observe(viewLifecycleOwner) { meals ->
-                areasAdapter = AreasAdapter(viewModel.areas.value ?: emptyList())
-                areasRecyclerView.adapter = areasAdapter
+                areasAdapter = AreasAdapter(viewModel.areas.value ?: emptyList()) { area ->
+                    val action = HomeFragmentDirections.actionHomeFragmentToAreaFragment(area)
+                    findNavController().navigate(action)
+                }
             }
 
             viewModel.getAreas()

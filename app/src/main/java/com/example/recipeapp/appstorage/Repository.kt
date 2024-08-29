@@ -2,6 +2,7 @@ package com.example.recipeapp.appstorage
 
 import com.example.recipeapp.database.favourites.Favourites
 import com.example.recipeapp.database.user.User
+import com.example.recipeapp.dto.AreaMealsResponse
 import com.example.recipeapp.dto.AreasStr
 import com.example.recipeapp.dto.Category
 import com.example.recipeapp.dto.Ingradients
@@ -24,7 +25,7 @@ interface Repository {
 
     suspend fun searchMealByName(mealName: String): Response<MealList>
     suspend fun listMealsByFirstLetter(firstLetter: String): Response<List<MealDataBase>>
-    suspend fun lookupMealById(mealId: String): Response<MealDataBase>
+    suspend fun lookupMealById(mealId: String): Response<MealList>
     suspend fun getRandomMeal(): Response<MealList>
     suspend fun returnlastid():Int
 
@@ -40,6 +41,6 @@ interface Repository {
 
     suspend fun filterByCategory(category: String): Response<List<MealDataBase>>
 
-    suspend fun filterByArea(area: String): Response<List<MealDataBase>>
+    suspend fun filterByArea(area: String): Response<AreaMealsResponse>
 
 }

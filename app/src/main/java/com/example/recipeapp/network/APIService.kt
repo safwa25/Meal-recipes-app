@@ -1,5 +1,6 @@
 package com.example.recipeapp.network
 
+import com.example.recipeapp.dto.AreaMealsResponse
 import com.example.recipeapp.dto.AreasStr
 import com.example.recipeapp.dto.Category
 import com.example.recipeapp.dto.Ingradients
@@ -22,7 +23,7 @@ interface APIService {
 
     // Lookup full meal details by id
     @GET("lookup.php")
-    suspend fun lookupMealById(@Query("i") mealId: String): Response<MealDataBase>
+    suspend fun lookupMealById(@Query("i") mealId: String): Response<MealList>
 
     // Lookup a single random meal
     @GET("api/json/v1/1/random.php")
@@ -53,7 +54,7 @@ interface APIService {
     suspend fun filterByCategory(@Query("c") category: String): Response<List<MealDataBase>>
 
     // Filter by area
-    @GET("filter.php")
-    suspend fun filterByArea(@Query("a") area: String): Response<List<MealDataBase>>
+    @GET("api/json/v1/1/filter.php")
+    suspend fun filterByArea(@Query("a") area: String): Response<AreaMealsResponse>
 
 }

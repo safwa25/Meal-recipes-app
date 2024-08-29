@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.recipeapp.appstorage.Repository
+import com.example.recipeapp.database.favourites.Favourites
 import com.example.recipeapp.dto.AreasStr
 import com.example.recipeapp.dto.MealAPI
 import com.example.recipeapp.dto.MealArea
@@ -71,5 +72,13 @@ class HomeViewModel(val repository: Repository): ViewModel() {
 
         }
     }
+
+//
+//    fun insertFavourite(meal : MealAPI, userId: Int){
+//        viewModelScope.launch(Dispatchers.IO) {
+//            repository.insertMeal(meal)
+//            repository.insertFavourite(Favourites(meal.idMeal.toString(), userId))
+//        }
+//    }
 
 }
