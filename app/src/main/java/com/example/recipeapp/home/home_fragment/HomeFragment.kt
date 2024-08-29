@@ -28,6 +28,7 @@ import com.example.recipeapp.database.user.LocalDataBaseImplement
 import com.example.recipeapp.network.APIClient
 import com.example.task2.AreasAdapter
 import com.example.task2.PopularAdapter
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class HomeFragment : Fragment() {
     private lateinit var image: ImageView
@@ -36,6 +37,7 @@ class HomeFragment : Fragment() {
     private var mealAdapter: PopularAdapter? = null // Changed to nullable
     private lateinit var areasAdapter: AreasAdapter
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var favBtn: FloatingActionButton
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,17 +63,40 @@ class HomeFragment : Fragment() {
             image = view.findViewById(R.id.meal_image)
             randomMealTitle = view.findViewById(R.id.recipeTitle)
             randomMealDescription = view.findViewById(R.id.recipeDesc)
-
-
-            viewModel.getRandomMeal()
-            viewModel.randomMeal.observe(viewLifecycleOwner) {
-                Glide.with(view).load(it?.strMealThumb.toString()).into(image)
-                randomMealTitle.text = it?.strMeal.toString()
-                randomMealDescription.text = it?.strInstructions.toString()
-            }
-
+            favBtn = view.findViewById(R.id.fav_btn)
             sharedPreferences = requireContext().getSharedPreferences("currentuser", Context.MODE_PRIVATE)
             val userId = sharedPreferences.getInt("id", -1)
+
+            viewModel.getRandomMeal()
+            viewModel.randomMeal.observe(viewLifecycleOwner) { meal ->
+                Glide.with(view).load(meal?.strMealThumb).into(image)
+                randomMealTitle.text = meal?.strMeal ?: ""
+                randomMealDescription.text = meal?.strInstructions ?: ""
+
+                // Update the FAB icon based on whether the meal is in the favorites
+                favBtn.setImageResource(
+                    if (viewModel.favorites.value?.map { it.idMeal }?.contains(meal?.idMeal) == true) {
+                        R.drawable.baseline_favorite_24
+                    } else {
+                        R.drawable.baseline_favorite_border_24
+                    }
+                )
+
+                // Handle the fav button click
+                favBtn.setOnClickListener {
+                    meal?.let {
+                        if (viewModel.favorites.value?.map { it.idMeal }?.contains(meal.idMeal) == true) {
+                            viewModel.deleteFavourite(meal, userId)
+                            favBtn.setImageResource(R.drawable.baseline_favorite_border_24)
+                        } else {
+                            viewModel.insertFavourite(meal, userId)
+                            favBtn.setImageResource(R.drawable.baseline_favorite_24)
+                        }
+                    }
+                }
+            }
+
+
 
             val mealsRecyclerView = view.findViewById<RecyclerView>(R.id.popular_rv)
             mealsRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
