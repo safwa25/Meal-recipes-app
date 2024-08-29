@@ -11,7 +11,7 @@ import com.example.recipeapp.R
 import com.example.recipeapp.dto.Meal
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class PopularAdapter(val meals:List<Meal>, val onFavClick : (Meal, FloatingActionButton) -> Unit) : RecyclerView.Adapter<PopularAdapter.ViewHolder>() {
+class PopularAdapter(var meals:List<Meal>, val onFavClick : (Meal, FloatingActionButton) -> Unit) : RecyclerView.Adapter<PopularAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val row = LayoutInflater.from(parent.context).inflate(R.layout.meal_card, parent, false)
@@ -37,6 +37,11 @@ class PopularAdapter(val meals:List<Meal>, val onFavClick : (Meal, FloatingActio
         var fab = card.findViewById<FloatingActionButton>(R.id.pop_fav_btn)
 
 
+    }
+
+    fun updateData(newMeals: List<Meal>) {
+        meals = newMeals
+        notifyDataSetChanged()
     }
 
 

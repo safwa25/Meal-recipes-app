@@ -87,22 +87,16 @@ class HomeFragment : Fragment() {
             mealsRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             mealsRecyclerView.adapter = mealAdapter
             mealsRecyclerView.addItemDecoration(SpaceItemDecoration(20))
-
+            viewModel.getRandomMealList()
             viewModel.randomMealList.observe(viewLifecycleOwner) { meals ->
-                mealAdapter = PopularAdapter(viewModel.randomMealList.value ?: emptyList()) { meal, fab ->
-                    val userId = sharedPreferences.getInt("id", -1)
-                    viewModel.insertFavourite(meal, userId)
-                    fab.setImageResource(R.drawable.baseline_favorite_24)
-                    Toast.makeText(context, "Added to favourites", Toast.LENGTH_SHORT).show()
+                if (meals != null) {
+                    mealAdapter.updateData(meals)
                 }
-                mealsRecyclerView.adapter = mealAdapter
             }
 
 
-            viewModel.getRandomMealList()
 
 
-            // Initialize and set up areasRecyclerView and areasAdapter
             areasAdapter = AreasAdapter(viewModel.areas.value ?: emptyList()) { area ->
                 val action = HomeFragmentDirections.actionHomeFragmentToAreaFragment(area)
                 findNavController().navigate(action)
