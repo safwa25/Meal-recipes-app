@@ -15,6 +15,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -161,6 +162,19 @@ class HomeFragment : Fragment() {
             Log.d("HomeFragment", "No network connection")
             Toast.makeText(context, "Network error", Toast.LENGTH_SHORT).show()
         }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                AlertDialog.Builder(requireContext())
+                    .setTitle("Exit")
+                    .setMessage("Are you sure you want to exit?")
+                    .setPositiveButton("Yes") { _, _ ->
+                        requireActivity().finishAffinity() // Exit the app
+                    }
+                    .setNegativeButton("No", null)
+                    .show()
+            }
+        })
     }
 
     private fun isInternetAvailable(context: Context): Boolean {

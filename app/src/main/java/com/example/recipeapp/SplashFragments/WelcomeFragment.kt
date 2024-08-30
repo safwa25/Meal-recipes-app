@@ -1,5 +1,6 @@
 package com.example.recipeapp.SplashFragments
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -8,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.recipeapp.home.HomeActivity
@@ -31,13 +33,29 @@ lateinit var sharedPreferences: SharedPreferences
             if(id==-1 || id==0)
             {
                 findNavController().navigate(R.id.loginFragment)
+
             }else
             {
                 val homepage= Intent(view.context, HomeActivity::class.java)
                 startActivity(homepage)
+                requireActivity().finish()
             }
 
+
         }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                AlertDialog.Builder(requireContext())
+                    .setTitle("Exit")
+                    .setMessage("Are you sure you want to exit?")
+                    .setPositiveButton("Yes") { _, _ ->
+                        requireActivity().finishAffinity() // Exit the app
+                    }
+                    .setNegativeButton("No", null)
+                    .show()
+            }
+        })
+
         return view
 
     }

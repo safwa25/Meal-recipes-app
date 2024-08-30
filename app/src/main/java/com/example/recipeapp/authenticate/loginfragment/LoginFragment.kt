@@ -63,8 +63,11 @@ class LoginFragment : Fragment() {
                 val editor=sharedPreferences.edit()
                 editor.putInt("id",it.id)
                 editor.apply()
-                val homepage=Intent(view.context, HomeActivity::class.java)
-                startActivity(homepage)
+                val homepageIntent = Intent(requireContext(), HomeActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                }
+                startActivity(homepageIntent)
+                requireActivity().finish()
             } else {
                 Toast.makeText(context, "Invalid Username or Password", Toast.LENGTH_SHORT).show()
             }
