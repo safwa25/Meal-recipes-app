@@ -14,6 +14,6 @@
 
     <item
         android:id="@+id/search"
-        android:icon="@drawable/search64"
+        android:icon="@drawable/search1"
         android:title=" " />
 </menu>

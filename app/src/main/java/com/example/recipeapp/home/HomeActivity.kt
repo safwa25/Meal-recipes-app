@@ -1,9 +1,11 @@
 package com.example.recipeapp.home
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
 import androidx.navigation.findNavController
@@ -27,6 +29,24 @@ class HomeActivity : AppCompatActivity() {
         val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.tool_bar)
         setSupportActionBar(toolbar)
         toolbar.title ="Welcome,User"
+
+
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        // Set the default selected item to the middle item (home)
+        bottomNavigationView.selectedItemId = R.id.home
+
+//        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+//            override fun handleOnBackPressed() {
+//                AlertDialog.Builder(this@HomeActivity)
+//                    .setTitle("Exit")
+//                    .setMessage("Are you sure you want to exit?")
+//                    .setPositiveButton("Yes") { _, _ ->
+//                        finish()
+//                    }
+//                    .setNegativeButton("No", null)
+//                    .show()
+//            }
+//        })
 
         fabButton.setOnClickListener {
             findNavController(R.id.fragment_host).navigate(R.id.fragment_home)

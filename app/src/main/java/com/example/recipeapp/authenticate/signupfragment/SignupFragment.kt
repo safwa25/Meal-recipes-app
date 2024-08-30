@@ -89,6 +89,8 @@ class SignupFragment : Fragment() {
                 editor.apply()
 
                 findNavController().navigate(R.id.first_splash)
+                requireActivity().finish()
+
         }
     }
 
@@ -116,9 +118,7 @@ class SignupFragment : Fragment() {
     private fun setupPasswordValidation() {
         password.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                // Optionally validate here for real-time feedback
-            }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
                 passwordInput.helperText = validatePassword()
                 updateSignUpButtonState()

@@ -3,7 +3,6 @@ package com.example.recipeapp.home.favourites_fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.recipeapp.appstorage.Repository
-import com.example.recipeapp.home.area_fragment.AreaViewModel
 import java.lang.IllegalArgumentException
 
 class FavouritesViewModelFactory(private val repository: Repository) : ViewModelProvider.Factory {
