@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home_nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/favorite">
     <fragment
         android:id="@+id/logoutFragment"
         android:name="com.example.recipeapp.home.logout.LogoutFragment"
@@ -28,4 +28,40 @@
             app:argType="string"
             app:nullable="false" />
     </fragment>
+    <fragment
+        android:id="@+id/favorite"
+        android:name="com.example.recipeapp.home.favorite_fargment.Favorite"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" >
+        <action
+            android:id="@+id/action_favorite_to_test"
+            app:destination="@id/test" />
+    </fragment>
+    <fragment
+        android:id="@+id/test"
+        android:name="com.example.recipeapp.home.favorite_fargment.test"
+        android:label="fragment_test"
+        tools:layout="@layout/fragment_test" >
+    <argument
+        android:name="mealTitle"
+        app:argType="string" />
+    <argument
+        android:name="mealCategory"
+        app:argType="string" />
+    <argument
+        android:name="mealInstructions"
+        app:argType="string" />
+    <argument android:name="mealYoutubeVideo"
+        app:argType="string" />
+    <argument
+        android:name="mealImage"
+        app:argType="string" />
+    <argument
+        android:name="mealId"
+        app:argType="string" />
+    <argument
+        android:name="mealArea"
+        app:argType="string" />
+    </fragment>
+
 </navigation>
