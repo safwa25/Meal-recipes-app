@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home_nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/fragment_home">
     <fragment
-        android:id="@+id/logoutFragment"
+        android:id="@+id/fragment_logout"
         android:name="com.example.recipeapp.home.logout.LogoutFragment"
         android:label="fragment_logout"
         tools:layout="@layout/fragment_logout" />
     <fragment
-        android:id="@+id/homeFragment"
+        android:id="@+id/fragment_home"
         android:name="com.example.recipeapp.home.home_fragment.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
@@ -28,4 +28,9 @@
             app:argType="string"
             app:nullable="false" />
     </fragment>
+    <fragment
+        android:id="@+id/settings_fragment"
+        android:name="com.example.recipeapp.home.Settings"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>
