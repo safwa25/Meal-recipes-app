@@ -24,7 +24,7 @@ interface Repository {
     // favourite database functions
     suspend fun insertFavourite(favourite: Favourites)
     suspend fun getFavourites(userId: Int): List<Meal>
-    suspend fun deleteFavouriteByMealId(mealId: String)
+    suspend fun deleteFavouriteByMealId(mealId: String,userId: Int)
     // api functions
     suspend fun searchMealByName(mealName: String): Response<MealList>
     suspend fun listMealsByFirstLetter(firstLetter: String): Response<List<Meal>>
