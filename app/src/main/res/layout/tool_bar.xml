@@ -6,11 +6,4 @@
     android:background="?attr/colorPrimary"
     app:menu="@menu/options_menu">
 
-    <TextView
-        android:id="@+id/toolbar_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Welcome, User!"
-        android:textSize="18sp" />
-
 </androidx.appcompat.widget.Toolbar>

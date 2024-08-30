@@ -1,6 +1,7 @@
 package com.example.recipeapp.home.home_fragment
 
 import SpaceItemDecoration
+import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.net.ConnectivityManager
@@ -25,6 +26,7 @@ import com.example.recipeapp.appstorage.RepositoryImplement
 import com.example.recipeapp.database.favourites.FavouritesLocalDsImplement
 import com.example.recipeapp.database.meal.MealLocalDsImplement
 import com.example.recipeapp.database.user.LocalDataBaseImplement
+import com.example.recipeapp.dto.Meal
 import com.example.recipeapp.network.APIClient
 import com.example.task2.AreasAdapter
 import com.example.task2.PopularAdapter
@@ -86,8 +88,12 @@ class HomeFragment : Fragment() {
                 favBtn.setOnClickListener {
                     meal?.let {
                         if (viewModel.favorites.value?.map { it.idMeal }?.contains(meal.idMeal) == true) {
-                            viewModel.deleteFavourite(meal, userId)
-                            favBtn.setImageResource(R.drawable.baseline_favorite_border_24)
+                            showConfirmationDialog(meal) { confirmed ->
+                                if (confirmed) {
+                                    viewModel.deleteFavourite(meal, userId)
+                                    favBtn.setImageResource(R.drawable.baseline_favorite_border_24)
+                                }
+                            }
                         } else {
                             viewModel.insertFavourite(meal, userId)
                             favBtn.setImageResource(R.drawable.baseline_favorite_24)
@@ -170,5 +176,21 @@ class HomeFragment : Fragment() {
             @Suppress("DEPRECATION")
             networkInfo.isConnected
         }
+    }
+
+    // Function to show confirmation dialog
+    private fun showConfirmationDialog(meal: Meal, onConfirmed: (Boolean) -> Unit) {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Remove Favorite")
+            .setMessage("Are you sure you want to remove this item from favorites?")
+            .setPositiveButton("Yes") { _, _ ->
+                onConfirmed(true)
+            }
+            .setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss()
+                onConfirmed(false)
+            }
+            .create()
+            .show()
     }
 }
