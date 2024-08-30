@@ -5,22 +5,44 @@
     android:id="@+id/recipe_details"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".home.recipe_details.RecipeDetails" >
+    tools:context=".home.recipe_details.RecipeDetails">
 
-    <androidx.cardview.widget.CardView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@drawable/rounded_bottom_corners"
-        app:cardCornerRadius="0dp"
+        android:layout_height="220dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
 
         <ImageView
             android:id="@+id/imageView4"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@drawable/rounded_bottom_corners"
+            android:clipToOutline="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/pretty1" />
-    </androidx.cardview.widget.CardView>
+            android:src="@drawable/pretty1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/fav_white"
+            android:tint="@color/defaultColor"
+            app:backgroundTint="@color/white"
+            app:fabCustomSize="60dp"
+            app:maxImageSize="35dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.046"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
