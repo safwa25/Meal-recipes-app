@@ -16,11 +16,8 @@ import com.example.recipeapp.dto.MealArea
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class AreasMealsAdapter(
-    private val areasMeals: List<AreaMeal>,
-    private val getMeal: (String, (Meal?) -> Unit) -> Unit
+    private val meals: List<Meal>
 ) : RecyclerView.Adapter<AreasMealsAdapter.ViewHolder>() {
-
-    private val mealCache = mutableMapOf<String, Meal?>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val row = LayoutInflater.from(parent.context).inflate(R.layout.custom_card, parent, false)
@@ -28,18 +25,8 @@ class AreasMealsAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val areaMeal = areasMeals[position]
-
-
-        val cachedMeal = mealCache[areaMeal.idMeal.toString()]
-        if (cachedMeal != null) {
-            bindMeal(holder, cachedMeal)
-        } else {
-            getMeal(areaMeal.idMeal.toString()) { meal ->
-                mealCache[areaMeal.idMeal.toString()] = meal
-                bindMeal(holder, meal)
-            }
-        }
+        val meal = meals[position]
+        bindMeal(holder, meal)
     }
 
     private fun bindMeal(holder: ViewHolder, meal: Meal?) {
@@ -50,7 +37,7 @@ class AreasMealsAdapter(
         holder.desc.text = meal?.strInstructions ?: "No description available"
     }
 
-    override fun getItemCount(): Int = areasMeals.size
+    override fun getItemCount(): Int = meals.size
 
     class ViewHolder(val card: View) : RecyclerView.ViewHolder(card) {
         var title = card.findViewById<TextView>(R.id.recipeTitle)
@@ -59,4 +46,5 @@ class AreasMealsAdapter(
         var fav = card.findViewById<FloatingActionButton>(R.id.fav_btn)
     }
 }
+
 

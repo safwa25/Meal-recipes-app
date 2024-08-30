@@ -14,8 +14,6 @@ import com.example.recipeapp.appstorage.RepositoryImplement
 import com.example.recipeapp.database.favourites.FavouritesLocalDsImplement
 import com.example.recipeapp.database.meal.MealLocalDsImplement
 import com.example.recipeapp.database.user.LocalDataBaseImplement
-import com.example.recipeapp.home.home_fragment.HomeViewFactory
-import com.example.recipeapp.home.home_fragment.HomeViewModel
 import com.example.recipeapp.network.APIClient
 import com.example.task2.AreasMealsAdapter
 
@@ -47,11 +45,7 @@ class AreaFragment : Fragment() {
         val areaName = arguments?.getString("areaName") ?: ""
         val viewModel = ViewModelProvider(this, viewModelFactory).get(AreaViewModel::class.java)
 
-        adapter = AreasMealsAdapter(viewModel.areasMeals.value ?: emptyList()) { id, callback ->
-            viewModel.getMealByID(id).observe(viewLifecycleOwner) { meal ->
-                callback(meal)
-            }
-        }
+        adapter = AreasMealsAdapter(viewModel.areasMeals.value ?: emptyList())
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.areas_meals_rv)
         recyclerView.adapter = adapter
@@ -59,11 +53,7 @@ class AreaFragment : Fragment() {
         recyclerView.addItemDecoration(SpaceItemDecoration(20))
 
         viewModel.areasMeals.observe(viewLifecycleOwner) { areasMeals ->
-            adapter = AreasMealsAdapter(viewModel.areasMeals.value ?: emptyList()) { id, callback ->
-                viewModel.getMealByID(id).observe(viewLifecycleOwner) { meal ->
-                    callback(meal)
-                }
-            }
+            adapter = AreasMealsAdapter(viewModel.areasMeals.value ?: emptyList())
             recyclerView.adapter = adapter
         }
 

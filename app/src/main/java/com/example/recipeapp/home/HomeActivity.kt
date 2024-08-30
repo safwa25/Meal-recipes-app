@@ -30,6 +30,11 @@ class HomeActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         toolbar.title ="Welcome,User"
 
+
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        // Set the default selected item to the middle item (home)
+        bottomNavigationView.selectedItemId = R.id.home
+
 //        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
 //            override fun handleOnBackPressed() {
 //                AlertDialog.Builder(this@HomeActivity)
