@@ -16,6 +16,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url = uri("https://jcenter.bintray.com")  // Correct way to add jcenter in Kotlin DSL
+        }
     }
 }
 

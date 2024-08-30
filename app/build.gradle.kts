@@ -12,6 +12,9 @@ android {
     namespace = "com.example.recipeapp"
     compileSdk = 34
 
+    buildFeatures {
+        viewBinding = true
+    }
     defaultConfig {
         applicationId = "com.example.recipeapp"
         minSdk = 24
@@ -58,8 +61,13 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.kotlinx.coroutines)
     implementation("com.airbnb.android:lottie:3.4.0")
+    implementation(libs.readmoretextview)
     implementation(libs.gson)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.glide)
+    implementation(libs.readmoretextview)
+    implementation(libs.gitexpand)
+    implementation(libs.expandabletextview)
+    implementation(libs.youtube)
 }

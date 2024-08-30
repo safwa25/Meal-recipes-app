@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/meal_card"
     android:layout_width="250dp"
-    android:layout_height="270dp"
+    android:layout_height="230dp"
     android:background="#FF0000"
     app:cardCornerRadius="30dp"
-    app:cardElevation="50dp">
+    app:cardElevation="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,10 +15,10 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/meal_image_card"
             android:layout_width="0dp"
-            android:layout_height="150dp"
-            android:layout_marginStart="15dp"
+            android:layout_height="145dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="15dp"
+            android:layout_marginEnd="10dp"
             android:background="#737373"
             android:backgroundTint="#808080"
             app:cardCornerRadius="40dp"
@@ -42,6 +42,7 @@
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:clickable="true"
+            android:fadingEdgeLength="0dp"
             android:focusable="true"
             android:tint="#00BCD4"
             app:backgroundTint="@android:color/transparent"

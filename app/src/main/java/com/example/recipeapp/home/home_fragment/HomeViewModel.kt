@@ -7,78 +7,91 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.recipeapp.appstorage.Repository
 import com.example.recipeapp.database.favourites.Favourites
-import com.example.recipeapp.dto.AreasStr
-import com.example.recipeapp.dto.MealArea
 import com.example.recipeapp.dto.Meal
+import com.example.recipeapp.dto.MealArea
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 class HomeViewModel(val repository: Repository): ViewModel() {
     private val _randomMeal = MutableLiveData<Meal?>()
-    val randomMeal :LiveData<Meal?> get() = _randomMeal
+    val randomMeal: LiveData<Meal?> get() = _randomMeal
 
     private val _randomMealList = MutableLiveData<List<Meal>?>()
-    val randomMealList : MutableLiveData<List<Meal>?> get() = _randomMealList
-
+    val randomMealList: LiveData<List<Meal>?> get() = _randomMealList
 
     private val _areas = MutableLiveData<List<MealArea>>()
-    val areas :LiveData<List<MealArea>> get() = _areas
+    val areas: LiveData<List<MealArea>> get() = _areas
 
+    private val _favorites = MutableLiveData<List<Meal>>()
+    val favorites: LiveData<List<Meal>> get() = _favorites
 
-    // Function to get random meal
-
-    fun getRandomMeal(){
-            viewModelScope.launch(Dispatchers.IO) {
-                val randomMealList=repository.getRandomMeal()
-                if (randomMealList.isSuccessful) {
-                    val randomMealitem=randomMealList.body()?.meals?.get(0)
-                    _randomMeal.postValue(randomMealitem)
-                } else {
-                }
-
+    fun getRandomMeal() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val randomMealResponse = repository.getRandomMeal()
+            if (randomMealResponse.isSuccessful) {
+                val randomMealItem = randomMealResponse.body()?.meals?.get(0)
+                _randomMeal.postValue(randomMealItem)
+            } else {
+                Log.d("HomeViewModel", "Failed to fetch random meal")
             }
         }
+    }
 
-
-    // Function to get random meal list
-    fun getRandomMealList(){
+    fun getRandomMealList() {
         viewModelScope.launch(Dispatchers.IO) {
             val alphabet = "abcdefghijklmnopqrstuvwxyz"
             val rand = alphabet[Random.nextInt(alphabet.length)]
-            val randomMealList=repository.searchMealByName(rand.toString())
-            if (randomMealList.isSuccessful) {
-                val randomMealitem=randomMealList.body()?.meals
-                Log.d("Meal", "Success: ${randomMealitem?.size}")
-                _randomMealList.postValue(randomMealitem)
+            val randomMealResponse = repository.searchMealByName(rand.toString())
+            if (randomMealResponse.isSuccessful) {
+                val randomMealItems = randomMealResponse.body()?.meals
+                _randomMealList.postValue(randomMealItems)
             } else {
-                Log.d("favMeal","Error in response")
+                Log.d("HomeViewModel", "Failed to fetch random meal list")
             }
-
         }
     }
 
-
-    // Function to get areas
-    fun getAreas(){
+    fun getAreas() {
         viewModelScope.launch(Dispatchers.IO) {
-            val areas=repository.listAreas()
-            if (areas.isSuccessful) {
-                val areasList=areas.body()
+            val areasResponse = repository.listAreas()
+            if (areasResponse.isSuccessful) {
+                val areasList = areasResponse.body()
                 _areas.postValue(areasList?.meals)
             } else {
-                Log.d("favMeal","Error in response")
+                Log.d("HomeViewModel", "Failed to fetch areas")
             }
-
         }
     }
 
-
-    fun insertFavourite(meal : Meal, userId: Int){
+    fun insertFavourite(meal: Meal, userId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.insertMeal(meal)
-            repository.insertFavourite(Favourites(meal.idMeal.toString(), userId))
+            try {
+                repository.insertMeal(meal)
+                repository.insertFavourite(Favourites(meal.idMeal.toString(), userId))
+                getFavorites(userId) // Refresh favorites list after insertion
+            } catch (e: Exception) {
+                Log.e("HomeViewModel", "Insert favourite failed", e)
+            }
         }
     }
 
+    fun deleteFavourite(meal: Meal, userId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                repository.deleteMeal(meal.idMeal)
+                repository.deleteFavouriteByMealId(meal.idMeal, userId)
+                getFavorites(userId) // Refresh favorites list after deletion
+            } catch (e: Exception) {
+                Log.e("HomeViewModel", "Delete favourite failed", e)
+            }
+        }
+    }
+
+    fun getFavorites(userId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val favoritesList = repository.getFavourites(userId)
+            _favorites.postValue(favoritesList)
+        }
+    }
 }

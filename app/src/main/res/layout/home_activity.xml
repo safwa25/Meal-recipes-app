@@ -1,46 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".home.HomeActivity">
 
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/tool_bar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
+        android:id="@+id/fragment_host"
         android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/tool_bar"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:defaultNavHost="true"
         app:navGraph="@navigation/home_nav_graph" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         style="@style/CustomToolbar"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
         android:backgroundTint="@color/white"
         app:itemIconSize="38dp"
         app:itemIconTint="@color/defaultColor"
-        app:menu="@menu/app_bar" />
+        app:menu="@menu/app_bar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         style="@style/CustomToolbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center|bottom"
-        app:fabCustomSize="80dp"
         android:layout_marginBottom="20dp"
-
         android:contentDescription="Home item"
         android:src="@drawable/home_icon"
         android:tint="@color/black"
         app:backgroundTint="@color/defaultColor"
         app:elevation="90dp"
-        app:layout_anchor="@id/bottomNavigationView"
-        app:layout_anchorGravity="top|center_horizontal"
+        app:fabCustomSize="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:maxImageSize="40dp" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
