@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".home.recipe_details.RecipeDetails">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -96,20 +97,6 @@
                     android:textStyle="bold"
                     app:layout_constraintBaseline_toBaselineOf="@+id/category_text"
                     app:layout_constraintStart_toEndOf="@+id/category_text" />
-
-                <!-- ExpandableTextView -->
-                <com.ms.square.android.expandabletextview.ExpandableTextView
-                    android:id="@+id/instructionsTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:maxLines="3"
-                    android:text="This is a sample expandable text. You can click on the text to expand or collapse it. Add your actual content here."
-                    android:textSize="20sp"
-                    app:animDuration="200"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/category_name" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
