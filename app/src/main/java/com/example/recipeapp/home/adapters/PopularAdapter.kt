@@ -1,5 +1,7 @@
 package com.example.task2
 
+import android.app.AlertDialog
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,14 +40,18 @@ class PopularAdapter(
 
         holder.fab.setOnClickListener {
             if (favoriteMeals.contains(meal.idMeal)) {
-                onFavClick(meal)
-                favoriteMeals.remove(meal.idMeal)
+                showConfirmationDialog(holder.itemView.context, meal) { confirmed ->
+                    if (confirmed) {
+                        onFavClick(meal)
+                        favoriteMeals.remove(meal.idMeal)
+                        notifyItemChanged(position)
+                    }
+                }
             } else {
                 onFavClick(meal)
                 favoriteMeals.add(meal.idMeal)
+                notifyItemChanged(position)
             }
-            // Notify the adapter that the data has changed
-            notifyItemChanged(position)
         }
     }
 
@@ -61,5 +67,20 @@ class PopularAdapter(
         meals = newMeals
         favoriteMeals = favoriteIds.toMutableSet() // Update the favorite meals
         notifyDataSetChanged()
+    }
+
+    private fun showConfirmationDialog(context: Context, meal: Meal, onConfirmed: (Boolean) -> Unit) {
+        AlertDialog.Builder(context)
+            .setTitle("Remove Favorite")
+            .setMessage("Are you sure you want to remove this item from favorites?")
+            .setPositiveButton("Yes") { _, _ ->
+                onConfirmed(true)
+            }
+            .setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss()
+                onConfirmed(false)
+            }
+            .create()
+            .show()
     }
 }
