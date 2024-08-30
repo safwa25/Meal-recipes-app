@@ -47,8 +47,6 @@ retrofit={group="com.squareup.retrofit2",name="retrofit",version.ref="retrofit"}
 converter-gson={group="com.squareup.retrofit2",name="converter-gson",version.ref="gsonconverter"}
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 lifecycle-viewmodel-ktx={group="androidx.lifecycle",name="lifecycle-viewmodel-ktx",version.ref="livecycleviewmodelKts"}
-expandableTextView={group="com.ms-square",name="expandableTextView",version.ref="expandText"}
-expandable-textview = { group = "at.blogc", name = "expandabletextview", version.ref = "expandText" }
 
 
 
