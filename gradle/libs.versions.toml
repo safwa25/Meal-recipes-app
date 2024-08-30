@@ -21,8 +21,9 @@ retrofit="2.11.0"
 gsonconverter="2.11.0"
 glide = "4.16.0"
 livecycleviewmodelKts="2.6.1"
-expandText="0.1.4"
-
+expandText="2.1.0"
+expandTextVesion="1.0.5"
+androidYoutubePlayerVersion = "12.1.0"
 
 
 [libraries]
@@ -47,7 +48,10 @@ retrofit={group="com.squareup.retrofit2",name="retrofit",version.ref="retrofit"}
 converter-gson={group="com.squareup.retrofit2",name="converter-gson",version.ref="gsonconverter"}
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 lifecycle-viewmodel-ktx={group="androidx.lifecycle",name="lifecycle-viewmodel-ktx",version.ref="livecycleviewmodelKts"}
-
+readmoretextview={group="com.borjabravo",name="readmoretextview",version.ref="expandText"}
+gitexpand={group="com.github.colourmoon",name="readmore-textview",version="v1.0.2"}
+expandabletextview={group="at.blogc", name="expandabletextview" , version.ref="expandTextVesion"}
+youtube={group="com.pierfrancescosoffritti.androidyoutubeplayer",name="core",version.ref="androidYoutubePlayerVersion"}
 
 
 [plugins]
