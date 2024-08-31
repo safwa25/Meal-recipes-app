@@ -2,16 +2,16 @@ package com.example.recipeapp.network
 
 import CategoriesResponse
 import com.example.recipeapp.dto.AreasStr
-import com.example.recipeapp.dto.Category
 import com.example.recipeapp.dto.Ingradients
 import com.example.recipeapp.dto.MainIngradient
 import com.example.recipeapp.dto.MealDataBase
 import com.example.recipeapp.dto.MealList
+import com.example.recipeapp.dto.SearchList
 import retrofit2.Response
 
 object APIClient : RemoteDataSource {
 
-    override suspend fun searchMealByName(mealName: String): Response<MealList> {
+    override suspend fun searchMealByName(mealName: String): Response<SearchList> {
         return API.retrofitService.searchMealByName(mealName)
     }
 

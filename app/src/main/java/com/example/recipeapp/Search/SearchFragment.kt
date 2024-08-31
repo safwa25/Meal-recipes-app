@@ -1,15 +1,18 @@
 package com.example.recipeapp.Search
 
-import SpaceItemDecoration
+import CategorySpaceItemDecoration
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -21,39 +24,18 @@ import com.example.recipeapp.database.favourites.FavouritesLocalDsImplement
 import com.example.recipeapp.database.meal.MealLocalDsImplement
 import com.example.recipeapp.database.user.LocalDataBaseImplement
 import com.example.recipeapp.network.APIClient
-import com.example.task2.AreasAdapter
 
 class SearchFragment : Fragment() {
 
     private lateinit var categoryAdaptor: CategoryRecyclerAdaptor
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private lateinit var searchAdaptor: SearchRecycleAdapter
+    private lateinit var searchViewvar: androidx.appcompat.widget.SearchView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_search, container, false)
-    }
-
-    fun isInternetAvailable(context: Context): Boolean {
-        val connectivityManager =
-            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val network = connectivityManager.activeNetwork ?: return false
-            val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
-            return activeNetwork.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) &&
-                    activeNetwork.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
-        } else {
-            @Suppress("DEPRECATION")
-            val networkInfo = connectivityManager.activeNetworkInfo ?: return false
-            @Suppress("DEPRECATION")
-            return networkInfo.isConnected
-        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -71,29 +53,99 @@ class SearchFragment : Fragment() {
             )
             val viewModel = ViewModelProvider(this, viewModelFactory).get(SearchViewModel::class.java)
 
-            // Initialize the RecyclerView and Adapter with an empty list
+            // Initialize the Category RecyclerView
             val categoryRecyclerView = view.findViewById<RecyclerView>(R.id.cat_recyclerview)
             categoryAdaptor = CategoryRecyclerAdaptor(emptyList())
             categoryRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             categoryRecyclerView.adapter = categoryAdaptor
+            categoryRecyclerView.addItemDecoration(CategorySpaceItemDecoration(1))
+
+            // Initialize the Search RecyclerView
+            val searchRecyclerView = view.findViewById<RecyclerView>(R.id.search_recycler)
+            searchAdaptor = SearchRecycleAdapter(emptyList())
+            searchRecyclerView.layoutManager = LinearLayoutManager(context)
+            searchRecyclerView.adapter = searchAdaptor
+
+            Log.d("asd", "Initializing SearchView")
+
+            // Set up the SearchView
+            searchViewvar = view.findViewById(R.id.search_textbox)
+            setupSearchView(viewModel)
+
+
             viewModel.categoryList.observe(viewLifecycleOwner) { categoryList ->
                 categoryAdaptor.updateData(categoryList ?: emptyList())
             }
 
+            viewModel.SearchList.observe(viewLifecycleOwner) { searchResults ->
+                if (searchResults != null) {
+                    searchAdaptor.updateData(searchResults)
+                    Log.d("SearchFragment", "Search results updated: $searchResults")
 
-            // Observe error messages from the ViewModel
+                } else {
+                    // Handle null data gracefully
+                    searchAdaptor.updateData(emptyList())
+                }
+            }
+
             viewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
                 errorMessage?.let {
                     Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
                 }
             }
 
-            // Fetch the categories from the ViewModel
             viewModel.getALLCategories()
 
         } else {
-            Log.d("SearchFragment", "Error: Network not available")
+            Log.d("asd", "Error: Network not available")
             Toast.makeText(context, "Network error", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun setupSearchView(viewModel: SearchViewModel) {
+        searchViewvar?.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            private val handler = Handler(Looper.getMainLooper())
+            private val runnable: Runnable = Runnable {
+                searchViewvar?.query?.let { query ->
+                    if (query.isNotBlank()) {
+                        Log.d("SearchFragment", "Query submitted: $query")
+                        viewModel.getMealByName(query.toString())
+                    }
+                }
+            }
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let {
+                    if (it.isNotBlank()) {
+                        Log.d("SearchFragment", "Query submitted: $it")
+                        viewModel.getMealByName(it)
+                    }
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                handler.removeCallbacks(runnable)
+                handler.postDelayed(runnable, 300) // Adjust delay as needed
+                return true
+            }
+        })
+    }
+
+    fun isInternetAvailable(context: Context): Boolean {
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val network = connectivityManager.activeNetwork ?: return false
+            val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
+            return activeNetwork.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) &&
+                    activeNetwork.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
+        } else {
+            @Suppress("DEPRECATION")
+            val networkInfo = connectivityManager.activeNetworkInfo ?: return false
+            @Suppress("DEPRECATION")
+            return networkInfo.isConnected
         }
     }
 }

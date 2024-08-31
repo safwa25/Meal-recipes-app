@@ -3,57 +3,67 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FEFEFE"
+    android:background="@color/white"
     tools:context=".Search.SearchFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+
         android:id="@+id/constraintLayout"
-        android:layout_width="403dp"
-        android:layout_height="184dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/searchback"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.appcompat.widget.SearchView
-            android:layout_width="339dp"
-            android:layout_height="42dp"
-            android:layout_marginTop="88dp"
-            android:layout_marginEnd="32dp"
-            android:elevation="0dp"
-            android:gravity="center"
-            android:padding="10dp"
-            android:textAlignment="center"
-            app:iconifiedByDefault="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:queryBackground="@android:color/transparent"
-            app:queryHint="Search here..." />
-
-        <TextView
-            android:id="@+id/textView5"
-            style="@style/Heading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:shadowColor="#FEFEFE"
-            android:text="Looking for a tasty meal?"
-            android:textColor="#89A28C"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/cat_recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="270dp"
+        android:layout_width="412dp"
+        android:layout_height="264dp"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/searchhead"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_textbox"
+            android:layout_width="277dp"
+            android:layout_height="94dp"
+            android:layout_marginBottom="64dp"
+            app:iconifiedByDefault="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintStart_toStartOf="parent"
+            app:queryBackground="@android:color/transparent"
+            app:queryHint="Search Here.." />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cat_recyclerview"
+            android:layout_width="391dp"
+            android:layout_height="60dp"
+            android:background="@drawable/cardelavition"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textView5"
+        style="@style/Heading"
+        android:layout_width="268dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="100dp"
+        android:gravity="center"
+        android:shadowColor="#FEFEFE"
+        android:text="Looking for a tasty meal?"
+        android:textColor="@color/defaultColor"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/search_recycler"
+        android:layout_width="409dp"
+        android:layout_height="409dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

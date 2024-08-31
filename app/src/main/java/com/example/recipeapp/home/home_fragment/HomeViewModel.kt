@@ -49,7 +49,7 @@ class HomeViewModel(val repository: Repository): ViewModel() {
             if (randomMealList.isSuccessful) {
                 val randomMealitem=randomMealList.body()?.meals
                 Log.d("Meal", "Success: ${randomMealitem?.size}")
-                _randomMealList.postValue(randomMealitem)
+               // _randomMealList.postValue(randomMealitem)
             } else {
                 Log.d("favMeal","Error in response")
             }

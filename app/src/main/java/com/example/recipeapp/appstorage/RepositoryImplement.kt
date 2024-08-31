@@ -8,11 +8,11 @@ import com.example.recipeapp.database.meal.MealLocalDs
 import com.example.recipeapp.database.user.LocalDataSource
 import com.example.recipeapp.database.user.User
 import com.example.recipeapp.dto.AreasStr
-import com.example.recipeapp.dto.Category
 import com.example.recipeapp.dto.Ingradients
 import com.example.recipeapp.dto.MainIngradient
 import com.example.recipeapp.dto.MealDataBase
 import com.example.recipeapp.dto.MealList
+import com.example.recipeapp.dto.SearchList
 import com.example.recipeapp.network.RemoteDataSource
 import retrofit2.Response
 
@@ -60,7 +60,7 @@ class RepositoryImplement(val localDataSource: LocalDataSource, val mealLocalDs:
 
 
 
-    override suspend fun searchMealByName(mealName: String): Response<MealList> {
+    override suspend fun searchMealByName(mealName: String): Response<SearchList> {
         return remoteDataSource.searchMealByName(mealName)
     }
 

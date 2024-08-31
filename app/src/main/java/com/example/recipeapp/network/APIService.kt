@@ -2,11 +2,11 @@ package com.example.recipeapp.network
 
 import CategoriesResponse
 import com.example.recipeapp.dto.AreasStr
-import com.example.recipeapp.dto.Category
 import com.example.recipeapp.dto.Ingradients
 import com.example.recipeapp.dto.MainIngradient
 import com.example.recipeapp.dto.MealDataBase
 import com.example.recipeapp.dto.MealList
+import com.example.recipeapp.dto.SearchList
 import retrofit2.http.GET
 import retrofit2.http.Query
 import retrofit2.Response
@@ -15,7 +15,7 @@ interface APIService {
 
     // Search meal by name
     @GET("api/json/v1/1/search.php")
-    suspend fun searchMealByName(@Query("s") mealName: String): Response<MealList>
+    suspend fun searchMealByName(@Query("s") mealName: String): Response<SearchList>
 
     // List all meals by first letter
     @GET("search.php")
