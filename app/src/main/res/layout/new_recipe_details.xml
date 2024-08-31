@@ -22,7 +22,7 @@
                 android:layout_height="220dp">
 
                 <ImageView
-                    android:id="@+id/imageView4"
+                    android:id="@+id/meal_image"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/rounded_bottom_corners"
@@ -66,7 +66,7 @@
                     android:shadowColor="#F6F4F4"
                     android:text="Meal Name"
                     android:textColor="@color/defaultColor"
-                    android:textSize="34sp"
+                    android:textSize="36sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.039"
                     app:layout_constraintStart_toStartOf="parent"
@@ -76,11 +76,11 @@
                     android:id="@+id/category_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="6dp"
                     android:layout_marginTop="8dp"
                     android:text="Category :"
                     android:textColor="@color/defaultColor"
-                    android:textSize="26sp"
+                    android:textSize="28sp"
                     android:textStyle="bold|italic"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/meal_text" />
@@ -92,7 +92,7 @@
                     android:layout_marginStart="8dp"
                     android:text="Category name"
                     android:textColor="#403838"
-                    android:textSize="20sp"
+                    android:textSize="24sp"
                     android:textStyle="bold"
                     app:layout_constraintBaseline_toBaselineOf="@+id/category_text"
                     app:layout_constraintStart_toEndOf="@+id/category_text" />
@@ -100,7 +100,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="6dp"
                     android:layout_marginBottom="6dp"
                     android:orientation="vertical"
                     app:layout_constraintBottom_toTopOf="@+id/youtube_player_view"
@@ -110,13 +110,14 @@
                     app:layout_constraintTop_toBottomOf="@+id/category_name"
                     app:layout_constraintVertical_bias="0.352">
 
-                    <at.blogc.android.views.ExpandableTextView
+                    <TextView
                         android:id="@+id/recipeInstruction_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="24dp"
+                        android:ellipsize="end"
                         android:maxLines="3"
-                        android:textAlignment="center"
+                        android:textAlignment="textStart"
                         android:textAllCaps="false"
                         android:textColor="#403838"
                         android:textSize="19sp"
@@ -145,7 +146,6 @@
                     app:layout_constraintStart_toStartOf="parent">
 
                 </com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView>
-
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
