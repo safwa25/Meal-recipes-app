@@ -83,6 +83,19 @@ class HomeFragment : Fragment() {
                         R.drawable.baseline_favorite_border_24
                     }
                 )
+                val cardLayout = view.findViewById<ViewGroup>(R.id.random_card)
+
+                cardLayout.setOnClickListener{
+                    val action = meal?.let { it1 ->
+                        HomeFragmentDirections.actionFragmentHomeToRecipeDetails(
+                            it1
+                        )
+                    }
+                    if (action != null) {
+                        findNavController().navigate(action)
+                    }
+                }
+
 
                 // Handle the fav button click
                 favBtn.setOnClickListener {
@@ -104,6 +117,7 @@ class HomeFragment : Fragment() {
 
 
 
+
             val mealsRecyclerView = view.findViewById<RecyclerView>(R.id.popular_rv)
             mealsRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             mealsRecyclerView.addItemDecoration(SpaceItemDecoration(20))
@@ -113,13 +127,16 @@ class HomeFragment : Fragment() {
             areasRecyclerView.addItemDecoration(SpaceItemDecoration(20))
 
             // Initialize the adapter
-            mealAdapter = PopularAdapter(emptyList()) { meal ->
+            mealAdapter = PopularAdapter(emptyList(), { meal ->
                 if (viewModel.favorites.value?.map { it.idMeal }?.contains(meal.idMeal) == true) {
                     viewModel.deleteFavourite(meal, userId)
                 } else {
                     viewModel.insertFavourite(meal, userId)
                 }
-            }
+            }, { meal ->
+                val action = HomeFragmentDirections.actionFragmentHomeToRecipeDetails(meal)
+                findNavController().navigate(action)
+            })
             mealsRecyclerView.adapter = mealAdapter
 
             // Observe and update meal list
