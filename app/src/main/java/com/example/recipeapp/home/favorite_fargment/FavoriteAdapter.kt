@@ -29,7 +29,7 @@ class FavoriteAdapter(
         var mealname: TextView = row.findViewById(R.id.recipeTitle)
         var image: ImageView = row.findViewById(R.id.meal_image)
         var fab: FloatingActionButton = row.findViewById(R.id.fav_btn)
-//        var imagecard=row.findViewById<CardView>(R.id.meal_image_card)
+        var imagecard=row.findViewById<CardView>(R.id.meal_image_card)
 //        var mealcard=row.findViewById<CardView>(R.id.custom_card)
 
         fun bind(meal: Meal) {
