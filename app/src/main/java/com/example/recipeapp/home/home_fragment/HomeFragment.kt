@@ -40,6 +40,7 @@ class HomeFragment : Fragment() {
     private lateinit var areasAdapter: AreasAdapter
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var favBtn: FloatingActionButton
+    private lateinit var viewModelSharedPreferences: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,14 +52,16 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         if (isInternetAvailable(view.context)) {
+            val viewModelSharedPreferences = requireActivity().getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
             val viewModelFactory = HomeViewFactory(
                 RepositoryImplement(
                     LocalDataBaseImplement(requireContext()),
                     MealLocalDsImplement(requireContext()),
                     FavouritesLocalDsImplement(requireContext()),
                     APIClient
-                )
+                ), viewModelSharedPreferences
             )
             val viewModel = ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
             val toolbar: androidx.appcompat.widget.Toolbar = requireActivity().findViewById(R.id.tool_bar)
@@ -69,8 +72,14 @@ class HomeFragment : Fragment() {
             favBtn = view.findViewById(R.id.fav_btn)
             sharedPreferences = requireContext().getSharedPreferences("currentuser", Context.MODE_PRIVATE)
             val userId = sharedPreferences.getInt("id", -1)
-
-            viewModel.getRandomMeal()
+            viewModel.getUserById(userId)
+            viewModel.currentUser.observe(viewLifecycleOwner)
+            {user->
+                toolbar.title ="Welcome, ${user.name.replaceFirstChar { it.uppercase() }} "
+            }
+            if(viewModel.randomMeal.value == null) {
+                viewModel.getRandomMeal()
+            }
             viewModel.randomMeal.observe(viewLifecycleOwner) { meal ->
                 Glide.with(view).load(meal?.strMealThumb).into(image)
                 randomMealTitle.text = meal?.strMeal ?: ""
@@ -162,8 +171,9 @@ class HomeFragment : Fragment() {
                 mealAdapter?.updateData(viewModel.randomMealList.value ?: emptyList(), favoriteIds)
             }
 
-            // Trigger initial data fetch
-            viewModel.getRandomMealList()
+            if(viewModel.randomMealList.value == null) {
+                viewModel.getRandomMealList()
+            }
             viewModel.getAreas()
             viewModel.getFavorites(userId)
 
