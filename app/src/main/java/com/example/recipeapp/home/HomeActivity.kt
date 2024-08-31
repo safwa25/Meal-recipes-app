@@ -57,7 +57,7 @@ class HomeActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
         when(item.itemId){
             R.id.favourite->{
-                findNavController(R.id.fragment_host).navigate(R.id.fragment_home)
+                findNavController(R.id.fragment_host).navigate(R.id.favorite)
                 true
             }
             else -> false
