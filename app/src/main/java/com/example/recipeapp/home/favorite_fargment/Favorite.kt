@@ -74,7 +74,7 @@ class Favorite : Fragment() {
             }
             val dialog = builder.create()
             dialog.show()
-        },isNetworkAvailable(), {}) //{ clickedMeal -> onRecipeClick(clickedMeal) })
+        },isNetworkAvailable(), { clickedMeal -> onRecipeClick(clickedMeal) })
         recyclerView.adapter = adapter
 
         viewModel.favoriteMealsList.observe(viewLifecycleOwner) { Meals ->
@@ -103,10 +103,10 @@ class Favorite : Fragment() {
                         networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)
                 )
     }
-//    fun onRecipeClick(meal: Meal) {
-//        val action = FavoriteDirections.actionFavoriteToTest(mealId = meal.idMeal, mealTitle = meal.strMeal ?:"" , mealCategory = meal.strCategory ?:"", mealYoutubeVideo = meal.strYoutube ?:"", mealArea = meal.strArea?:"", mealInstructions = meal.strInstructions ?:"", mealImage = meal.strMealThumb ?:"")
-//        findNavController().navigate(action)
-//    }
+    fun onRecipeClick(meal: Meal) {
+        val action = FavoriteDirections.actionFavoriteToRecipeDetails(meal)
+        findNavController().navigate(action)
+    }
 
 
 

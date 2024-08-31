@@ -89,7 +89,7 @@ class SignupFragment : Fragment() {
                 editor.apply()
 
                 findNavController().navigate(R.id.first_splash)
-                requireActivity().finish()
+
 
         }
     }
