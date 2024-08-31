@@ -12,8 +12,12 @@ import com.example.recipeapp.dto.MealArea
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlin.random.Random
+import android.content.SharedPreferences
+import androidx.lifecycle.SavedStateHandle
+import com.example.recipeapp.database.user.User
+import com.google.gson.Gson
 
-class HomeViewModel(val repository: Repository): ViewModel() {
+class HomeViewModel(val repository: Repository, private val sharedPreferences: SharedPreferences): ViewModel() {
     private val _randomMeal = MutableLiveData<Meal?>()
     val randomMeal: LiveData<Meal?> get() = _randomMeal
 
@@ -26,28 +30,47 @@ class HomeViewModel(val repository: Repository): ViewModel() {
     private val _favorites = MutableLiveData<List<Meal>>()
     val favorites: LiveData<List<Meal>> get() = _favorites
 
+    private val _currentUser = MutableLiveData<User>()
+    val currentUser : LiveData<User> get() = _currentUser
+
     fun getRandomMeal() {
-        viewModelScope.launch(Dispatchers.IO) {
-            val randomMealResponse = repository.getRandomMeal()
-            if (randomMealResponse.isSuccessful) {
-                val randomMealItem = randomMealResponse.body()?.meals?.get(0)
-                _randomMeal.postValue(randomMealItem)
+        if (_randomMeal.value == null) {
+            val savedMeal = sharedPreferences.getString("random_meal_key", null)
+            if (savedMeal != null) {
+                _randomMeal.value = Gson().fromJson(savedMeal, Meal::class.java)
             } else {
-                Log.d("HomeViewModel", "Failed to fetch random meal")
+                viewModelScope.launch(Dispatchers.IO) {
+                    val randomMealResponse = repository.getRandomMeal()
+                    if (randomMealResponse.isSuccessful) {
+                        val randomMealItem = randomMealResponse.body()?.meals?.get(0)
+                        _randomMeal.postValue(randomMealItem)
+                        sharedPreferences.edit().putString("random_meal_key", Gson().toJson(randomMealItem)).apply()
+                    } else {
+                        Log.d("HomeViewModel", "Failed to fetch random meal")
+                    }
+                }
             }
         }
     }
 
     fun getRandomMealList() {
-        viewModelScope.launch(Dispatchers.IO) {
-            val alphabet = "abcdefghijklmnopqrstuvwxyz"
-            val rand = alphabet[Random.nextInt(alphabet.length)]
-            val randomMealResponse = repository.searchMealByName(rand.toString())
-            if (randomMealResponse.isSuccessful) {
-                val randomMealItems = randomMealResponse.body()?.meals
-                _randomMealList.postValue(randomMealItems)
+        if (_randomMealList.value == null) {
+            val savedMeals = sharedPreferences.getString("random_meal_list_key", null)
+            if (savedMeals != null) {
+                _randomMealList.value = Gson().fromJson(savedMeals, Array<Meal>::class.java).toList()
             } else {
-                Log.d("HomeViewModel", "Failed to fetch random meal list")
+                viewModelScope.launch(Dispatchers.IO) {
+                    val alphabet = "abcdefghijklmnopqrstuvwxyz"
+                    val rand = alphabet[Random.nextInt(alphabet.length)]
+                    val randomMealResponse = repository.searchMealByName(rand.toString())
+                    if (randomMealResponse.isSuccessful) {
+                        val randomMealItems = randomMealResponse.body()?.meals
+                        _randomMealList.postValue(randomMealItems)
+                        sharedPreferences.edit().putString("random_meal_list_key", Gson().toJson(randomMealItems)).apply()
+                    } else {
+                        Log.d("HomeViewModel", "Failed to fetch random meal list")
+                    }
+                }
             }
         }
     }
@@ -91,6 +114,15 @@ class HomeViewModel(val repository: Repository): ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             val favoritesList = repository.getFavourites(userId)
             _favorites.postValue(favoritesList)
+        }
+    }
+
+
+
+    fun getUserById(userid:Int)
+    {
+        viewModelScope.launch(Dispatchers.IO) {
+            _currentUser.postValue(repository.selectById(userid))
         }
     }
 }

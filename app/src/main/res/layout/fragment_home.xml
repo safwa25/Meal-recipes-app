@@ -27,7 +27,7 @@
             android:id="@+id/random_card"
             layout="@layout/custom_card"
             android:layout_width="0dp"
-            android:layout_height="200dp"
+            android:layout_height="220dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="9dp"
             android:layout_marginEnd="20dp"
