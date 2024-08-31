@@ -48,6 +48,8 @@ class Favorite : Fragment() {
                 APIClient
             )
         )
+        val toolbar: androidx.appcompat.widget.Toolbar = requireActivity().findViewById(R.id.tool_bar)
+        toolbar.title ="Your Favorites"
         val viewModel = ViewModelProvider(this, viewModelFactory).get(FavoriteViewModel::class.java)
         sharedPreferences = requireContext().getSharedPreferences("currentuser", Context.MODE_PRIVATE)
         val userid:Int=sharedPreferences.getInt("id",-1)

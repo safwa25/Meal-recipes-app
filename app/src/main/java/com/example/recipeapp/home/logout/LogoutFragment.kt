@@ -43,6 +43,8 @@ class LogoutFragment : Fragment() {
                 APIClient
             )
         )
+        val toolbar: androidx.appcompat.widget.Toolbar = requireActivity().findViewById(R.id.tool_bar)
+        toolbar.title ="Logout"
         val viewModel = ViewModelProvider(this, viewModelFactory).get(LogoutViewModel::class.java)
         sharedPreferences = requireContext().getSharedPreferences("currentuser", Context.MODE_PRIVATE)
         logoutButton=view.findViewById(R.id.btn_logout)
