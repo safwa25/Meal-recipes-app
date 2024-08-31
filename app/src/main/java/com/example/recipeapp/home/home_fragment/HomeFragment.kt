@@ -61,6 +61,8 @@ class HomeFragment : Fragment() {
                 )
             )
             val viewModel = ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
+            val toolbar: androidx.appcompat.widget.Toolbar = requireActivity().findViewById(R.id.tool_bar)
+            toolbar.title ="Welcome,User"
 
             image = view.findViewById(R.id.meal_image)
             randomMealTitle = view.findViewById(R.id.recipeTitle)

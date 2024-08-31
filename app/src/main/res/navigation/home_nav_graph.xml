@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home_nav_graph"
-    app:startDestination="@id/favorite">
+    app:startDestination="@id/fragment_home">
     <fragment
         android:id="@+id/fragment_logout"
         android:name="com.example.recipeapp.home.logout.LogoutFragment"

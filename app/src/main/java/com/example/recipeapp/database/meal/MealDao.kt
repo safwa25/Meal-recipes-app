@@ -2,6 +2,7 @@ package com.example.recipeapp.database.meal
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.recipeapp.dto.Meal
 
@@ -9,7 +10,7 @@ import com.example.recipeapp.dto.Meal
 @Dao
 interface MealDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMeal(mealDataBase: Meal)
 
 

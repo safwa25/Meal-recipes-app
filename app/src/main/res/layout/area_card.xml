@@ -4,7 +4,7 @@
     android:id="@+id/area_card"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:backgroundTint="#3DBF42"
+    android:backgroundTint="#FF6D00"
     app:cardCornerRadius="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout

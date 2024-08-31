@@ -43,6 +43,9 @@ class AreaFragment : Fragment() {
         )
 
         val areaName = arguments?.getString("areaName") ?: ""
+        val toolbar: androidx.appcompat.widget.Toolbar = requireActivity().findViewById(R.id.tool_bar)
+        toolbar.title ="$areaName Meals"
+
         val viewModel = ViewModelProvider(this, viewModelFactory).get(AreaViewModel::class.java)
 
         adapter = AreasMealsAdapter(viewModel.areasMeals.value ?: emptyList())

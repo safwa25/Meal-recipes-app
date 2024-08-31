@@ -27,8 +27,9 @@ class HomeActivity : AppCompatActivity() {
         fabButton=findViewById(R.id.fab)
 
         val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.tool_bar)
-        setSupportActionBar(toolbar)
         toolbar.title ="Welcome,User"
+        setSupportActionBar(toolbar)
+
 
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
