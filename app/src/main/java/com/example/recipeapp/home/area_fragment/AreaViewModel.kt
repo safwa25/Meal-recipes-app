@@ -73,7 +73,6 @@ class AreaViewModel(val repo : Repository) : ViewModel(){
     fun deleteFavourite(meal: Meal, userId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                repo.deleteMeal(meal.idMeal)
                 repo.deleteFavouriteByMealId(meal.idMeal, userId)
                 getFavorites(userId) // Refresh favorites list after deletion
             } catch (e: Exception) {

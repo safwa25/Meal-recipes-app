@@ -26,19 +26,19 @@ class FavoriteAdapter(
 ) : RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
 
     inner class ViewHolder(val row: View) : RecyclerView.ViewHolder(row) {
-        var mealname: TextView = row.findViewById(R.id.meal_title)
-        var image: ImageView = row.findViewById(R.id.meal_pop_image)
-        var fab: FloatingActionButton = row.findViewById(R.id.pop_fav_btn)
-        var imagecard=row.findViewById<CardView>(R.id.meal_image_card)
-        var mealcard=row.findViewById<CardView>(R.id.meal_card)
+        var mealname: TextView = row.findViewById(R.id.recipeTitle)
+        var image: ImageView = row.findViewById(R.id.meal_image)
+        var fab: FloatingActionButton = row.findViewById(R.id.fav_btn)
+//        var imagecard=row.findViewById<CardView>(R.id.meal_image_card)
+//        var mealcard=row.findViewById<CardView>(R.id.custom_card)
 
         fun bind(meal: Meal) {
-            val layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, // Width
-                LinearLayout.LayoutParams.WRAP_CONTENT  // Height
-            )
-
-            mealcard.layoutParams = layoutParams
+//            val layoutParams = LinearLayout.LayoutParams(
+//                LinearLayout.LayoutParams.MATCH_PARENT, // Width
+//                LinearLayout.LayoutParams.WRAP_CONTENT  // Height
+//            )
+//
+//            mealcard.layoutParams = layoutParams
 
 
             mealname.text = meal.strMeal
@@ -46,14 +46,14 @@ class FavoriteAdapter(
             {
                 mealname.textSize = 24f
                 image.isInvisible=false
-                imagecard.isInvisible=false
+//                imagecard.isInvisible=false
                 Glide.with(itemView.context)
                     .load(meal.strMealThumb)
                     .placeholder(R.drawable.ic_launcher_foreground)
                     .into(image)
          } else {
                 image.isInvisible=true
-                imagecard.isInvisible=true
+//                imagecard.isInvisible=true
                 mealname.textSize = 60f
             }
             fab.setImageResource(R.drawable.baseline_favorite_24)
@@ -68,7 +68,7 @@ class FavoriteAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val row = LayoutInflater.from(parent.context).inflate(R.layout.meal_card, parent, false)
+        val row = LayoutInflater.from(parent.context).inflate(R.layout.custom_card, parent, false)
         return ViewHolder(row)
     }
 

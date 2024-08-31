@@ -79,7 +79,6 @@ class HomeViewModel(val repository: Repository): ViewModel() {
     fun deleteFavourite(meal: Meal, userId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                repository.deleteMeal(meal.idMeal)
                 repository.deleteFavouriteByMealId(meal.idMeal, userId)
                 getFavorites(userId) // Refresh favorites list after deletion
             } catch (e: Exception) {

@@ -34,7 +34,6 @@ class AreasMealsAdapter(
         Glide.with(holder.image)
             .load(meal?.strMealThumb)
             .into(holder.image)
-        holder.desc.text = meal?.strInstructions ?: "No description available"
     }
 
     override fun getItemCount(): Int = meals.size
@@ -42,7 +41,6 @@ class AreasMealsAdapter(
     class ViewHolder(val card: View) : RecyclerView.ViewHolder(card) {
         var title = card.findViewById<TextView>(R.id.recipeTitle)
         var image = card.findViewById<ImageView>(R.id.meal_image)
-        var desc = card.findViewById<TextView>(R.id.recipeDesc)
         var fav = card.findViewById<FloatingActionButton>(R.id.fav_btn)
     }
 }
