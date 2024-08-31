@@ -38,4 +38,13 @@
         android:name="com.example.recipeapp.home.favorite_fargment.Favorite"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" />
+    <fragment
+        android:id="@+id/recipeDetails"
+        android:name="com.example.recipeapp.home.recipe_details.RecipeDetails"
+        android:label="fragment_recipe_details"
+        tools:layout="@layout/fragment_recipe_details">
+        <argument
+            android:name="meal"
+            app:argType="com.example.recipeapp.dto.Meal" />
+    </fragment>
 </navigation>
