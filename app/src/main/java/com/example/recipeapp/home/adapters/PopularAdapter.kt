@@ -15,7 +15,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class PopularAdapter(
     private var meals: List<Meal>,
-    private val onFavClick: (Meal) -> Unit
+    private val onFavClick: (Meal) -> Unit, private val onItemClick: (Meal) -> Unit
 ) : RecyclerView.Adapter<PopularAdapter.ViewHolder>() {
 
     private var favoriteMeals = mutableSetOf<String>()
@@ -52,6 +52,10 @@ class PopularAdapter(
                 favoriteMeals.add(meal.idMeal)
                 notifyItemChanged(position)
             }
+        }
+
+        holder.itemView.setOnClickListener {
+            onItemClick(meal)
         }
     }
 
