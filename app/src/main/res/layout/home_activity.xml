@@ -50,7 +50,7 @@
         android:src="@drawable/home_icon"
         android:tint="@color/black"
         app:backgroundTint="@color/defaultColor"
-        app:elevation="90dp"
+        app:elevation="10dp"
         app:fabCustomSize="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

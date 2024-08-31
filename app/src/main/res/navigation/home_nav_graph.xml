@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home_nav_graph"
-    app:startDestination="@id/fragment_home">
+    app:startDestination="@id/favorite">
     <fragment
         android:id="@+id/fragment_logout"
         android:name="com.example.recipeapp.home.logout.LogoutFragment"
@@ -33,4 +33,9 @@
         android:name="com.example.recipeapp.home.Settings"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/favorite"
+        android:name="com.example.recipeapp.home.favorite_fargment.Favorite"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" />
 </navigation>

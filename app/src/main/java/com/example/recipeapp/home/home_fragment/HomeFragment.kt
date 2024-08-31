@@ -36,7 +36,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 class HomeFragment : Fragment() {
     private lateinit var image: ImageView
     private lateinit var randomMealTitle: TextView
-    private lateinit var randomMealDescription: TextView
     private var mealAdapter: PopularAdapter? = null // Changed to nullable
     private lateinit var areasAdapter: AreasAdapter
     private lateinit var sharedPreferences: SharedPreferences
@@ -65,7 +64,6 @@ class HomeFragment : Fragment() {
 
             image = view.findViewById(R.id.meal_image)
             randomMealTitle = view.findViewById(R.id.recipeTitle)
-            randomMealDescription = view.findViewById(R.id.recipeDesc)
             favBtn = view.findViewById(R.id.fav_btn)
             sharedPreferences = requireContext().getSharedPreferences("currentuser", Context.MODE_PRIVATE)
             val userId = sharedPreferences.getInt("id", -1)
@@ -74,7 +72,6 @@ class HomeFragment : Fragment() {
             viewModel.randomMeal.observe(viewLifecycleOwner) { meal ->
                 Glide.with(view).load(meal?.strMealThumb).into(image)
                 randomMealTitle.text = meal?.strMeal ?: ""
-                randomMealDescription.text = meal?.strInstructions ?: ""
 
                 // Update the FAB icon based on whether the meal is in the favorites
                 favBtn.setImageResource(
@@ -133,7 +130,6 @@ class HomeFragment : Fragment() {
             viewModel.randomMeal.observe(viewLifecycleOwner) { meal ->
                 Glide.with(view).load(meal?.strMealThumb).into(image)
                 randomMealTitle.text = meal?.strMeal ?: ""
-                randomMealDescription.text = meal?.strInstructions ?: ""
             }
 
             // Observe and update areas
