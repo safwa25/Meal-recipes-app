@@ -1,7 +1,10 @@
 package com.example.recipeapp.network
 
 import CategoriesResponse
+import android.util.Log
 import com.example.recipeapp.dto.AreasStr
+import com.example.recipeapp.dto.CategoryFilterClass
+import com.example.recipeapp.dto.CategoryFilterList
 import com.example.recipeapp.dto.Ingradients
 import com.example.recipeapp.dto.MainIngradient
 import com.example.recipeapp.dto.MealDataBase
@@ -47,8 +50,10 @@ object APIClient : RemoteDataSource {
         return API.retrofitService.filterByMainIngredient(ingredient)
     }
 
-    override suspend fun filterByCategory(category: String): Response<List<MealDataBase>> {
-        return API.retrofitService.filterByCategory(category)
+    override suspend fun filterByCategory(category: String): Response<CategoryFilterList> {
+        val Response=API.retrofitService.filterByCategory(category)
+        Log.d("asd_habiba",Response.toString())
+        return Response
     }
 
     override suspend fun filterByArea(area: String): Response<List<MealDataBase>> {

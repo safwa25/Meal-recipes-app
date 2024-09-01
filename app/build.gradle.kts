@@ -59,6 +59,7 @@ dependencies {
     implementation("com.airbnb.android:lottie:3.4.0")
     implementation(libs.gson)
     implementation(libs.retrofit)
+
     implementation(libs.converter.gson)
     implementation(libs.glide)
 }

@@ -16,6 +16,9 @@ class SearchRecycleAdapter(private var searchList: List<SearchClass>) : Recycler
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val image: ImageView = itemView.findViewById(R.id.Search_image)
         val title: TextView = itemView.findViewById(R.id.recipe_title)
+        val ingrd1:TextView=itemView.findViewById(R.id.ingredient1)
+        val ingrd2:TextView=itemView.findViewById(R.id.ingredient2)
+        val ingrd3:TextView=itemView.findViewById(R.id.ingredient3)
     }
 
     // Bind data to each item view
@@ -23,14 +26,21 @@ class SearchRecycleAdapter(private var searchList: List<SearchClass>) : Recycler
         val searchResponse = searchList.getOrNull(position)
         if (searchResponse != null) {
             holder.title.text = searchResponse.strMeal ?: "No Title"
+            holder.ingrd1.text=searchResponse.strIngredient1
+            holder.ingrd2.text=searchResponse.strIngredient2
+            holder.ingrd3.text=searchResponse.strIngredient3
+            // Truncate the description and add "......" if it's longer than 20 characters
+//            holder.describ.text = getTruncatedText(searchResponse.strInstructions, 100)
 
             Glide.with(holder.image.context)
                 .load(searchResponse.strMealThumb)
                 .into(holder.image)
         } else {
             holder.title.text = "No Data"
+//            holder.describ.text = ""
         }
     }
+
 
     // Inflate the item layout and create ViewHolder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -47,4 +57,5 @@ class SearchRecycleAdapter(private var searchList: List<SearchClass>) : Recycler
         searchList = newList
         notifyDataSetChanged() // Notify the adapter that the data has changed
     }
+
 }

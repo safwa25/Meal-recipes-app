@@ -10,15 +10,21 @@ import com.bumptech.glide.Glide
 import com.example.recipeapp.R
 import com.example.recipeapp.dto.Category
 
-class CategoryRecyclerAdaptor(private var categoryList: List<Category>) : RecyclerView.Adapter<CategoryRecyclerAdaptor.MyViewHolder>() {
+// Define the interface for item click handling
+interface OnCategoryClickListener {
+    fun onCategoryClick(category: Category)
+}
 
-    // ViewHolder class to hold references to the views
+class CategoryRecyclerAdaptor(
+    private var categoryList: List<Category>,
+//    private val listener: OnCategoryClickListener
+) : RecyclerView.Adapter<CategoryRecyclerAdaptor.MyViewHolder>() {
+
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val image: ImageView = itemView.findViewById(R.id.cat_img_itm)
         val title: TextView = itemView.findViewById(R.id.cat_title_item)
     }
 
-    // Bind data to each item view
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val category = categoryList[position]
         holder.title.text = category.strCategory
@@ -27,15 +33,15 @@ class CategoryRecyclerAdaptor(private var categoryList: List<Category>) : Recycl
             .load(category.strCategoryThumb)
             .into(holder.image)
 
-        // Handle item clicks
-        holder.itemView.setOnClickListener {
-            // Implement your filtering logic here
-        }
+//        // Handle item clicks
+//        holder.itemView.setOnClickListener {
+//            listener.onCategoryClick(category)
+//        }
     }
 
-    // Inflate the item layout and create ViewHolder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val layout = LayoutInflater.from(parent.context).inflate(R.layout.category_item_layout, parent, false)
+        val layout = LayoutInflater.from(parent.context)
+            .inflate(R.layout.category_item_layout, parent, false)
         return MyViewHolder(layout)
     }
 
@@ -43,7 +49,6 @@ class CategoryRecyclerAdaptor(private var categoryList: List<Category>) : Recycl
         return categoryList.size
     }
 
-    // Update the data list and refresh the RecyclerView
     fun updateData(newCategoryList: List<Category>) {
         categoryList = newCategoryList
         notifyDataSetChanged()

@@ -8,6 +8,8 @@ import com.example.recipeapp.database.meal.MealLocalDs
 import com.example.recipeapp.database.user.LocalDataSource
 import com.example.recipeapp.database.user.User
 import com.example.recipeapp.dto.AreasStr
+import com.example.recipeapp.dto.CategoryFilterClass
+import com.example.recipeapp.dto.CategoryFilterList
 import com.example.recipeapp.dto.Ingradients
 import com.example.recipeapp.dto.MainIngradient
 import com.example.recipeapp.dto.MealDataBase
@@ -96,9 +98,14 @@ class RepositoryImplement(val localDataSource: LocalDataSource, val mealLocalDs:
         return remoteDataSource.filterByMainIngredient(ingredient)
     }
 
-    override suspend fun filterByCategory(category: String): Response<List<MealDataBase>> {
-        return remoteDataSource.filterByCategory(category)
+    override suspend fun filterByCategory(category: String): Response<CategoryFilterList> {
+        Log.d("asd_habiba", "Entering filterByCategory with category: $category")
+        val response = remoteDataSource.filterByCategory(category)
+        Log.d("asd_habiba", "Exiting filterByCategory with response: ${response.isSuccessful}")
+        return response
     }
+
+
 
     override suspend fun filterByArea(area: String): Response<List<MealDataBase>> {
         return remoteDataSource.filterByArea(area)

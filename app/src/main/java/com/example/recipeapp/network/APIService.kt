@@ -2,6 +2,8 @@ package com.example.recipeapp.network
 
 import CategoriesResponse
 import com.example.recipeapp.dto.AreasStr
+import com.example.recipeapp.dto.CategoryFilterClass
+import com.example.recipeapp.dto.CategoryFilterList
 import com.example.recipeapp.dto.Ingradients
 import com.example.recipeapp.dto.MainIngradient
 import com.example.recipeapp.dto.MealDataBase
@@ -50,8 +52,8 @@ interface APIService {
     suspend fun filterByMainIngredient(@Query("i") ingredient: String): Response<List<MainIngradient>>
 
     // Filter by category
-    @GET("filter.php")
-    suspend fun filterByCategory(@Query("c") category: String): Response<List<MealDataBase>>
+    @GET("api/json/v1/1/filter.php")
+    suspend fun filterByCategory(@Query("c") category: String): Response<CategoryFilterList>
 
     // Filter by area
     @GET("filter.php")
