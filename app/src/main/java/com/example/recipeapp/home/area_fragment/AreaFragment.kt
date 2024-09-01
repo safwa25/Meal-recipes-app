@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import com.example.recipeapp.R
 import com.example.recipeapp.appstorage.RepositoryImplement
 import com.example.recipeapp.database.favourites.FavouritesLocalDsImplement
@@ -24,10 +25,7 @@ import com.example.task2.AreasMealsAdapter
 class AreaFragment : Fragment() {
     private lateinit var adapter: AreasMealsAdapter
     private lateinit var sharedPreferences: SharedPreferences
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private lateinit var loadingAnimationView: LottieAnimationView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,32 +37,38 @@ class AreaFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Initialize the loading animation view
+        loadingAnimationView = view.findViewById(R.id.loading_animation)
+
         val viewModelFactory = AreaViewModelFactory(
             RepositoryImplement(
                 LocalDataBaseImplement(this.requireContext()),
-                MealLocalDsImplement(this.requireContext()), FavouritesLocalDsImplement(this.requireContext()),
+                MealLocalDsImplement(this.requireContext()),
+                FavouritesLocalDsImplement(this.requireContext()),
                 APIClient
             )
         )
+
         sharedPreferences = requireContext().getSharedPreferences("currentuser", Context.MODE_PRIVATE)
         val userId = sharedPreferences.getInt("id", -1)
 
         val areaName = arguments?.getString("areaName") ?: ""
         val toolbar: androidx.appcompat.widget.Toolbar = requireActivity().findViewById(R.id.tool_bar)
-        toolbar.title ="$areaName Meals"
+        toolbar.title = "$areaName Meals"
 
         val viewModel = ViewModelProvider(this, viewModelFactory).get(AreaViewModel::class.java)
 
-        adapter = AreasMealsAdapter(viewModel.areasMeals.value ?: emptyList(),{meal ->
-        if (viewModel.favorites.value?.map { it.idMeal }?.contains(meal.idMeal) == true) {
-            viewModel.deleteFavourite(meal, userId)
-        } else {
-            viewModel.insertFavourite(meal, userId)
-        }
-    }, { meal ->
-        val action = AreaFragmentDirections.actionAreaFragmentToRecipeDetails(meal)
-        findNavController().navigate(action)
-    })
+        adapter = AreasMealsAdapter(viewModel.areasMeals.value ?: emptyList(), { meal ->
+            if (viewModel.favorites.value?.map { it.idMeal }?.contains(meal.idMeal) == true) {
+                viewModel.deleteFavourite(meal, userId)
+            } else {
+                viewModel.insertFavourite(meal, userId)
+            }
+        }, { meal ->
+            val action = AreaFragmentDirections.actionAreaFragmentToRecipeDetails(meal)
+            findNavController().navigate(action)
+        })
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.areas_meals_rv)
         recyclerView.adapter = adapter
@@ -73,19 +77,25 @@ class AreaFragment : Fragment() {
 
         viewModel.areasMeals.observe(viewLifecycleOwner) { meals ->
             val favoriteIds = viewModel.favorites.value?.map { it.idMeal }?.toSet() ?: emptySet()
-            adapter?.updateData(meals ?: emptyList(), favoriteIds)
+            adapter.updateData(meals ?: emptyList(), favoriteIds)
+
+            // Hide the loading animation when data is loaded
+            loadingAnimationView.cancelAnimation() // Stop the animation
+            loadingAnimationView.visibility = View.GONE
+            recyclerView.visibility = View.VISIBLE
         }
 
         viewModel.favorites.observe(viewLifecycleOwner) { favorites ->
             val favoriteIds = favorites?.map { it.idMeal }?.toSet() ?: emptySet()
-            adapter?.updateData(viewModel.areasMeals.value ?: emptyList(), favoriteIds)
+            adapter.updateData(viewModel.areasMeals.value ?: emptyList(), favoriteIds)
         }
+
+        // Show the loading animation before starting data fetch
+        loadingAnimationView.visibility = View.VISIBLE
+        loadingAnimationView.playAnimation() // Start the animation
+        recyclerView.visibility = View.GONE
 
         viewModel.getAreasMeals(areaName)
         viewModel.getFavorites(userId)
-
-
     }
-
-
 }

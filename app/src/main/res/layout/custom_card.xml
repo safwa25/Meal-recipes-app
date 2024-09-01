@@ -35,6 +35,7 @@
                 android:background="@android:color/transparent"
                 android:clickable="true"
                 android:focusable="true"
+                android:stateListAnimator="@android:anim/fade_in"
                 android:tint="#D50000"
                 app:backgroundTint="@android:color/transparent"
                 app:elevation="0dp"
