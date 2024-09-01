@@ -60,6 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
+            android:stateListAnimator="@android:anim/fade_in"
             android:text="Meal Title"
             android:textSize="24sp"
             android:textStyle="bold"

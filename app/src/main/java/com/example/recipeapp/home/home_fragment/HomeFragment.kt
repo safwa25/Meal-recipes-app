@@ -12,6 +12,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -39,8 +41,8 @@ class HomeFragment : Fragment() {
     private var mealAdapter: PopularAdapter? = null // Changed to nullable
     private lateinit var areasAdapter: AreasAdapter
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var  scaleAnimation : Animation
     private lateinit var favBtn: FloatingActionButton
-    private lateinit var viewModelSharedPreferences: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,6 +53,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        scaleAnimation = AnimationUtils.loadAnimation(view.context, R.anim.fab_clicked)
 
 
         if (isInternetAvailable(view.context)) {
@@ -108,6 +111,7 @@ class HomeFragment : Fragment() {
 
                 // Handle the fav button click
                 favBtn.setOnClickListener {
+
                     meal?.let {
                         if (viewModel.favorites.value?.map { it.idMeal }?.contains(meal.idMeal) == true) {
                             showConfirmationDialog(meal) { confirmed ->
@@ -117,6 +121,7 @@ class HomeFragment : Fragment() {
                                 }
                             }
                         } else {
+                            favBtn.startAnimation(scaleAnimation)
                             viewModel.insertFavourite(meal, userId)
                             favBtn.setImageResource(R.drawable.baseline_favorite_24)
                         }
@@ -136,12 +141,15 @@ class HomeFragment : Fragment() {
             areasRecyclerView.addItemDecoration(SpaceItemDecoration(20))
 
             // Initialize the adapter
-            mealAdapter = PopularAdapter(emptyList(), { meal ->
+            mealAdapter = PopularAdapter(emptyList(), { meal, fab ->
                 if (viewModel.favorites.value?.map { it.idMeal }?.contains(meal.idMeal) == true) {
                     viewModel.deleteFavourite(meal, userId)
                 } else {
+                    fab.startAnimation(scaleAnimation)
                     viewModel.insertFavourite(meal, userId)
                 }
+
+
             }, { meal ->
                 val action = HomeFragmentDirections.actionFragmentHomeToRecipeDetails(meal)
                 findNavController().navigate(action)
@@ -169,6 +177,15 @@ class HomeFragment : Fragment() {
             viewModel.favorites.observe(viewLifecycleOwner) { favorites ->
                 val favoriteIds = favorites?.map { it.idMeal }?.toSet() ?: emptySet()
                 mealAdapter?.updateData(viewModel.randomMealList.value ?: emptyList(), favoriteIds)
+                viewModel.randomMeal.value?.let { meal ->
+                    favBtn.setImageResource(
+                        if (favoriteIds.contains(meal.idMeal)) {
+                            R.drawable.baseline_favorite_24
+                        } else {
+                            R.drawable.baseline_favorite_border_24
+                        }
+                    )
+                }
             }
 
             if(viewModel.randomMealList.value == null) {

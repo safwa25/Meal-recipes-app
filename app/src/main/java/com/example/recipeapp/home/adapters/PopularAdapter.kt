@@ -15,7 +15,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class PopularAdapter(
     private var meals: List<Meal>,
-    private val onFavClick: (Meal) -> Unit, private val onItemClick: (Meal) -> Unit
+    private val onFavClick: (Meal, FloatingActionButton) -> Unit, private val onItemClick: (Meal) -> Unit
 ) : RecyclerView.Adapter<PopularAdapter.ViewHolder>() {
 
     private var favoriteMeals = mutableSetOf<String>()
@@ -42,13 +42,13 @@ class PopularAdapter(
             if (favoriteMeals.contains(meal.idMeal)) {
                 showConfirmationDialog(holder.itemView.context, meal) { confirmed ->
                     if (confirmed) {
-                        onFavClick(meal)
+                        onFavClick(meal,holder.fab)
                         favoriteMeals.remove(meal.idMeal)
                         notifyItemChanged(position)
                     }
                 }
             } else {
-                onFavClick(meal)
+                onFavClick(meal,holder.fab)
                 favoriteMeals.add(meal.idMeal)
                 notifyItemChanged(position)
             }

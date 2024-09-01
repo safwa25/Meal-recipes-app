@@ -61,7 +61,7 @@ dependencies {
     kapt(libs.androidx.room.compiler)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.kotlinx.coroutines)
-    implementation("com.airbnb.android:lottie:3.4.0")
+    implementation(libs.lottie)
     implementation(libs.gson)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
