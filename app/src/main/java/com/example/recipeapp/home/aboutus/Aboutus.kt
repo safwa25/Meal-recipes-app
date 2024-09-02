@@ -33,6 +33,8 @@ class Aboutus : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val toolbar: androidx.appcompat.widget.Toolbar = requireActivity().findViewById(R.id.tool_bar)
+        toolbar.title ="About Us"
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerview_personalCards)
         val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         recyclerView.addItemDecoration(SpaceItemDecoration(30))

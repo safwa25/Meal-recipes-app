@@ -11,7 +11,6 @@
         android:id="@+id/imageView10"
         android:layout_width="382dp"
         android:layout_height="807dp"
-        android:layout_marginTop="32dp"
         android:src="@drawable/basil"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,6 +24,7 @@
         style="@style/Heading"
         android:layout_width="283dp"
         android:layout_height="158dp"
+        android:layout_marginTop="100dp"
         android:shadowColor="#D9D2D2"
         android:text=" Foodii"
         android:textAlignment="textStart"
@@ -33,10 +33,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.424"
+        app:layout_constraintHorizontal_bias="0.421"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.062" />
+        app:layout_constraintVertical_bias="0.304" />
 
     <ImageView
         android:id="@+id/imageView7"
@@ -46,9 +46,10 @@
         android:src="@drawable/burger"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.422" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView3"
@@ -56,6 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="45dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="45dp"
         android:fontFamily="@font/poppins_medium"
         android:gravity="center"
@@ -66,10 +68,9 @@
         android:textStyle="normal|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.209" />
+        app:layout_constraintVertical_bias="0.415" />
 
     <ImageView
         android:id="@+id/pizza"
@@ -83,24 +84,24 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.22000003" />
+        app:layout_constraintVertical_bias="0.288" />
 
-    <Button
-        android:id="@+id/start_btn"
-        android:layout_width="134dp"
-        android:layout_height="81dp"
-        android:background="@drawable/button"
-        android:fontFamily="@font/poppins_medium"
-        android:text="Let's Start"
-        android:textAllCaps="false"
-        android:textColor="#6C4E31"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.64" />
+    <!--    <Button-->
+<!--        android:id="@+id/start_btn"-->
+<!--        android:layout_width="134dp"-->
+<!--        android:layout_height="81dp"-->
+<!--        android:background="@drawable/button"-->
+<!--        android:fontFamily="@font/poppins_medium"-->
+<!--        android:text="Let's Start"-->
+<!--        android:textAllCaps="false"-->
+<!--        android:textColor="#6C4E31"-->
+<!--        android:textSize="20sp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.498"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.64" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
