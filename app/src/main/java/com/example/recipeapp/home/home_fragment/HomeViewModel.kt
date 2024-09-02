@@ -35,43 +35,35 @@ class HomeViewModel(val repository: Repository, private val sharedPreferences: S
 
     fun getRandomMeal() {
         if (_randomMeal.value == null) {
-            val savedMeal = sharedPreferences.getString("random_meal_key", null)
-            if (savedMeal != null) {
-                _randomMeal.value = Gson().fromJson(savedMeal, Meal::class.java)
-            } else {
-                viewModelScope.launch(Dispatchers.IO) {
-                    val randomMealResponse = repository.getRandomMeal()
-                    if (randomMealResponse.isSuccessful) {
-                        val randomMealItem = randomMealResponse.body()?.meals?.get(0)
-                        _randomMeal.postValue(randomMealItem)
-                        sharedPreferences.edit().putString("random_meal_key", Gson().toJson(randomMealItem)).apply()
-                    } else {
-                        Log.d("HomeViewModel", "Failed to fetch random meal")
-                    }
+            viewModelScope.launch(Dispatchers.IO) {
+                val randomMealResponse = repository.getRandomMeal()
+                if (randomMealResponse.isSuccessful) {
+                    val randomMealItem = randomMealResponse.body()?.meals?.get(0)
+                    _randomMeal.postValue(randomMealItem)
+                    sharedPreferences.edit().putString("random_meal_key", Gson().toJson(randomMealItem)).apply()
+                } else {
+                    Log.d("HomeViewModel", "Failed to fetch random meal")
                 }
             }
+
         }
     }
 
     fun getRandomMealList() {
         if (_randomMealList.value == null) {
-            val savedMeals = sharedPreferences.getString("random_meal_list_key", null)
-            if (savedMeals != null) {
-                _randomMealList.value = Gson().fromJson(savedMeals, Array<Meal>::class.java).toList()
-            } else {
-                viewModelScope.launch(Dispatchers.IO) {
-                    val alphabet = "abcdefghijklmnopqrstuvwxyz"
-                    val rand = alphabet[Random.nextInt(alphabet.length)]
-                    val randomMealResponse = repository.searchMealByName(rand.toString())
-                    if (randomMealResponse.isSuccessful) {
-                        val randomMealItems = randomMealResponse.body()?.meals
-                        _randomMealList.postValue(randomMealItems)
-                        sharedPreferences.edit().putString("random_meal_list_key", Gson().toJson(randomMealItems)).apply()
-                    } else {
-                        Log.d("HomeViewModel", "Failed to fetch random meal list")
-                    }
+            viewModelScope.launch(Dispatchers.IO) {
+                val alphabet = "abcdefghijklmnopqrstuvwxyz"
+                val rand = alphabet[Random.nextInt(alphabet.length)]
+                val randomMealResponse = repository.searchMealByName(rand.toString())
+                if (randomMealResponse.isSuccessful) {
+                    val randomMealItems = randomMealResponse.body()?.meals
+                    _randomMealList.postValue(randomMealItems)
+                    sharedPreferences.edit().putString("random_meal_list_key", Gson().toJson(randomMealItems)).apply()
+                } else {
+                    Log.d("HomeViewModel", "Failed to fetch random meal list")
                 }
             }
+
         }
     }
 
