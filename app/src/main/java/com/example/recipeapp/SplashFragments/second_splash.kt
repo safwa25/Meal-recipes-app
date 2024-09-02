@@ -31,6 +31,7 @@ class second_splash : Fragment() {
         {
             val homepage= Intent(view2.context, HomeActivity::class.java)
             startActivity(homepage)
+            requireActivity().finish()
         }
 
         return view2

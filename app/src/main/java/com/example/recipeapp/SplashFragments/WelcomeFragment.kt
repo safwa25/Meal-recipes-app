@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,7 +29,7 @@ lateinit var sharedPreferences: SharedPreferences
         val view = inflater.inflate(R.layout.fragment_welcome, container, false)
         val startButton = view.findViewById<Button>(R.id.start_btn)
          sharedPreferences = requireContext().getSharedPreferences("currentuser", Context.MODE_PRIVATE)
-        startButton.setOnClickListener {
+        Handler(Looper.getMainLooper()).postDelayed({
 
             val id =sharedPreferences.getInt("id",-1)
             if(id==-1 || id==0)
@@ -40,9 +42,8 @@ lateinit var sharedPreferences: SharedPreferences
                 startActivity(homepage)
                 requireActivity().finish()
             }
+        }, 1000)
 
-
-        }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 AlertDialog.Builder(requireContext())
