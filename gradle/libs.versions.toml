@@ -22,6 +22,8 @@ gsonconverter="2.11.0"
 glide = "4.16.0"
 expandTextVesion="1.0.5"
 androidYoutubePlayerVersion = "12.1.0"
+safeargs="2.7.7"
+
 
 
 [libraries]
@@ -54,7 +56,7 @@ youtube={group="com.pierfrancescosoffritti.androidyoutubeplayer",name="core",ver
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 jetbrains-kotlin-kapt={id="org.jetbrains.kotlin.kapt",version.ref="kapt"}
-safe-args-plugin = { id = "androidx.navigation.safeargs.kotlin", version = "2.5.3" }
+safe-args-plugin = { id = "androidx.navigation.safeargs.kotlin", version.ref = "safeargs" }
 kotlin-plugin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 
 

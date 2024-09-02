@@ -4,7 +4,7 @@
     android:id="@+id/area_card"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:backgroundTint="#FF6D00"
+    android:backgroundTint="@color/primary_color"
     app:cardCornerRadius="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,6 +16,7 @@
             android:id="@+id/areaTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
             android:text="Area"
             android:textSize="20sp"
             android:textStyle="bold"

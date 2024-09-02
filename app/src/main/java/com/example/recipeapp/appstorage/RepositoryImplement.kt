@@ -63,6 +63,10 @@ class RepositoryImplement(val localDataSource: LocalDataSource, val mealLocalDs:
         favouritesLocalDs.deleteFavouriteByMealId(mealId,userId)
     }
 
+    override suspend fun checkMeal(mealId: String, userId: Int) :String?{
+      return favouritesLocalDs.checkMeal(mealId,userId)
+    }
+
     override suspend fun searchMealByName(mealName: String): Response<MealList> {
         return remoteDataSource.searchMealByName(mealName)
     }

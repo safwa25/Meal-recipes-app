@@ -21,4 +21,8 @@ class FavouritesLocalDsImplement(context: Context) : FavouritesLocalDs {
     override suspend fun deleteFavouriteByMealId(mealId: String, userId: Int) {
         favouritesDao.deleteFavouriteByMealId(mealId,userId)
     }
+
+    override suspend fun checkMeal(mealId: String, userId: Int):String? {
+        return favouritesDao.checkMeal(mealId,userId)
+    }
 }
