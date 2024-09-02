@@ -23,6 +23,7 @@ class SplashFragmentThree : Fragment() {
         {
             val homepage= Intent(view.context, HomeActivity::class.java)
             startActivity(homepage)
+            requireActivity().finish()
         }
 
 

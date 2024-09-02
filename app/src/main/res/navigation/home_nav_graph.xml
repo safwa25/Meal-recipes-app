@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home_nav_graph"
-    app:startDestination="@id/fragment_home">
+    app:startDestination="@id/favorite">
     <fragment
         android:id="@+id/fragment_logout"
         android:name="com.example.recipeapp.home.logout.LogoutFragment"
@@ -57,4 +57,9 @@
             android:name="meal"
             app:argType="com.example.recipeapp.dto.Meal" />
     </fragment>
+    <fragment
+        android:id="@+id/aboutus"
+        android:name="com.example.recipeapp.home.aboutus.Aboutus"
+        android:label="fragment_aboutus"
+        tools:layout="@layout/fragment_aboutus" />
 </navigation>
