@@ -76,7 +76,7 @@ class Favorite : Fragment() {
             }
             val dialog = builder.create()
             dialog.show()
-        },isNetworkAvailable(), { clickedMeal -> onRecipeClick(clickedMeal) })
+        },isNetworkAvailable(), { clickedMeal -> onRecipeClick(clickedMeal) },findNavController())
         recyclerView.adapter = adapter
 
         viewModel.favoriteMealsList.observe(viewLifecycleOwner) { Meals ->

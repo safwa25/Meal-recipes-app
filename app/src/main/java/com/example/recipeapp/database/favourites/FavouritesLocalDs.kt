@@ -8,4 +8,6 @@ interface FavouritesLocalDs {
     suspend fun getFavourites(userId: Int): List<Meal>
 
     suspend fun deleteFavouriteByMealId(mealId: String,userId: Int)
+
+    suspend fun checkMeal(mealId: String,userId: Int) : String?
 }

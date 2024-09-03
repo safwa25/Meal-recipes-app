@@ -1,15 +1,12 @@
 package com.example.recipeapp.home
 
-import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Button
-import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import com.example.recipeapp.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -60,6 +57,12 @@ class HomeActivity : AppCompatActivity() {
                 findNavController(R.id.fragment_host).navigate(R.id.favorite)
                 true
             }
+            R.id.search->
+            {
+                findNavController(R.id.fragment_host).navigate(R.id.searchFragment)
+                Log.d("habiba","navigate to search")
+                true
+            }
             else -> false
         }
         }
@@ -85,6 +88,7 @@ class HomeActivity : AppCompatActivity() {
                 findNavController(R.id.fragment_host).navigate(R.id.fragment_home)
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }

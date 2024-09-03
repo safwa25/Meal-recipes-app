@@ -1,5 +1,6 @@
 package com.example.recipeapp.appstorage
 
+import CategoryList
 import android.util.Log
 import com.example.recipeapp.database.favourites.Favourites
 import com.example.recipeapp.database.favourites.FavouritesLocalDs
@@ -9,6 +10,7 @@ import com.example.recipeapp.database.user.User
 import com.example.recipeapp.dto.AreaMealsResponse
 import com.example.recipeapp.dto.AreasStr
 import com.example.recipeapp.dto.Category
+import com.example.recipeapp.dto.CategoryFilterList
 import com.example.recipeapp.dto.Ingradients
 import com.example.recipeapp.dto.MainIngradient
 import com.example.recipeapp.dto.Meal
@@ -63,6 +65,10 @@ class RepositoryImplement(val localDataSource: LocalDataSource, val mealLocalDs:
         favouritesLocalDs.deleteFavouriteByMealId(mealId,userId)
     }
 
+    override suspend fun checkMeal(mealId: String, userId: Int): String? {
+        return favouritesLocalDs.checkMeal(mealId,userId)
+    }
+
     override suspend fun searchMealByName(mealName: String): Response<MealList> {
         return remoteDataSource.searchMealByName(mealName)
     }
@@ -81,7 +87,7 @@ class RepositoryImplement(val localDataSource: LocalDataSource, val mealLocalDs:
         return remoteDataSource.getRandomMeal()
     }
 
-    override suspend fun listAllCategories(): Response<List<Category>> {
+    override suspend fun listAllCategories(): Response<CategoryList> {
         return remoteDataSource.listAllCategories()
     }
 
@@ -101,7 +107,7 @@ class RepositoryImplement(val localDataSource: LocalDataSource, val mealLocalDs:
         return remoteDataSource.filterByMainIngredient(ingredient)
     }
 
-    override suspend fun filterByCategory(category: String): Response<List<Meal>> {
+    override suspend fun filterByCategory(category: String): Response<CategoryFilterList> {
         return remoteDataSource.filterByCategory(category)
     }
 

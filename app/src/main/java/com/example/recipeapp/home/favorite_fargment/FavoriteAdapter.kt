@@ -22,7 +22,8 @@ class FavoriteAdapter(
     var meals: List<Meal>,
     val onFavClick: (Meal, FloatingActionButton) -> Unit,
     val Internet:Boolean,
-    val onRecipeClick: (Meal) -> Unit
+    val onRecipeClick: (Meal) -> Unit,
+    val navControl:NavController
 ) : RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
 
     inner class ViewHolder(val row: View) : RecyclerView.ViewHolder(row) {
@@ -62,6 +63,7 @@ class FavoriteAdapter(
             }
             itemView.setOnClickListener {
                 onRecipeClick(meal)
+
 
             }
         }
