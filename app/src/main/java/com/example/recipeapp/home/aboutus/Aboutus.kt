@@ -41,7 +41,7 @@ class Aboutus : Fragment() {
         recyclerView.layoutManager = layoutManager
         val names = arrayOf("Foodiii","Safwa", "Abdelrahman","Habiba","Ahmed")
         val emails = arrayOf("Foodiii.contactus@gmail.com","safwaibrahim8@gmail.com","abdelrahmantamer0111@gmail.com","habibamohamedgabr@gmail.com","ahmedsaber3620004@gmail.com")
-        val images=arrayOf(R.mipmap.foodii,R.drawable.safwa,R.drawable.abdelrahman,R.drawable.habiba,R.drawable.ic_launcher_foreground)
+        val images=arrayOf(R.mipmap.foodii,R.drawable.safwa2,R.drawable.abdelrahman,R.drawable.habiba,R.drawable.ic_launcher_foreground)
         adapter = AboutUsAdapter(names, emails, images) { email ->
             val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
                 data = Uri.parse("mailto:")

@@ -5,4 +5,5 @@
     <color name="defaultLightColor">#6C4E31</color>
     <color name="custom_red">#D50000</color>
     <color name="primary_color">#EFDEC4</color>
+    <color name="IngrdiantsColor">#403A3A</color>
 </resources>
