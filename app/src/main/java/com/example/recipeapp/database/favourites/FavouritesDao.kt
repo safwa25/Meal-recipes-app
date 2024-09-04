@@ -18,9 +18,6 @@ interface FavouritesDao {
     @Query("DELETE FROM favourites WHERE mealId = :mealId and userId= :userId ")
     suspend fun deleteFavouriteByMealId(mealId: String,userId: Int)
 
-@Query("SELECT mealId FROM favourites WHERE mealId = :mealId and userId= :userId")
-suspend fun checkMeal(mealId: String,userId: Int) : String?
-
-
-
+    @Query("SELECT mealId FROM favourites WHERE mealId = :mealId and userId= :userId ")
+    suspend fun checkMeal(mealId: String,userId: Int) : String?
 }

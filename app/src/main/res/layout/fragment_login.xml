@@ -54,6 +54,7 @@
                     android:drawableLeft="@drawable/baseline_person_24"
                     android:drawablePadding="8dp"
                     android:drawableTint="#FFFFFF"
+                    android:fontFamily="@font/poppins_medium"
                     android:hint="Email"
                     android:padding="10dp"
                     android:textColor="@color/defaultColor"
@@ -78,6 +79,7 @@
                     android:drawableStart="@drawable/baseline_lock_24"
                     android:drawablePadding="8dp"
                     android:drawableTint="#FFFFFF"
+                    android:fontFamily="@font/poppins_medium"
                     android:hint="Password"
                     android:inputType="textPassword"
                     android:padding="10dp"
@@ -107,9 +109,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:textColor="@color/defaultColor"
+                android:fontFamily="@font/poppins_medium"
                 android:text="Don't Have One? Sign Up"
                 android:textAlignment="center"
+                android:textColor="@color/defaultColor"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 

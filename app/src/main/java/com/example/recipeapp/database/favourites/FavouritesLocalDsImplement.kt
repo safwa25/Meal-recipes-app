@@ -22,7 +22,7 @@ class FavouritesLocalDsImplement(context: Context) : FavouritesLocalDs {
         favouritesDao.deleteFavouriteByMealId(mealId,userId)
     }
 
-    override suspend fun checkMeal(mealId: String, userId: Int): String? {
+    override suspend fun checkMeal(mealId: String, userId: Int):String? {
         return favouritesDao.checkMeal(mealId,userId)
     }
 }

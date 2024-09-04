@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isInvisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -92,6 +93,11 @@ class Favorite : Fragment() {
                 recyclerView.isInvisible=true
             }
         }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                findNavController().navigate(R.id.fragment_home)
+            }
+        })
 
 
     }
@@ -105,12 +111,8 @@ class Favorite : Fragment() {
                         networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)
                 )
     }
-    fun onRecipeClick(meal: Meal) {
+    private  fun onRecipeClick(meal: Meal) {
         val action = FavoriteDirections.actionFavoriteToRecipeDetails(meal)
         findNavController().navigate(action)
     }
-
-
-
-
 }

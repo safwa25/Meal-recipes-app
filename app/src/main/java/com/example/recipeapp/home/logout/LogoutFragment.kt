@@ -1,5 +1,6 @@
 package com.example.recipeapp.home.logout
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -11,7 +12,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.recipeapp.R
 import com.example.recipeapp.appstorage.RepositoryImplement
 import com.example.recipeapp.authenticate.AuthenticateActivity
@@ -66,5 +69,11 @@ Log.d("tktk", userid.toString())
             startActivity(intent)
             requireActivity().finish()
         }
-    }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                findNavController().navigate(R.id.fragment_home)
+            }
+        })
+
+}
 }

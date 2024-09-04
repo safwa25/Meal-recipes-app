@@ -30,16 +30,9 @@ class FavoriteAdapter(
         var mealname: TextView = row.findViewById(R.id.recipeTitle)
         var image: ImageView = row.findViewById(R.id.meal_image)
         var fab: FloatingActionButton = row.findViewById(R.id.fav_btn)
-        var imagecard=row.findViewById<CardView>(R.id.meal_image_card)
-//        var mealcard=row.findViewById<CardView>(R.id.custom_card)
 
         fun bind(meal: Meal) {
-//            val layoutParams = LinearLayout.LayoutParams(
-//                LinearLayout.LayoutParams.MATCH_PARENT, // Width
-//                LinearLayout.LayoutParams.WRAP_CONTENT  // Height
-//            )
-//
-//            mealcard.layoutParams = layoutParams
+
 
 
             mealname.text = meal.strMeal
@@ -47,14 +40,12 @@ class FavoriteAdapter(
             {
                 mealname.textSize = 24f
                 image.isInvisible=false
-//                imagecard.isInvisible=false
                 Glide.with(itemView.context)
                     .load(meal.strMealThumb)
                     .placeholder(R.drawable.ic_launcher_foreground)
                     .into(image)
          } else {
                 image.isInvisible=true
-//                imagecard.isInvisible=true
                 mealname.textSize = 60f
             }
             fab.setImageResource(R.drawable.baseline_favorite_24)

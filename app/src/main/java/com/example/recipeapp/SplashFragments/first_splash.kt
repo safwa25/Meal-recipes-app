@@ -32,6 +32,7 @@ class first_splash : Fragment() {
         skip.setOnClickListener {
             val homepage=Intent(view.context, HomeActivity::class.java)
             startActivity(homepage)
+            requireActivity().finish()
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {

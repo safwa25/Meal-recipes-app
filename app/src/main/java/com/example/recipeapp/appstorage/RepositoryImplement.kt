@@ -1,6 +1,5 @@
 package com.example.recipeapp.appstorage
 
-import CategoryList
 import android.util.Log
 import com.example.recipeapp.database.favourites.Favourites
 import com.example.recipeapp.database.favourites.FavouritesLocalDs
@@ -65,10 +64,6 @@ class RepositoryImplement(val localDataSource: LocalDataSource, val mealLocalDs:
         favouritesLocalDs.deleteFavouriteByMealId(mealId,userId)
     }
 
-    override suspend fun checkMeal(mealId: String, userId: Int): String? {
-        return favouritesLocalDs.checkMeal(mealId,userId)
-    }
-
     override suspend fun searchMealByName(mealName: String): Response<MealList> {
         return remoteDataSource.searchMealByName(mealName)
     }
@@ -87,7 +82,7 @@ class RepositoryImplement(val localDataSource: LocalDataSource, val mealLocalDs:
         return remoteDataSource.getRandomMeal()
     }
 
-    override suspend fun listAllCategories(): Response<CategoryList> {
+    override suspend fun listAllCategories(): Response<List<Category>> {
         return remoteDataSource.listAllCategories()
     }
 
