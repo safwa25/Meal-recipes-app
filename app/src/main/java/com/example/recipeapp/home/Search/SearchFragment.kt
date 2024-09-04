@@ -2,6 +2,7 @@ package com.example.recipeapp.home.Search
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.SharedPreferences
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
@@ -16,6 +17,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
@@ -30,12 +32,14 @@ import com.example.recipeapp.database.user.LocalDataBaseImplement
 import com.example.recipeapp.dto.Category
 import com.example.recipeapp.dto.Meal
 import com.example.recipeapp.network.APIClient
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-    class SearchFragment : Fragment(), OnCategoryClickListener {
+class SearchFragment : Fragment(), OnCategoryClickListener {
 
     private lateinit var categoryAdaptor: CategorySearchAdapter
     private lateinit var searchAdaptor: SearchFragmentAdapter
@@ -43,6 +47,10 @@ import kotlinx.coroutines.launch
     private lateinit var StartAnimationView: ConstraintLayout
     private lateinit var animationtext: TextView
     private lateinit var animation: LottieAnimationView
+    lateinit var sharedPreferences: SharedPreferences
+    lateinit var searchViewModel: SearchViewModel
+    private var userid: Int = 0
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -72,7 +80,8 @@ import kotlinx.coroutines.launch
             )
         )
 
-        val searchViewModel = ViewModelProvider(this, searchViewModelFactory).get(SearchViewModel::class.java)
+        searchViewModel =
+            ViewModelProvider(this, searchViewModelFactory).get(SearchViewModel::class.java)
 
         // Initialize the Category RecyclerView
         val categoryRecyclerView = view.findViewById<RecyclerView>(R.id.cat_recyclerview)
@@ -82,8 +91,21 @@ import kotlinx.coroutines.launch
         categoryRecyclerView.adapter = categoryAdaptor
 
         // Initialize the Search RecyclerView
+
+        sharedPreferences =
+            requireContext().getSharedPreferences("currentuser", Context.MODE_PRIVATE)
+        userid = sharedPreferences.getInt("id", -1)
+
         val searchRecyclerView = view.findViewById<RecyclerView>(R.id.search_recycler)
-        searchAdaptor = SearchFragmentAdapter(emptyList(),{meal->onRecipeClick(meal)})
+        searchAdaptor = SearchFragmentAdapter(emptyList(),
+             { meal ->
+                if (searchViewModel.favorites.value?.map { it.idMeal }?.contains(meal.idMeal) == true) {
+                    searchViewModel.deleteFavourite(meal, userid)
+                } else {
+                    searchViewModel.insertFavourite(meal, userid)
+                }
+            },{ meal -> onRecipeClick(meal) }
+           )
         searchRecyclerView.layoutManager = LinearLayoutManager(context)
         searchRecyclerView.adapter = searchAdaptor
 
@@ -95,22 +117,25 @@ import kotlinx.coroutines.launch
         searchViewModel.categoryList.observe(viewLifecycleOwner) { categoryList ->
             categoryAdaptor.updateData(categoryList ?: emptyList())
         }
+        searchViewModel.favorites.observe(viewLifecycleOwner) { favorites ->
+            val favoriteIds = favorites?.map { it.idMeal }?.toSet() ?: emptySet()
+            searchAdaptor.updateData(searchViewModel.SearchList.value ?: emptyList(), favoriteIds)
+        }
+
 
         searchViewModel.SearchList.observe(viewLifecycleOwner) { searchResults ->
-            if (searchResults != null) {
                 if (searchResults.isEmpty()) {
                     // Show "No Recipe Found" animation if no results
                     showNoRecipeAnimation(animationtext, animation)
                     searchRecyclerView.visibility = View.GONE
                 } else {
                     // Show search results
-                    searchAdaptor.updateData(searchResults)
+                    searchAdaptor.updateData(searchViewModel.SearchList.value ?: emptyList(), emptySet())
+                    searchViewModel.getFavorites(userid)
                     StartAnimationView.visibility = View.GONE
                     searchRecyclerView.visibility = View.VISIBLE
                 }
-            } else {
-                searchAdaptor.updateData(emptyList())
-            }
+
         }
 
         searchViewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
@@ -135,18 +160,20 @@ import kotlinx.coroutines.launch
 
         searchViewModel.getALLCategories()
 
-        fun check(MealId:String,UserId:Int):Boolean
-        {
-            searchViewModel.checing(MealId,UserId)
-            searchViewModel.checking.observe(viewLifecycleOwner){
-                found->
 
-//                return@observe found
-            }
-        }
     }
 
 
+//    private fun checkHeartStatus(meal: Meal, heart: FloatingActionButton) {
+//        searchViewModel.checking.observe(viewLifecycleOwner) { isFavorite ->
+//            if (isFavorite) {
+//                heart.setImageResource(R.drawable.baseline_favorite_24)
+//            } else {
+//                heart.setImageResource(R.drawable.baseline_favorite_border_24)
+//            }
+//        }
+////        searchViewModel.checking(meal.idMeal, userid)  // Trigger the LiveData update
+//    }
 
 
     fun onRecipeClick(meal:Meal)
@@ -178,7 +205,7 @@ import kotlinx.coroutines.launch
                 return true
             }
 
-            override fun onQueryTextChange(newText: String?): Boolean {
+            override fun onQueryTextChange(newText: String?,): Boolean {
                 if (newText.isNullOrEmpty()) {
                     // Handle when the search text is cleared by pressing X or by deleting with the keyboard
                     showStartAnimation(animationtext, animation)

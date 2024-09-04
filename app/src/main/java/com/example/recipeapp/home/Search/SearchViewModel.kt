@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.recipeapp.appstorage.Repository
+import com.example.recipeapp.database.favourites.Favourites
 import com.example.recipeapp.dto.Category
 import com.example.recipeapp.dto.CategoryFilterClass
 import com.example.recipeapp.dto.Meal
@@ -18,8 +19,8 @@ class SearchViewModel(private val repository: Repository) : ViewModel() {
     private val _categoryList = MutableLiveData<List<Category>?>()
     val categoryList: LiveData<List<Category>?> get() = _categoryList
 
-    private val _SearchList = MutableLiveData<List<Meal>?>()
-    val SearchList: LiveData<List<Meal>?> get() = _SearchList
+    private val _SearchList = MutableLiveData<List<Meal>>()
+    val SearchList: LiveData<List<Meal>> get() = _SearchList
 
 
     private val _isLoading = MutableLiveData<Boolean>()
@@ -76,23 +77,40 @@ class SearchViewModel(private val repository: Repository) : ViewModel() {
         }
     }
 
+    private val _favorites = MutableLiveData<List<Meal>>()
+    val favorites: LiveData<List<Meal>> get() = _favorites
+
     private val _checking = MutableLiveData<Boolean>()
     val checking: LiveData<Boolean> get() = _checking
 
-    fun checing(MealId:String,UserId:Int)
-    {
+    fun getFavorites(userId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-           val response = repository.checkMeal(MealId,UserId)
-            if(response.isNullOrEmpty())
-            {
-                _checking.postValue(false)
-            }
-            else
-            {
-                _checking.postValue(true)
+            val favoritesList = repository.getFavourites(userId)
+            _favorites.postValue(favoritesList)
+        }
+    }
+    fun insertFavourite(meal: Meal, userId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                repository.insertMeal(meal)
+                repository.insertFavourite(Favourites(meal.idMeal.toString(), userId))
+                getFavorites(userId) // Refresh favorites list after insertion
+            } catch (e: Exception) {
+                Log.e("HomeViewModel", "Insert favourite failed", e)
             }
         }
+    }
 
+    fun deleteFavourite(meal: Meal, userId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+
+                repository.deleteFavouriteByMealId(meal.idMeal, userId)
+                getFavorites(userId) // Refresh favorites list after deletion
+            } catch (e: Exception) {
+                Log.e("HomeViewModel", "Delete favourite failed", e)
+            }
+        }
     }
 
 }
