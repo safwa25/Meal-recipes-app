@@ -1,5 +1,5 @@
 <!-- res/drawable/rounded_searchview.xml -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="#F9F9F9"/>
+    <solid android:color="@color/defaultLightColor"/>
     <corners android:radius="150dp"/>
 </shape>

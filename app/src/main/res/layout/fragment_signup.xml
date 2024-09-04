@@ -43,9 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 app:boxBackgroundColor="@color/black"
-                app:boxStrokeColor="@color/defaultColor"
-                app:endIconMode="none"
-                app:hintTextColor="@color/defaultColor">
+                app:endIconMode="none">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/signUsernameText"
@@ -57,7 +55,6 @@
                     android:fontFamily="@font/poppins_medium"
                     android:hint="Username"
                     android:padding="10dp"
-                    android:textColor="@color/defaultColor"
                     android:textColorHint="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -70,8 +67,6 @@
                 android:layout_marginTop="30dp"
                 app:boxBackgroundColor="@color/black"
                 app:helperTextTextColor="@android:color/holo_red_dark"
-                app:boxStrokeColor="@color/defaultColor"
-                app:hintTextColor="@color/defaultColor"
                 app:endIconMode="none">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -84,7 +79,6 @@
                     android:fontFamily="@font/poppins_medium"
                     android:hint="Email"
                     android:padding="10dp"
-                    android:textColor="@color/defaultColor"
                     android:textColorHint="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -132,7 +126,7 @@
                 app:cornerRadius="30dp" />
 
             <TextView
-                android:id="@+id/signup_text"
+                android:id="@+id/login_text"
                 style="@style/content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

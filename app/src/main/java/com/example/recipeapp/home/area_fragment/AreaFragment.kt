@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -62,8 +63,10 @@ class AreaFragment : Fragment() {
         adapter = AreasMealsAdapter(viewModel.areasMeals.value ?: emptyList(), { meal ->
             if (viewModel.favorites.value?.map { it.idMeal }?.contains(meal.idMeal) == true) {
                 viewModel.deleteFavourite(meal, userId)
+                Toast.makeText(context, "Removed from favorites", Toast.LENGTH_SHORT).show()
             } else {
                 viewModel.insertFavourite(meal, userId)
+                Toast.makeText(context, "Added to favorites", Toast.LENGTH_SHORT).show()
             }
         }, { meal ->
             val action = AreaFragmentDirections.actionAreaFragmentToRecipeDetails(meal)

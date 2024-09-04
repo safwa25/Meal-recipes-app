@@ -43,6 +43,8 @@ class CategoryFragment : Fragment() {
         // Retrieve the data from the bundle
         val categoryTitle = arguments?.getString("title") ?: ""
         val categoryImage = arguments?.getString("image")
+        val toolbar: androidx.appcompat.widget.Toolbar = requireActivity().findViewById(R.id.tool_bar)
+        toolbar.title =categoryTitle
         Log.d("habiba",categoryTitle.toString())
         Log.d("habiba",categoryImage.toString())
 

@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.recipeapp.R
@@ -52,6 +53,10 @@ class SignupFragment : Fragment() {
                 LocalDataBaseImplement(this.requireContext()),
                 MealLocalDsImplement(this.requireContext()), FavouritesLocalDsImplement(this.requireContext()),APIClient
             ))
+        val txt = view.findViewById<TextView>(R.id.login_text)
+        txt.setOnClickListener{
+            findNavController().navigate(R.id.loginFragment)
+        }
         val viewModel = ViewModelProvider(this,signupViewModelFactory).get(SignupViewModel::class.java)
         emailInput = view.findViewById(R.id.email)
         passwordInput = view.findViewById(R.id.signPassword)
@@ -134,7 +139,7 @@ class SignupFragment : Fragment() {
 
         val criteriaCount = listOf(hasLetter, hasDigit, hasSymbol).count { it }
         return when {
-            passwordText.length <= 8 -> "Password should be longer than 8 characters"
+            passwordText.length < 8 -> "Password should be at Least 8 characters"
             criteriaCount < 2 -> "Password should contain at least two options of: letters, digits, or symbols"
             else -> null
         }

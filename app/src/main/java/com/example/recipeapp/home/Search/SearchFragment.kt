@@ -17,7 +17,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
@@ -82,6 +82,8 @@ class SearchFragment : Fragment(), OnCategoryClickListener {
 
         searchViewModel =
             ViewModelProvider(this, searchViewModelFactory).get(SearchViewModel::class.java)
+        val toolbar: androidx.appcompat.widget.Toolbar = requireActivity().findViewById(R.id.tool_bar)
+        toolbar.title ="Search"
 
         // Initialize the Category RecyclerView
         val categoryRecyclerView = view.findViewById<RecyclerView>(R.id.cat_recyclerview)
@@ -145,7 +147,7 @@ class SearchFragment : Fragment(), OnCategoryClickListener {
         }
 
         // Delay before showing loading animation to allow start animation to play
-        CoroutineScope(Dispatchers.Main).launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             showLoadingAnimation(animationtext, animation)
 
             delay(1000)  // Adjust delay as needed
@@ -157,6 +159,7 @@ class SearchFragment : Fragment(), OnCategoryClickListener {
                 }
             }
         }
+
 
         searchViewModel.getALLCategories()
 

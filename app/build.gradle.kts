@@ -68,7 +68,6 @@ dependencies {
     implementation(libs.glide)
     implementation(libs.expandabletextview)
     implementation(libs.youtube)
-    implementation ("com.google.android.material:material:1.9.0")
 
 
 }

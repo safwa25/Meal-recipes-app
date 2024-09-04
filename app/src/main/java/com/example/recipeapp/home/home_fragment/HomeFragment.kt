@@ -38,7 +38,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 class HomeFragment : Fragment() {
     private lateinit var image: ImageView
     private lateinit var randomMealTitle: TextView
-    private var mealAdapter: PopularAdapter? = null // Changed to nullable
+    private lateinit var mealAdapter: PopularAdapter
     private lateinit var areasAdapter: AreasAdapter
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var  scaleAnimation : Animation
@@ -117,12 +117,14 @@ class HomeFragment : Fragment() {
                             showConfirmationDialog(meal) { confirmed ->
                                 if (confirmed) {
                                     viewModel.deleteFavourite(meal, userId)
+                                    Toast.makeText(context, "Removed from favorites", Toast.LENGTH_SHORT).show()
                                     favBtn.setImageResource(R.drawable.baseline_favorite_border_24)
                                 }
                             }
                         } else {
                             favBtn.startAnimation(scaleAnimation)
                             viewModel.insertFavourite(meal, userId)
+                            Toast.makeText(context, "Added to favorites", Toast.LENGTH_SHORT).show()
                             favBtn.setImageResource(R.drawable.baseline_favorite_24)
                         }
                     }
@@ -144,9 +146,11 @@ class HomeFragment : Fragment() {
             mealAdapter = PopularAdapter(emptyList(), { meal, fab ->
                 if (viewModel.favorites.value?.map { it.idMeal }?.contains(meal.idMeal) == true) {
                     viewModel.deleteFavourite(meal, userId)
+                    Toast.makeText(context, "Removed from favorites", Toast.LENGTH_SHORT).show()
                 } else {
                     fab.startAnimation(scaleAnimation)
                     viewModel.insertFavourite(meal, userId)
+                    Toast.makeText(context, "Added to favorites", Toast.LENGTH_SHORT).show()
                 }
 
 
@@ -159,7 +163,7 @@ class HomeFragment : Fragment() {
             // Observe and update meal list
             viewModel.randomMealList.observe(viewLifecycleOwner) { meals ->
                 val favoriteIds = viewModel.favorites.value?.map { it.idMeal }?.toSet() ?: emptySet()
-                mealAdapter?.updateData(meals ?: emptyList(), favoriteIds)
+                mealAdapter.updateData(meals ?: emptyList(), favoriteIds)
             }
 
             // Observe and update random meal
@@ -176,7 +180,7 @@ class HomeFragment : Fragment() {
             // Observe and update favorites
             viewModel.favorites.observe(viewLifecycleOwner) { favorites ->
                 val favoriteIds = favorites?.map { it.idMeal }?.toSet() ?: emptySet()
-                mealAdapter?.updateData(viewModel.randomMealList.value ?: emptyList(), favoriteIds)
+                mealAdapter.updateData(viewModel.randomMealList.value ?: emptyList(), favoriteIds)
                 viewModel.randomMeal.value?.let { meal ->
                     favBtn.setImageResource(
                         if (favoriteIds.contains(meal.idMeal)) {
@@ -188,17 +192,17 @@ class HomeFragment : Fragment() {
                 }
             }
 
-            if(viewModel.randomMealList.value == null) {
-                viewModel.getRandomMealList()
-            }
-            viewModel.getAreas()
-            viewModel.getFavorites(userId)
-
             areasAdapter = AreasAdapter(viewModel.areas.value ?: emptyList()) { area ->
                 val action = HomeFragmentDirections.actionHomeFragmentToAreaFragment(area)
                 findNavController().navigate(action)
             }
             areasRecyclerView.adapter = areasAdapter
+
+            viewModel.getRandomMealList()
+            viewModel.getAreas()
+            viewModel.getFavorites(userId)
+
+
 
         } else {
             Log.d("HomeFragment", "No network connection")
@@ -220,18 +224,14 @@ class HomeFragment : Fragment() {
     }
 
     private fun isInternetAvailable(context: Context): Boolean {
-        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val network = connectivityManager.activeNetwork ?: return false
-            val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
-            activeNetwork.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) &&
-                    activeNetwork.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
-        } else {
-            @Suppress("DEPRECATION")
-            val networkInfo = connectivityManager.activeNetworkInfo ?: return false
-            @Suppress("DEPRECATION")
-            networkInfo.isConnected
-        }
+        val connectivityManager = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkCapabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+
+        return networkCapabilities != null && (
+                networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) ||
+                        networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
+                        networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)
+                )
     }
 
     // Function to show confirmation dialog

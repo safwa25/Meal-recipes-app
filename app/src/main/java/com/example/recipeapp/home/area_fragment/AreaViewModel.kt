@@ -45,18 +45,18 @@ class AreaViewModel(val repo : Repository) : ViewModel(){
 
 
 
-    fun getMealByID(id: String): LiveData<Meal?> {
-        val mealLiveData = MutableLiveData<Meal?>()
-        viewModelScope.launch {
-            val response = repo.lookupMealById(id)
-            if (response.isSuccessful) {
-                mealLiveData.postValue(response.body()?.meals?.get(0))
-            } else {
-                mealLiveData.postValue(null)
-            }
-        }
-        return mealLiveData
-    }
+//    fun getMealByID(id: String): LiveData<Meal?> {
+//        val mealLiveData = MutableLiveData<Meal?>()
+//        viewModelScope.launch {
+//            val response = repo.lookupMealById(id)
+//            if (response.isSuccessful) {
+//                mealLiveData.postValue(response.body()?.meals?.get(0))
+//            } else {
+//                mealLiveData.postValue(null)
+//            }
+//        }
+//        return mealLiveData
+//    }
 
     fun insertFavourite(meal: Meal, userId: Int) {
         viewModelScope.launch(Dispatchers.IO) {

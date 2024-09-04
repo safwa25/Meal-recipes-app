@@ -38,9 +38,10 @@
                     android:id="@+id/fav_details"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginBottom="8dp"
                     android:contentDescription="Favourite icon"
                     android:src="@drawable/fav_white"
-                    android:tint="@color/custom_red"
                     app:backgroundTint="@color/white"
                     app:fabCustomSize="60dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -49,7 +50,8 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="1.0"
-                    app:maxImageSize="35dp" />
+                    app:maxImageSize="35dp"
+                    app:tint="@color/custom_red" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -60,17 +62,15 @@
 
                 <TextView
                     android:id="@+id/meal_text"
-                    style="@style/Heading"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_medium"
                     android:shadowColor="#F6F4F4"
                     android:text="Meal Name"
-                    android:textColor="@color/defaultColor"
                     android:textSize="38sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.039"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -82,7 +82,6 @@
                     android:layout_marginTop="12dp"
                     android:fontFamily="@font/poppins_medium"
                     android:text="Category :"
-                    android:textColor="@color/defaultColor"
                     android:textSize="28sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -95,7 +94,6 @@
                     android:layout_marginStart="8dp"
                     android:fontFamily="@font/poppins_medium"
                     android:text="Category name"
-                    android:textColor="#403838"
                     android:textSize="24sp"
                     app:layout_constraintBaseline_toBaselineOf="@+id/category_text"
                     app:layout_constraintStart_toEndOf="@+id/category_text" />
@@ -122,7 +120,6 @@
                         android:maxLines="3"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
-                        android:textColor="#403838"
                         android:textSize="22sp" />
 
                     <Button

@@ -40,115 +40,116 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/avatars" />
 
-            <LinearLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="148dp"
-                android:layout_height="134dp"
-                android:layout_gravity="start"
-                android:layout_marginStart="9dp"
-                android:layout_marginTop="10dp"
-                android:gravity="start"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/Search_image"
-                app:layout_constraintTop_toBottomOf="@+id/recipe_title">
+<!--            <LinearLayout-->
+<!--                android:id="@+id/linearLayout"-->
+<!--                android:layout_width="148dp"-->
+<!--                android:layout_height="134dp"-->
+<!--                android:layout_gravity="start"-->
+<!--                android:layout_marginStart="9dp"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:gravity="start"-->
+<!--                android:orientation="vertical"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/Search_image"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/recipe_title">-->
 
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center|start"
-                    android:layout_marginBottom="10dp"
-                    android:textAlignment="center"
-                    app:cardBackgroundColor="#997857"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="10dp"
-                    app:cardUseCompatPadding="false"
-                    app:contentPadding="3dp">
+<!--                <com.google.android.material.card.MaterialCardView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center|start"-->
+<!--                    android:layout_marginBottom="10dp"-->
+<!--                    android:textAlignment="center"-->
+<!--                    app:cardBackgroundColor="#997857"-->
+<!--                    app:cardCornerRadius="16dp"-->
+<!--                    app:cardElevation="10dp"-->
+<!--                    app:cardUseCompatPadding="false"-->
+<!--                    app:contentPadding="3dp">-->
 
-                    <TextView
-                        android:id="@+id/ingredient1"
-                        style="@style/content"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="TextView"
-                        android:textAlignment="center"
-                        android:textColor="#FEFEFE" />
-                </com.google.android.material.card.MaterialCardView>
+<!--                    <TextView-->
+<!--                        android:id="@+id/ingredient1"-->
+<!--                        style="@style/content"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:text="TextView"-->
+<!--                        android:textAlignment="center"-->
+<!--                        android:textColor="#FEFEFE" />-->
+<!--                </com.google.android.material.card.MaterialCardView>-->
 
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_marginBottom="10dp"
-                    app:cardBackgroundColor="#997857"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="10dp"
-                    app:contentPadding="3dp">
+<!--                <com.google.android.material.card.MaterialCardView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="left"-->
+<!--                    android:layout_marginBottom="10dp"-->
+<!--                    app:cardBackgroundColor="#997857"-->
+<!--                    app:cardCornerRadius="16dp"-->
+<!--                    app:cardElevation="10dp"-->
+<!--                    app:contentPadding="3dp">-->
 
-                    <TextView
-                        android:id="@+id/ingredient2"
-                        style="@style/content"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="TextView"
-                        android:textAlignment="center"
-                        android:textColor="#FEFEFE" />
-                </com.google.android.material.card.MaterialCardView>
+<!--                    <TextView-->
+<!--                        android:id="@+id/ingredient2"-->
+<!--                        style="@style/content"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:text="TextView"-->
+<!--                        android:textAlignment="center"-->
+<!--                        android:textColor="#FEFEFE" />-->
+<!--                </com.google.android.material.card.MaterialCardView>-->
 
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_marginBottom="10dp"
-                    app:cardBackgroundColor="#997857"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="10dp"
-                    app:contentPadding="3dp">
+<!--                <com.google.android.material.card.MaterialCardView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="left"-->
+<!--                    android:layout_marginBottom="10dp"-->
+<!--                    app:cardBackgroundColor="#997857"-->
+<!--                    app:cardCornerRadius="16dp"-->
+<!--                    app:cardElevation="10dp"-->
+<!--                    app:contentPadding="3dp">-->
 
-                    <TextView
-                        android:id="@+id/ingredient3"
-                        style="@style/content"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="TextView"
-                        android:textAlignment="center"
-                        android:textColor="#FEFEFE" />
-                </com.google.android.material.card.MaterialCardView>
+<!--                    <TextView-->
+<!--                        android:id="@+id/ingredient3"-->
+<!--                        style="@style/content"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:text="TextView"-->
+<!--                        android:textAlignment="center"-->
+<!--                        android:textColor="#FEFEFE" />-->
+<!--                </com.google.android.material.card.MaterialCardView>-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/pop_fav_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
                 android:layout_marginTop="92dp"
                 android:clickable="true"
                 android:fadingEdgeLength="0dp"
                 android:focusable="true"
-                android:tint="#D50000"
                 app:backgroundTint="@color/white"
                 app:elevation="6dp"
                 app:fabSize="mini"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/linearLayout"
-                app:layout_constraintTop_toBottomOf="@+id/recipe_title"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.81"
                 app:maxImageSize="30dp"
-                app:srcCompat="@drawable/baseline_favorite_border_24">
+                app:srcCompat="@drawable/baseline_favorite_border_24"
+                app:tint="#D50000">
 
             </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
             <TextView
                 android:id="@+id/recipe_title"
                 style="@style/Heading"
-                android:layout_width="250dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="5dp"
+                android:fontFamily="@font/poppins_medium"
                 android:maxLines="2"
                 android:shadowColor="#997857"
                 android:text="TextView"
@@ -159,12 +160,6 @@
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/Search_image"
                 app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>

@@ -67,7 +67,7 @@ class RecipeDetails : Fragment() {
         mealName.text=args.meal.strMeal
         mealCategory.text=args.meal.strCategory
         val toolbar: androidx.appcompat.widget.Toolbar = requireActivity().findViewById(R.id.tool_bar)
-        toolbar.title ="$mealName Recipe"
+        toolbar.title ="${mealName.text} Recipe"
 
         Glide.with(view)
             .load(args.meal.strMealThumb)
