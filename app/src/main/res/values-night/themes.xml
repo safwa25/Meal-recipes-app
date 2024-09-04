@@ -8,10 +8,9 @@
     <style name="Theme.RecipeApp" parent="Base.Theme.RecipeApp">
         <item name="android:textColor">@color/defaultDarkColor</item>
         <item name="android:statusBarColor">@color/defaultLightColor</item>
-        <item name="colorPrimary">@color/defaultDarkColor</item>
+        <item name="colorPrimary">@color/defaultLightColor</item>
         <item name="colorOnPrimary">@color/black</item>
-        <item name="colorSurface">@color/black</item>
-        <item name="colorOnSurface">@color/white</item>
+        <item name="colorSurface">@color/defaultLightColor</item>
         <item name="toolbarStyle">@color/defaultDarkColor</item>
     </style>
 

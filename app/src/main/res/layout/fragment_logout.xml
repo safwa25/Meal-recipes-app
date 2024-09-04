@@ -45,8 +45,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:fontFamily="@font/poppins_medium"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:ellipsize="end"/>
 
             <TextView
                 android:id="@+id/useremail_text"
@@ -54,8 +57,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:fontFamily="@font/poppins_medium"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:ellipsize="end"/>
 
             <Button
                 android:id="@+id/btn_logout"
