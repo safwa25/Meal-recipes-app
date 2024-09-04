@@ -35,11 +35,6 @@
             app:destination="@id/recipeDetails" />
     </fragment>
     <fragment
-        android:id="@+id/settings_fragment"
-        android:name="com.example.recipeapp.home.Settings"
-        android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
-    <fragment
         android:id="@+id/favorite"
         android:name="com.example.recipeapp.home.favorite_fargment.Favorite"
         android:label="fragment_favorite"

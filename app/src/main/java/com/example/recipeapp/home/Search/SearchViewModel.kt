@@ -35,7 +35,7 @@ class SearchViewModel(private val repository: Repository) : ViewModel() {
             try {
                 val response = repository.listAllCategories()
                 if (response.isSuccessful) {
-                    val categories = response.body()?.categories ?: emptyList()
+                    val categories = response.body()?.categories?: emptyList()
                     Log.d("SearchViewModel", "Categories: $categories")
                     _categoryList.postValue(categories)
                     _errorMessage.postValue(null) // Clear any previous errors

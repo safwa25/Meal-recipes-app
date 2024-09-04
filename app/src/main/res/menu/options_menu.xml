@@ -5,12 +5,6 @@
         android:id="@+id/logout_item"
         android:title="Logout" />
     <item
-        android:id="@+id/option_settings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:icon="@drawable/baseline_settings_24"
-        android:title="settings" />
-    <item
         android:id="@+id/option_about"
         android:icon="@drawable/baseline_info_24"
         android:title="About us" />

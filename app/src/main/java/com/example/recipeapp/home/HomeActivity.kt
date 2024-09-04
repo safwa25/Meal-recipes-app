@@ -80,17 +80,9 @@ class HomeActivity : AppCompatActivity() {
                 findNavController(R.id.fragment_host).navigate(R.id.fragment_logout)
                 true
             }
-            R.id.option_settings -> {
-               findNavController(R.id.fragment_host).navigate(R.id.settings_fragment)
-                true
-            }
             R.id.option_about->
             {
                 findNavController(R.id.fragment_host).navigate(R.id.aboutus)
-                true
-            }
-            R.id.favourite->{
-                findNavController(R.id.fragment_host).navigate(R.id.fragment_home)
                 true
             }
 
