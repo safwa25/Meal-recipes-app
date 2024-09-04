@@ -2,6 +2,7 @@ package com.example.recipeapp.home.home_fragment
 
 import SpaceItemDecoration
 import android.app.AlertDialog
+import android.app.ProgressDialog.show
 import android.content.Context
 import android.content.SharedPreferences
 import android.net.ConnectivityManager
@@ -34,6 +35,7 @@ import com.example.recipeapp.network.APIClient
 import com.example.task2.AreasAdapter
 import com.example.task2.PopularAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 
 class HomeFragment : Fragment() {
     private lateinit var image: ImageView
@@ -206,7 +208,12 @@ class HomeFragment : Fragment() {
 
         } else {
             Log.d("HomeFragment", "No network connection")
-            Toast.makeText(context, "Network error", Toast.LENGTH_SHORT).show()
+            // Show Snackbar
+            Snackbar.make(view, "No Internet Connection", Snackbar.LENGTH_LONG)
+                .setAction("Go To Favorites") {
+                    findNavController().navigate(R.id.favorite)
+                }
+                .show();
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
