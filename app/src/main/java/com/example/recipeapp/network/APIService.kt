@@ -1,8 +1,10 @@
 package com.example.recipeapp.network
 
+import CategoryList
 import com.example.recipeapp.dto.AreaMealsResponse
 import com.example.recipeapp.dto.AreasStr
 import com.example.recipeapp.dto.Category
+import com.example.recipeapp.dto.CategoryFilterList
 import com.example.recipeapp.dto.Ingradients
 import com.example.recipeapp.dto.MainIngradient
 import com.example.recipeapp.dto.Meal
@@ -30,8 +32,8 @@ interface APIService {
     suspend fun getRandomMeal(): Response<MealList>
 
     // List all meal categories
-    @GET("categories.php")
-    suspend fun listAllCategories(): Response<List<Category>>
+    @GET("api/json/v1/1/categories.php")
+    suspend fun listAllCategories(): Response<CategoryList>
 
     // List of all categories names
     @GET("list.php")
@@ -50,8 +52,8 @@ interface APIService {
     suspend fun filterByMainIngredient(@Query("i") ingredient: String): Response<List<MainIngradient>>
 
     // Filter by category
-    @GET("filter.php")
-    suspend fun filterByCategory(@Query("c") category: String): Response<List<Meal>>
+    @GET("api/json/v1/1/filter.php")
+    suspend fun filterByCategory(@Query("c") category: String): Response<CategoryFilterList>
 
     // Filter by area
     @GET("api/json/v1/1/filter.php")

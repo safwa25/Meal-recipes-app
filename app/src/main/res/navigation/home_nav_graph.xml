@@ -62,4 +62,29 @@
         android:name="com.example.recipeapp.home.aboutus.Aboutus"
         android:label="fragment_aboutus"
         tools:layout="@layout/fragment_aboutus" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.recipeapp.home.Search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_category_items_fragment"
+            app:destination="@id/categoryFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_categoryFragment"
+            app:destination="@id/categoryFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_recipeDetails"
+            app:destination="@id/recipeDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.example.recipeapp.home.CategoryFragment.CategoryFragment"
+        android:label="specific_category"
+        tools:layout="@layout/specific_category" >
+        <action
+            android:id="@+id/action_categoryFragment_to_recipeDetails"
+            app:destination="@id/recipeDetails" />
+    </fragment>
+
 </navigation>

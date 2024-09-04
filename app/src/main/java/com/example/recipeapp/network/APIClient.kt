@@ -1,9 +1,11 @@
 package com.example.recipeapp.network
 
+import CategoryList
 import android.util.Log
 import com.example.recipeapp.dto.AreaMealsResponse
 import com.example.recipeapp.dto.AreasStr
 import com.example.recipeapp.dto.Category
+import com.example.recipeapp.dto.CategoryFilterList
 import com.example.recipeapp.dto.Ingradients
 import com.example.recipeapp.dto.MainIngradient
 import com.example.recipeapp.dto.Meal
@@ -29,7 +31,7 @@ object APIClient : RemoteDataSource {
         return API.retrofitService.getRandomMeal()
     }
 
-    override suspend fun listAllCategories(): Response<List<Category>> {
+    override suspend fun listAllCategories(): Response<CategoryList> {
         return API.retrofitService.listAllCategories()
     }
 
@@ -49,7 +51,7 @@ object APIClient : RemoteDataSource {
         return API.retrofitService.filterByMainIngredient(ingredient)
     }
 
-    override suspend fun filterByCategory(category: String): Response<List<Meal>> {
+    override suspend fun filterByCategory(category: String): Response<CategoryFilterList> {
         return API.retrofitService.filterByCategory(category)
     }
 

@@ -25,7 +25,6 @@ interface Repository {
     suspend fun insertFavourite(favourite: Favourites)
     suspend fun getFavourites(userId: Int): List<Meal>
     suspend fun deleteFavouriteByMealId(mealId: String,userId: Int)
-    suspend fun checkMeal(mealId: String,userId: Int):String?
     // api functions
     suspend fun searchMealByName(mealName: String): Response<MealList>
     suspend fun listMealsByFirstLetter(firstLetter: String): Response<List<Meal>>
@@ -42,9 +41,8 @@ interface Repository {
 
     suspend fun filterByMainIngredient(ingredient: String): Response<List<MainIngradient>>
 
-    suspend fun filterByCategory(category: String): Response<List<Meal>>
+    suspend fun filterByCategory(category: String): Response<CategoryFilterList>
 
     suspend fun filterByArea(area: String): Response<AreaMealsResponse>
-
 
 }

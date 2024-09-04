@@ -1,0 +1,103 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".home.Search.SearchFragment">
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/search_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="340dp"
+        android:layout_marginBottom="38dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cat_recyclerview" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/Start_Animation"
+        android:layout_width="339dp"
+        android:layout_height="309dp"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cat_recyclerview">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieAnimationView"
+            android:layout_width="280dp"
+            android:layout_height="195dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="24dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.728"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/searching_anim" />
+
+        <TextView
+            android:id="@+id/searchtext"
+            style="@style/Heading"
+            android:layout_width="352dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:shadowColor="#FEFEFE"
+            android:text="Looking for a tasty meal?"
+            android:textColor="@color/defaultColor"
+            android:textSize="34sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lottieAnimationView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="265dp"
+        android:layout_marginTop="1dp"
+        android:background="@drawable/searchhead"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_textbox"
+            android:layout_width="290dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="132dp"
+            android:layout_marginEnd="60dp"
+            android:background="@drawable/rounded_searchview"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:iconifiedByDefault="false"
+            app:layout_constraintCircleRadius="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:queryHint="Search Here.." />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Lottie Animation View -->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cat_recyclerview"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="-20dp"
+        android:background="@drawable/cardelavition"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

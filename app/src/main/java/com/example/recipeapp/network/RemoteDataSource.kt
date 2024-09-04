@@ -1,7 +1,9 @@
 package com.example.recipeapp.network
+import CategoryList
 import com.example.recipeapp.dto.AreaMealsResponse
 import com.example.recipeapp.dto.AreasStr
 import com.example.recipeapp.dto.Category
+import com.example.recipeapp.dto.CategoryFilterList
 import com.example.recipeapp.dto.Ingradients
 import com.example.recipeapp.dto.MainIngradient
 import com.example.recipeapp.dto.Meal
@@ -17,7 +19,7 @@ interface RemoteDataSource {
 
     suspend fun getRandomMeal(): Response<MealList>
 
-    suspend fun listAllCategories(): Response<List<Category>>
+    suspend fun listAllCategories(): Response<CategoryList>
 
     suspend fun listCategories(): Response<List<String>>
 
@@ -27,7 +29,7 @@ interface RemoteDataSource {
 
     suspend fun filterByMainIngredient(ingredient: String): Response<List<MainIngradient>>
 
-    suspend fun filterByCategory(category: String): Response<List<Meal>>
+    suspend fun filterByCategory(category: String): Response<CategoryFilterList>
 
     suspend fun filterByArea(area: String): Response<AreaMealsResponse>
 }
