@@ -42,7 +42,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                app:boxBackgroundColor="@color/black"
                 app:endIconMode="none">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -65,9 +64,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                app:boxBackgroundColor="@color/black"
-                app:helperTextTextColor="@android:color/holo_red_dark"
-                app:endIconMode="none">
+                app:endIconMode="none"
+                app:helperTextTextColor="@android:color/holo_red_dark">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/emailText"
@@ -118,11 +116,13 @@
                 android:layout_height="60dp"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/sign_up"
-                android:fontFamily="@font/lobster"
+                android:capitalize="words"
+                android:fontFamily="@font/poppins_medium"
                 android:text="Sign up"
                 android:textAllCaps="false"
                 android:textColor="#FEFEFE"
                 android:textSize="24sp"
+                android:textStyle="bold"
                 app:cornerRadius="30dp" />
 
             <TextView

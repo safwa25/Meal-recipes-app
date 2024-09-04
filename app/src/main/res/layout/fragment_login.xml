@@ -42,7 +42,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                app:boxBackgroundColor="@color/black"
                 app:endIconMode="none">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -63,7 +62,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                app:boxBackgroundColor="@color/black"
                 app:endIconMode="password_toggle">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -89,7 +87,8 @@
                 android:layout_height="60dp"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/sign_up"
-                android:fontFamily="@font/lobster"
+                android:capitalize="words"
+                android:fontFamily="@font/poppins"
                 android:text="Login"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
