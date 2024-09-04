@@ -33,19 +33,6 @@ class HomeActivity : AppCompatActivity() {
         // Set the default selected item to the middle item (home)
         bottomNavigationView.selectedItemId = R.id.home
 
-//        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-//            override fun handleOnBackPressed() {
-//                AlertDialog.Builder(this@HomeActivity)
-//                    .setTitle("Exit")
-//                    .setMessage("Are you sure you want to exit?")
-//                    .setPositiveButton("Yes") { _, _ ->
-//                        finish()
-//                    }
-//                    .setNegativeButton("No", null)
-//                    .show()
-//            }
-//        })
-
         fabButton.setOnClickListener {
             findNavController(R.id.fragment_host).navigate(R.id.fragment_home)
 

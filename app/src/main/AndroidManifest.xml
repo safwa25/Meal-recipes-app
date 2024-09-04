@@ -17,6 +17,7 @@
         <activity
             android:name=".home.HomeActivity"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"
             android:exported="false" />
         <activity
             android:name=".authenticate.AuthenticateActivity"
