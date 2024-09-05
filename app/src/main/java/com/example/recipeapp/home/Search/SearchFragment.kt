@@ -64,119 +64,126 @@ class SearchFragment : Fragment(), OnCategoryClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Initialize animation views
-        StartAnimationView = view.findViewById(R.id.Start_Animation)
-        animationtext = view.findViewById(R.id.searchtext)
-        animation = view.findViewById(R.id.lottieAnimationView)
+            // Initialize animation views
+            StartAnimationView = view.findViewById(R.id.Start_Animation)
+            animationtext = view.findViewById(R.id.searchtext)
+            animation = view.findViewById(R.id.lottieAnimationView)
+        try {
+            if (isInternetAvailable(view.context)) {
+                showStartAnimation(animationtext, animation)
+            } else {
+                showNoInternetAnimation(animationtext, animation)
+            }
+        } catch (e: NullPointerException) {
+            Log.e("SearchFragment", "Caught NullPointerException: ${e.message}")
+            Toast.makeText(context, "An error occurred: ${e.message}", Toast.LENGTH_SHORT).show()
+        }
 
-        // Show start animation when fragment is first created
 
         val searchViewModelFactory = SearchViewModelFactory(
-            RepositoryImplement(
-                LocalDataBaseImplement(this.requireContext()),
-                MealLocalDsImplement(this.requireContext()),
-                FavouritesLocalDsImplement(this.requireContext()),
-                APIClient
+                RepositoryImplement(
+                    LocalDataBaseImplement(this.requireContext()),
+                    MealLocalDsImplement(this.requireContext()),
+                    FavouritesLocalDsImplement(this.requireContext()),
+                    APIClient
+                )
             )
-        )
 
-        searchViewModel =
-            ViewModelProvider(this, searchViewModelFactory).get(SearchViewModel::class.java)
-        val toolbar: androidx.appcompat.widget.Toolbar = requireActivity().findViewById(R.id.tool_bar)
-        toolbar.title ="Search"
+            searchViewModel =
+                ViewModelProvider(this, searchViewModelFactory).get(SearchViewModel::class.java)
+            val toolbar: androidx.appcompat.widget.Toolbar =
+                requireActivity().findViewById(R.id.tool_bar)
+            toolbar.title = "Search"
 
-        // Initialize the Category RecyclerView
-        val categoryRecyclerView = view.findViewById<RecyclerView>(R.id.cat_recyclerview)
-        categoryAdaptor = CategorySearchAdapter(emptyList(), this)
-        categoryRecyclerView.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        categoryRecyclerView.adapter = categoryAdaptor
+            // Initialize the Category RecyclerView
+            val categoryRecyclerView = view.findViewById<RecyclerView>(R.id.cat_recyclerview)
+            categoryAdaptor = CategorySearchAdapter(emptyList(), this)
+            categoryRecyclerView.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            categoryRecyclerView.adapter = categoryAdaptor
 
-        // Initialize the Search RecyclerView
+            // Initialize the Search RecyclerView
 
-        sharedPreferences =
-            requireContext().getSharedPreferences("currentuser", Context.MODE_PRIVATE)
-        userid = sharedPreferences.getInt("id", -1)
+            sharedPreferences =
+                requireContext().getSharedPreferences("currentuser", Context.MODE_PRIVATE)
+            userid = sharedPreferences.getInt("id", -1)
 
-        val searchRecyclerView = view.findViewById<RecyclerView>(R.id.search_recycler)
-        searchAdaptor = SearchFragmentAdapter(emptyList(),
-             { meal ->
-                if (searchViewModel.favorites.value?.map { it.idMeal }?.contains(meal.idMeal) == true) {
-                    searchViewModel.deleteFavourite(meal, userid)
-                } else {
-                    searchViewModel.insertFavourite(meal, userid)
-                }
-            },{ meal -> onRecipeClick(meal) }
-           )
-        searchRecyclerView.layoutManager = LinearLayoutManager(context)
-        searchRecyclerView.adapter = searchAdaptor
+            val searchRecyclerView = view.findViewById<RecyclerView>(R.id.search_recycler)
+            searchAdaptor = SearchFragmentAdapter(emptyList(),
+                { meal ->
+                    if (searchViewModel.favorites.value?.map { it.idMeal }
+                            ?.contains(meal.idMeal) == true) {
+                        searchViewModel.deleteFavourite(meal, userid)
+                    } else {
+                        searchViewModel.insertFavourite(meal, userid)
+                    }
+                }, { meal -> onRecipeClick(meal) }
+            )
+            searchRecyclerView.layoutManager = LinearLayoutManager(context)
+            searchRecyclerView.adapter = searchAdaptor
 
-        // Set up the SearchView
-        searchViewvar = view.findViewById(R.id.search_textbox)
-        setupSearchView(searchViewModel, searchRecyclerView)
+            // Set up the SearchView
+            searchViewvar = view.findViewById(R.id.search_textbox)
+            setupSearchView(searchViewModel, searchRecyclerView)
 
-        // Observers for ViewModel
-        searchViewModel.categoryList.observe(viewLifecycleOwner) { categoryList ->
-            categoryAdaptor.updateData(categoryList ?: emptyList())
-        }
-        searchViewModel.favorites.observe(viewLifecycleOwner) { favorites ->
-            val favoriteIds = favorites?.map { it.idMeal }?.toSet() ?: emptySet()
-            searchAdaptor.updateData(searchViewModel.SearchList.value ?: emptyList(), favoriteIds)
-        }
+            // Observers for ViewModel
+            searchViewModel.categoryList.observe(viewLifecycleOwner) { categoryList ->
+                categoryAdaptor.updateData(categoryList ?: emptyList())
+            }
+            searchViewModel.favorites.observe(viewLifecycleOwner) { favorites ->
+                val favoriteIds = favorites?.map { it.idMeal }?.toSet() ?: emptySet()
+                searchAdaptor.updateData(
+                    searchViewModel.SearchList.value ?: emptyList(),
+                    favoriteIds
+                )
+            }
 
 
-        searchViewModel.SearchList.observe(viewLifecycleOwner) { searchResults ->
+            searchViewModel.SearchList.observe(viewLifecycleOwner) { searchResults ->
                 if (searchResults.isEmpty()) {
                     // Show "No Recipe Found" animation if no results
                     showNoRecipeAnimation(animationtext, animation)
                     searchRecyclerView.visibility = View.GONE
                 } else {
                     // Show search results
-                    searchAdaptor.updateData(searchViewModel.SearchList.value ?: emptyList(), emptySet())
+                    searchAdaptor.updateData(
+                        searchViewModel.SearchList.value ?: emptyList(),
+                        emptySet()
+                    )
                     searchViewModel.getFavorites(userid)
                     StartAnimationView.visibility = View.GONE
                     searchRecyclerView.visibility = View.VISIBLE
                 }
 
-        }
-
-        searchViewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
-            errorMessage?.let {
-                Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
             }
-        }
 
-        // Delay before showing loading animation to allow start animation to play
-        viewLifecycleOwner.lifecycleScope.launch {
-            showLoadingAnimation(animationtext, animation)
-
-            delay(1000)  // Adjust delay as needed
-            searchViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
-                if (isLoading) {
-                    // Show loading animation after start animation has played
-                    showStartAnimation(animationtext, animation)
-                    searchRecyclerView.visibility = View.GONE
+            searchViewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
+                errorMessage?.let {
+                    Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
                 }
             }
-        }
+
+            // Delay before showing loading animation to allow start animation to play
+            viewLifecycleOwner.lifecycleScope.launch {
+
+                delay(1000)  // Adjust delay as needed
+                searchViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+                    if (isLoading) {
+                        // Show loading animation after start animation has played
+                        showLoadingAnimation(animationtext, animation)
+                        searchRecyclerView.visibility = View.GONE
+                    }
+                }
+            }
 
 
-        searchViewModel.getALLCategories()
+            searchViewModel.getALLCategories()
+
 
 
     }
 
 
-//    private fun checkHeartStatus(meal: Meal, heart: FloatingActionButton) {
-//        searchViewModel.checking.observe(viewLifecycleOwner) { isFavorite ->
-//            if (isFavorite) {
-//                heart.setImageResource(R.drawable.baseline_favorite_24)
-//            } else {
-//                heart.setImageResource(R.drawable.baseline_favorite_border_24)
-//            }
-//        }
-////        searchViewModel.checking(meal.idMeal, userid)  // Trigger the LiveData update
-//    }
 
 
     fun onRecipeClick(meal:Meal)
@@ -210,10 +217,22 @@ class SearchFragment : Fragment(), OnCategoryClickListener {
 
             override fun onQueryTextChange(newText: String?,): Boolean {
                 if (newText.isNullOrEmpty()) {
-                    // Handle when the search text is cleared by pressing X or by deleting with the keyboard
-                    showStartAnimation(animationtext, animation)
-                    StartAnimationView.visibility = View.VISIBLE
-                    searchRecyclerView.visibility = View.GONE
+                    try {
+                        if (isInternetAvailable(requireContext())) {
+                         // Handle when the search text is cleared by pressing X or by deleting with the keyboard
+                            showStartAnimation(animationtext, animation)
+                            StartAnimationView.visibility = View.VISIBLE
+                            searchRecyclerView.visibility = View.GONE
+                        }
+                        else {
+                            showNoInternetAnimation(animationtext, animation)
+                        }
+                    } catch (e: NullPointerException) {
+                        Log.e("SearchFragment", "Caught NullPointerException: ${e.message}")
+                        Toast.makeText(context, "An error occurred: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
+
+
                 } else {
                     // Handle text input as usual
                     if (isInternetAvailable(requireContext())) {

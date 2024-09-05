@@ -19,11 +19,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import com.example.recipeapp.R
 import com.example.recipeapp.appstorage.RepositoryImplement
@@ -45,20 +47,27 @@ class HomeFragment : Fragment() {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var  scaleAnimation : Animation
     private lateinit var favBtn: FloatingActionButton
+    private lateinit var animition_constraint: ConstraintLayout
+    private lateinit var random_card_var: View
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         scaleAnimation = AnimationUtils.loadAnimation(view.context, R.anim.fab_clicked)
-
+        animition_constraint=view.findViewById(R.id.animation_constaint)
+        random_card_var=view.findViewById(R.id.random_card)
 
         if (isInternetAvailable(view.context)) {
+            animition_constraint.visibility=View.GONE
+            random_card_var.visibility = View.VISIBLE
+
             val viewModelSharedPreferences = requireActivity().getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
             val viewModelFactory = HomeViewFactory(
                 RepositoryImplement(
@@ -208,6 +217,8 @@ class HomeFragment : Fragment() {
 
         } else {
             Log.d("HomeFragment", "No network connection")
+            animition_constraint.visibility=View.VISIBLE
+            random_card_var.visibility = View.GONE
             // Show Snackbar
             Snackbar.make(view, "No Internet Connection", Snackbar.LENGTH_LONG)
                 .setAction("Go To Favorites") {

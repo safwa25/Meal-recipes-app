@@ -33,21 +33,18 @@ class FavoriteAdapter(
 
         fun bind(meal: Meal) {
 
-
-
             mealname.text = meal.strMeal
-            if (Internet)
-            {
-                mealname.textSize = 24f
-                image.isInvisible=false
-                Glide.with(itemView.context)
-                    .load(meal.strMealThumb)
-                    .placeholder(R.drawable.ic_launcher_foreground)
-                    .into(image)
-         } else {
-                image.isInvisible=true
-                mealname.textSize = 60f
-            }
+        if(Internet) {
+            Glide.with(itemView.context)
+                .load(meal.strMealThumb)
+                .placeholder(R.drawable.ic_launcher_foreground)
+                .error(R.drawable.program_background)
+                .into(image)
+        }else
+        {
+            image.setImageResource(R.drawable.program_background)
+        }
+
             fab.setImageResource(R.drawable.baseline_favorite_24)
             fab.setOnClickListener {
                 onFavClick(meal, fab)

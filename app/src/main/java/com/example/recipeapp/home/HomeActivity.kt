@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isInvisible
 import androidx.navigation.findNavController
 import com.example.recipeapp.R
@@ -23,10 +25,9 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
         fabButton=findViewById(R.id.fab)
 
-        val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.tool_bar)
+        val toolbar: Toolbar = findViewById(R.id.tool_bar)
         toolbar.title ="Welcome,User"
         setSupportActionBar(toolbar)
-
 
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
