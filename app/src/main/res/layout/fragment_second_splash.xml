@@ -10,8 +10,8 @@
     <TextView
         android:id="@+id/heading"
         style="@style/Heading"
-        android:layout_width="372dp"
-        android:layout_height="71dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:fontFamily="@font/lobster"
         android:text="Discover Your Ideal Dish"
         android:textSize="37sp"
