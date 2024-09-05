@@ -34,9 +34,6 @@ class SignupFragment : Fragment() {
     private lateinit var userName : TextInputEditText
     private lateinit var sharedPreferences: SharedPreferences
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -137,7 +134,7 @@ class SignupFragment : Fragment() {
         val hasDigit = passwordText.any { it.isDigit() }
         val hasSymbol = passwordText.any { !it.isLetterOrDigit() }
 
-        val criteriaCount = listOf(hasLetter, hasDigit, hasSymbol).count { it }
+        val criteriaCount = listOf(hasLetter, hasDigit, hasSymbol).count { true }
         return when {
             passwordText.length < 8 -> "Password should be at Least 8 characters"
             criteriaCount < 2 -> "Password should contain at least two options of: letters, digits, or symbols"

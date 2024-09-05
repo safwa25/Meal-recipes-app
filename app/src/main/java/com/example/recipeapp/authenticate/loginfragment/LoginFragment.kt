@@ -63,9 +63,7 @@ class LoginFragment : Fragment() {
                 val editor=sharedPreferences.edit()
                 editor.putInt("id",it.id)
                 editor.apply()
-                val homepageIntent = Intent(requireContext(), HomeActivity::class.java).apply {
-                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                }
+                val homepageIntent = Intent(requireContext(), HomeActivity::class.java)
                 startActivity(homepageIntent)
                 requireActivity().finish()
             } else {

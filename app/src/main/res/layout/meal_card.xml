@@ -30,6 +30,7 @@
                 android:id="@+id/meal_pop_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:contentDescription="@string/meal_image"
                 android:elevation="0dp"
                 android:scaleType="fitXY"
                 app:srcCompat="@drawable/loginbk2" />
@@ -43,6 +44,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="10dp"
             android:clickable="true"
+            android:contentDescription="@string/add_to_favorite"
             android:fadingEdgeLength="0dp"
             android:focusable="true"
             app:tint="#D50000"
@@ -62,7 +64,6 @@
             android:layout_marginTop="10dp"
             android:fontFamily="@font/poppins_medium"
             android:stateListAnimator="@android:anim/fade_in"
-            android:text="Meal Title"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"

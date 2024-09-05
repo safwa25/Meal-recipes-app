@@ -48,7 +48,7 @@
             android:fontFamily="@font/poppins_medium"
             android:gravity="center"
             android:shadowColor="#FEFEFE"
-            android:text="Looking for a tasty meal?"
+            android:text="@string/looking_for_a_tasty_meal"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"

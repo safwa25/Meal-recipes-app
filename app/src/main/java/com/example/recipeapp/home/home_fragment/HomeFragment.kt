@@ -91,9 +91,7 @@ class HomeFragment : Fragment() {
             {user->
                 toolbar.title ="Welcome, ${user.name.replaceFirstChar { it.uppercase() }} "
             }
-            if(viewModel.randomMeal.value == null) {
-                viewModel.getRandomMeal()
-            }
+
             viewModel.randomMeal.observe(viewLifecycleOwner) { meal ->
                 Glide.with(view).load(meal?.strMealThumb).into(image)
                 randomMealTitle.text = meal?.strMeal ?: ""
@@ -171,17 +169,20 @@ class HomeFragment : Fragment() {
             })
             mealsRecyclerView.adapter = mealAdapter
 
+
+            areasAdapter = AreasAdapter(viewModel.areas.value ?: emptyList()) { area ->
+                val action = HomeFragmentDirections.actionHomeFragmentToAreaFragment(area)
+                findNavController().navigate(action)
+            }
+            areasRecyclerView.adapter = areasAdapter
+
+
             // Observe and update meal list
             viewModel.randomMealList.observe(viewLifecycleOwner) { meals ->
                 val favoriteIds = viewModel.favorites.value?.map { it.idMeal }?.toSet() ?: emptySet()
                 mealAdapter.updateData(meals ?: emptyList(), favoriteIds)
             }
 
-            // Observe and update random meal
-            viewModel.randomMeal.observe(viewLifecycleOwner) { meal ->
-                Glide.with(view).load(meal?.strMealThumb).into(image)
-                randomMealTitle.text = meal?.strMeal ?: ""
-            }
 
             // Observe and update areas
             viewModel.areas.observe(viewLifecycleOwner) { areas ->
@@ -203,15 +204,11 @@ class HomeFragment : Fragment() {
                 }
             }
 
-            areasAdapter = AreasAdapter(viewModel.areas.value ?: emptyList()) { area ->
-                val action = HomeFragmentDirections.actionHomeFragmentToAreaFragment(area)
-                findNavController().navigate(action)
-            }
-            areasRecyclerView.adapter = areasAdapter
 
             viewModel.getRandomMealList()
             viewModel.getAreas()
             viewModel.getFavorites(userId)
+            viewModel.getRandomMeal()
 
 
 

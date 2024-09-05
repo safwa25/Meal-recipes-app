@@ -34,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:shadowColor="#EFECEC"
-                android:text="Logout"
+                android:text="@string/logout"
                 android:textAlignment="center"
                 android:textColor="#6C4E31"
                 android:textSize="42sp" />
@@ -70,7 +70,7 @@
                 android:layout_marginTop="30dp"
                 android:background="@drawable/sign_up"
                 android:fontFamily="@font/lobster"
-                android:text="Logout"
+                android:text="@string/logout"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="28sp"

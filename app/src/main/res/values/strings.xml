@@ -2,4 +2,32 @@
     <string name="app_name">Recipe App</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_to_favorite">ِAdd To Favorite</string>
+    <string name="meal_image">The Meal Image</string>
+    <string name="cat_image">The Category Image</string>
+    <string name="empty_favorites">your favorites list is empty</string>
+    <string name="cook_like_a_pro">Cook Like a Pro</string>
+    <string name="app_description">Step-by-step instructions and videos to guide you to perfect meals every time.</string>
+    <string name="skip_button">Skip</string>
+    <string name="next_button">Go to The Next Page</string>
+    <string name="top_pick_for_you">Top Pick For You</string>
+    <string name="areas">Areas</string>
+    <string name="most_popular">Most Popular</string>
+    <string name="check_your_internet_connection_please">Check Your Internet Connection Please</string>
+    <string name="don_t_have_one_sign_up">Don\'t Have One? Sign Up</string>
+    <string name="login">Login</string>
+    <string name="password_hint">Password</string>
+    <string name="email_hint">Email</string>
+    <string name="logout">Logout</string>
+    <string name="looking_for_a_tasty_meal">Looking for a tasty meal?</string>
+    <string name="signup">SignUp</string>
+    <string name="username_hint">Username</string>
+    <string name="already_have_one_login">Already Have One? Login</string>
+    <string name="home_item">Home item</string>
+    <string name="meal_title">Meal Title</string>
+    <string name="meal_name">Meal Name</string>
+    <string name="category">Category :</string>
+    <string name="category_name">Category name</string>
+    <string name="show_more">Show more</string>
+    <string name="profile_image">Profile Image</string>
 </resources>
