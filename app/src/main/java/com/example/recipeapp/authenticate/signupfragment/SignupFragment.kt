@@ -138,7 +138,7 @@ class SignupFragment : Fragment() {
         val hasDigit = passwordText.any { it.isDigit() }
         val hasSymbol = passwordText.any { !it.isLetterOrDigit() }
 
-        val criteriaCount = listOf(hasLetter, hasDigit, hasSymbol).count { true }
+        val criteriaCount = listOf(hasLetter, hasDigit, hasSymbol).count { it }
         return when {
             passwordText.length < 8 -> "Password should be at Least 8 characters"
             criteriaCount < 2 -> "Password should contain at least two options of: letters, digits, or symbols"

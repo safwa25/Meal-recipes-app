@@ -160,7 +160,7 @@ class SearchFragment : Fragment(), OnCategoryClickListener {
 
             searchViewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
                 errorMessage?.let {
-                    Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Network Error", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -235,7 +235,6 @@ class SearchFragment : Fragment(), OnCategoryClickListener {
                         }
                     } catch (e: NullPointerException) {
                         Log.e("SearchFragment", "Caught NullPointerException: ${e.message}")
-                        Toast.makeText(context, "An error occurred: ${e.message}", Toast.LENGTH_SHORT).show()
                     }
 
 
