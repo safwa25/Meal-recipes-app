@@ -110,12 +110,16 @@ class SignupFragment : Fragment() {
 
     private fun validateEmail(): String? {
         val emailText = email.text.toString()
-        return if (!Patterns.EMAIL_ADDRESS.matcher(emailText).matches()) {
+        // Define the regex pattern for a valid email
+        val emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$".toRegex()
+
+        return if (!emailRegex.matches(emailText)) {
             "Invalid Email Address"
         } else {
             null
         }
     }
+
 
     private fun setupPasswordValidation() {
         password.addTextChangedListener(object : TextWatcher {
