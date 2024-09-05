@@ -216,6 +216,8 @@ class HomeFragment : Fragment() {
             Log.d("HomeFragment", "No network connection")
             animition_constraint.visibility=View.VISIBLE
             random_card_var.visibility = View.GONE
+            val toolbar: androidx.appcompat.widget.Toolbar = requireActivity().findViewById(R.id.tool_bar)
+            toolbar.title ="Welcome,User"
             // Show Snackbar
             Snackbar.make(view, "No Internet Connection", Snackbar.LENGTH_LONG)
                 .setAction("Go To Favorites") {
