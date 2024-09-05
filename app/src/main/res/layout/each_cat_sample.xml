@@ -55,7 +55,7 @@
             android:gravity="center"
             android:maxWidth="200dp"
             android:maxLines="2"
-            android:shadowColor="#DACBB3"
+            android:shadowColor="@color/black"
             android:text="TextView"
             android:textAlignment="center"
             android:textSize="24sp"
